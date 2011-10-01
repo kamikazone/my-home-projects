@@ -139,17 +139,7 @@ BOOL MPFSInit(void)
 {
     mpfsOpenCount = 0;
     mpfsFlags.Val = 0;
-
-#if defined(MPFS_USE_PGRM)
     return TRUE;
-#else
-
-#if defined(USE_I2CEEPROM)
-    XEEInit(EE_BAUD(CPU_CLOCK, MPFS_EEPROM_CLOCK));
-#endif
-
-    return TRUE;
-#endif
 }
 
 /******************************************************************************

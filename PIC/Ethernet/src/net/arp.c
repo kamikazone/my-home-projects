@@ -1,39 +1,4 @@
-/******************************************************************************
- * ARP Module for Microchip TCP/IP Stack                                      *
- *============================================================================*
- *                                                                            *
- * The ARP Module includes the functions to implement the Address Resolution  *
- * Protocol for Ethernet. The code includes a state machine that is part of   *
- * the main stack state machine (StackTsk), taking care of ARP requests for   *
- * the configured IP Address.                                                 *
- *                                                                            *
- * If the TCP/IP stack is compiled with the STACK_CLIENT_MODE the code        *
- * includes two additional functions to provide ARP resolution for local      *
- * clients. The current version has an ARP cache that is one entry deep.      *
- *                                                                            *
- *                                                                            *
- * SOFTWARE LICENSE AGREEMENT                                                 *
- *                                                                            *
- * This software is owned by Microchip Technology Inc. ("Microchip") and is   *
- * supplied to you for use exclusively as described in the associated         *
- * software agreement.  This software is protected by software and other      *
- * intellectual property laws.  Any use in violation of the software license  *
- * may subject the user to criminal sanctions as well as civil liability.     *
- * Copyright 2006 Microchip Technology Inc.  All rights reserved.             *
- *                                                                            *
- * This software is provided "AS IS."  MICROCHIP DISCLAIMS ALL WARRANTIES,    *
- * EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, NOT LIMITED TO MERCHANTABILITY,  *
- * FITNESS FOR A PARTICULAR PURPOSE, AND INFRINGEMENT. Microchip shall in no  *
- * event be liable for special, incidental, or consequential damages.         *
- *                                                                            *
- *- Version Log --------------------------------------------------------------*
- *   Date       Author        Comments                                        *
- *----------------------------------------------------------------------------*
- * 05/01/01 Nilesh Rajbharti  Original (Rev 1.0)                              *
- * 02/09/02 Nilesh Rajbharti  Cleanup                                         *
- * 05/22/02 Nilesh Rajbharti  Rev 2.0                                         *
- * 04/25/07 Jorge Amodio      Cleanup and code merge with ArpTsk.c            *                           *
- ******************************************************************************/
+
 #include "net/include/stacktsk.h"
 #include "net/include/helpers.h"
 #include "net/include/arp.h"
@@ -241,10 +206,6 @@ BOOL ARPProcess(void)
 
         if ( opCode == ARP_REPLY )
         {
-#if defined(STACK_CLIENT_MODE)
-            Cache.MACAddr = remoteNode.MACAddr;
-            Cache.IPAddr.Val = remoteNode.IPAddr.Val;
-#endif
             break;
         }
         else
@@ -262,49 +223,6 @@ BOOL ARPProcess(void)
     return TRUE;
 }
 
-#if defined(STACK_CLIENT_MODE)
-/******************************************************************************
- * Function:        void ARPResolve(IP_ADDR* IPAddr)
- * PreCondition:    MACIsTxReady(TRUE) returns TRUE
- * Input:           IPAddr  - IP Address to be resolved.
- * Output:          None
- * Side Effects:    None
- * Overview:        An ARP request is sent.
- * Note:            This function is available only when
- *                  STACK_CLIENT_MODE is defined.
- ******************************************************************************/
-void ARPResolve(IP_ADDR *IPAddr)
-{
-    NODE_INFO remoteNode;
-
-    remoteNode.IPAddr = *IPAddr;
-    ARPPut(&remoteNode, ARP_REQUEST);
-}
-
-/******************************************************************************
- * Function:        BOOL ARPIsResolved(IP_ADDR* IPAddr,MAC_ADDR *MACAddr)
- * PreCondition:    None
- * Input:           IPAddr      - IPAddress to be resolved.
- *                  MACAddr     - Buffer to hold corresponding
- *                                MAC Address.
- * Output:          TRUE if given IP Address has been resolved.
- *                  FALSE otherwise.
- * Side Effects:    None
- * Overview:        None
- * Note:            This function is available only when
- *                  STACK_CLIENT_MODE is defined.
- ******************************************************************************/
-BOOL ARPIsResolved(IP_ADDR *IPAddr, MAC_ADDR *MACAddr)
-{
-    if(Cache.IPAddr.Val == IPAddr->Val || Cache.IPAddr.Val == AppConfig.MyGateway.Val)
-    {
-        *MACAddr = Cache.MACAddr;
-        return TRUE;
-    }
-    return FALSE;
-}
-#endif // STACK_CLIENT_MODE
-
 /******************************************************************************
  * Function:        void ARPInit(void)
  * PreCondition:    None
@@ -317,15 +235,5 @@ BOOL ARPIsResolved(IP_ADDR *IPAddr, MAC_ADDR *MACAddr)
 void ARPInit(void)
 {
     smARP = SM_ARP_IDLE;
-
-#if defined(STACK_CLIENT_MODE)
-    Cache.MACAddr.v[0] = 0xff;
-    Cache.MACAddr.v[1] = 0xff;
-    Cache.MACAddr.v[2] = 0xff;
-    Cache.MACAddr.v[3] = 0xff;
-    Cache.MACAddr.v[4] = 0xff;
-    Cache.MACAddr.v[5] = 0xff;
-    Cache.IPAddr.Val = 0x0;
-#endif
 }
 
