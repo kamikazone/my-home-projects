@@ -2,23 +2,7 @@
 #define _MAIN_C
 #include "include/config.h"
 
-/******************************************************************************
- * The following section set the requiredconfiguration bits for each          *
- * processor supported by different development boards and reference designs. *
- *                                                                            *
- * For this application running the current version of the Microchip TCP/IP   *
- * stack, it's important that some particualr configuration bit settings are  *
- * consistent with the hardware configuration. Oscillator configuration and   *
- * options must match the declared CPU_CLOCK, Watchdog Timer (WDT), Low       *
- * Voltage Programming (LVP) and JTAG must be disabled.                       *
- * If your particular hardware design or processor is not included in this    *
- * section you must add the proper configuration bits for it using the        *
- * existing ones and the C18, C30 compilers documentation as a reference.     *
- ******************************************************************************/
 #pragma config OSC=EC, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=OFF, PBADEN=OFF, LVP=OFF, XINST=OFF
-
-
-
 
 /******************************************************************************
  * Include specific headers files required for this application based on the  *
@@ -894,34 +878,13 @@ static void InitAppConfig(void) {
 /******************************************************************************
  * Main Application code                                                      *
  ******************************************************************************/
-#if defined(__C30__)
-int main(void)
-#else
-
 void main(void)
-#endif
 {
-#if defined(USE_LCD) && (LCD_ROWS == 2)
-    BYTE lcd_cycle = 0;
-#endif
-
-#if defined(USE_TIME)
-    time_t time;
-    tm tm_time;
-#endif
-
     char buffer[30];
     static TICK t = 0;
 
     InitializeBoard(); // Initialize hardware
-
-
-
     TickInit(); // Initialize tick manager
-
-#if defined(USE_TIME) && defined(TIME_SOURCE_32KTIMER)
-    Init32KTimer();
-#endif
 
 #if defined(MPFS_USE_EEPROM) || defined(MPFS_USE_PGRM)
     MPFSInit(); // Initialize file system
@@ -945,10 +908,6 @@ void main(void)
 
 #if defined(STACK_USE_HTTP_SERVER)
     HTTPInit(); // Start HTTP server
-#endif
-
-#if defined(STACK_USE_FTP_SERVER)
-    FTPInit(); // Start FTP server
 #endif
 
 #if defined(STACK_USE_DHCP) || defined(STACK_USE_IP_GLEANING)
@@ -990,41 +949,11 @@ void main(void)
         HTTPServer(); // Execute HTTP server FSM
 #endif
 
-#if defined(STACK_USE_FTP_SERVER)
-        FTPServer(); // Execute FTP server FSM
-#endif
-
-#if defined(STACK_USE_ANNOUNCE)
-        DiscoveryTask(); // Execute announce function
-#endif
-
-#if defined(STACK_USE_TCP_EXAMPLE1)
-        GenericTCPClient(); // Execute client example
-#endif
-
-#if defined(STACK_USE_UDPTEST)
-        UDPTest(); // Execute UDP Test routine
-#endif
-
-#if defined(ENABLE_USER_PROCESS)     
-        ProcessIO(); // Execute analog I/O process
-
-        // ADD YOUR SPECIFIC TASKS HERE //
-#endif
-
         // For DHCP information, display how many times we have renewed the IP
         // configuration since last reset.
         if (DHCPBindCount != myDHCPBindCount) {
             myDHCPBindCount = DHCPBindCount;
-            //putrsUART(NewIP);
             IPAddressToString(&AppConfig.MyIPAddr, buffer);
-            //putsUART(buffer);
-            //putrsUART(CRLF);
-
-#if defined(STACK_USE_ANNOUNCE)
-            AnnounceIP();
-#endif
-
         }
     }
 }

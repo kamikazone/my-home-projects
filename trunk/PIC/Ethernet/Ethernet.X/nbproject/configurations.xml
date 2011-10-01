@@ -4,14 +4,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>../src/net/include/announce.h</itemPath>
       <itemPath>../src/net/include/arp.h</itemPath>
       <itemPath>../src/include/config.h</itemPath>
       <itemPath>../src/include/delay.h</itemPath>
       <itemPath>../src/net/include/dhcp.h</itemPath>
       <itemPath>../src/net/include/dns.h</itemPath>
       <itemPath>../src/net/include/enc28j60.h</itemPath>
-      <itemPath>../src/net/include/ftp.h</itemPath>
       <itemPath>../src/include/generic_typedefs.h</itemPath>
       <itemPath>../src/net/include/helpers.h</itemPath>
       <itemPath>../src/net/include/http.h</itemPath>
@@ -21,15 +19,12 @@
       <itemPath>../src/include/minipic10t.h</itemPath>
       <itemPath>../src/mpfs/include/mpfs.h</itemPath>
       <itemPath>../src/net/include/nbns.h</itemPath>
-      <itemPath>../src/net/include/sntp.h</itemPath>
       <itemPath>../src/net/include/stacktsk.h</itemPath>
       <itemPath>../src/net/include/tcp.h</itemPath>
-      <itemPath>../src/net/include/tcp_client_ex1.h</itemPath>
       <itemPath>../src/net/include/tick.h</itemPath>
       <itemPath>../src/time/include/time.h</itemPath>
       <itemPath>../src/uart/include/uart.h</itemPath>
       <itemPath>../src/net/include/udp.h</itemPath>
-      <itemPath>../src/net/include/udptest.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
@@ -47,13 +42,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>../src/net/announce.c</itemPath>
       <itemPath>../src/net/arp.c</itemPath>
       <itemPath>../src/delay.c</itemPath>
       <itemPath>../src/net/dhcp.c</itemPath>
       <itemPath>../src/net/dns.c</itemPath>
       <itemPath>../src/net/enc28j60.c</itemPath>
-      <itemPath>../src/net/ftpd.c</itemPath>
       <itemPath>../src/net/helpers.c</itemPath>
       <itemPath>../src/net/httpd.c</itemPath>
       <itemPath>../src/net/icmpd.c</itemPath>
@@ -62,15 +55,11 @@
       <itemPath>../src/mpfs/mpfs.c</itemPath>
       <itemPath>../src/mpfsimg.c</itemPath>
       <itemPath>../src/net/nbns.c</itemPath>
-      <itemPath>../src/net/sntp.c</itemPath>
       <itemPath>../src/net/stacktsk.c</itemPath>
       <itemPath>../src/net/tcp.c</itemPath>
-      <itemPath>../src/net/tcp_client_ex1.c</itemPath>
       <itemPath>../src/net/tick.c</itemPath>
-      <itemPath>../src/time/time.c</itemPath>
       <itemPath>../src/uart/uart.c</itemPath>
       <itemPath>../src/net/udp.c</itemPath>
-      <itemPath>../src/net/udptest.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -128,8 +117,8 @@
       </C18>
       <C18-AS>
         <property key="default.radix" value="HEX"/>
-        <property key="hex.output.format" value="INHX32"/>
         <property key="enable.case.sensitivity" value="false"/>
+        <property key="hex.output.format" value="INHX32"/>
         <property key="preprocessor.macros" value=""/>
         <property key="warning.level" value="0"/>
         <property key="cross.reference.file" value=""/>
@@ -143,20 +132,15 @@
       </C18-LD>
       <C18LanguageToolchain>
         <property key="stack-analysis-mplink" value="false"/>
-        <property key="stack-analysis-mcc18" value="false"/>
-        <property key="stack-analysis" value="false"/>
         <property key="extended-mode-mcc18" value="false"/>
+        <property key="stack-analysis" value="false"/>
+        <property key="stack-analysis-mcc18" value="false"/>
         <property key="extended-mode" value="false"/>
         <property key="extended-mode-mpasm" value="false"/>
         <property key="extended-mode-mplink" value="false"/>
       </C18LanguageToolchain>
-      <PICkit2PlatformTool>
-        <property key="pk2settings.userpgmexec" value="true"/>
-        <property key="pk2settings.setvddvoltage" value="3.3"/>
-        <property key="pk2settings.3state" value="false"/>
-        <property key="pk2settings.preserveee" value="false"/>
-        <property key="pk2settings.usetargetpower" value="false"/>
-      </PICkit2PlatformTool>
+      <ICD2PlatformTool>
+      </ICD2PlatformTool>
     </conf>
   </confs>
 </configurationDescriptor>
