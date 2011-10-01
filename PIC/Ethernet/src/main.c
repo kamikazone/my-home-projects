@@ -501,96 +501,14 @@ WORD HTTPGetVar(BYTE var, WORD ref, BYTE* val) {
 //
 
 static void InitializeBoard(void) {
-
-    // Oscillator configuration / tunning for specific devices
-#if defined(__dsPIC33F__) || defined(__PIC24H__)
-    PLLFBD = 38; // Multiply by 40 for 160MHz VCO output
-    // (8MHz XT oscillator)
-    CLKDIV = 0x0000; // FRC: divide by 2, PLLPOST: divide by 2,
-    // PLLPRE: divide by 2
-#elif defined(__PIC18FXXJ60)
-    OSCTUNE = 0x40; // Enable 4 x PLL
-#endif
-
-    // I/O Peripheral Pin Select configuration for specific devices
-#if defined(PIC24FJ64_NIC28)
-    // The PIC24FJ64GA002 supports Peripheral Pin Select, then before we
-    // initialize all I/O ports and peripheral registers we must map
-    // the I/O of the peripherals we'll use to their assigned pins
-
-    // SPI1 Interface Pin Assignments
-    RPINR20bits.SDI1R = 9; // Make SDI1 RP9
-    RPOR4bits.RP8R = 7; // Make RP8 SDO1
-    RPOR3bits.RP7R = 8; // Make RP7 SCK1 OUT
-
-    // UART RS232 Interface RX & TX Pin Assignments    
-#if UART_NO == 1
-    // UART1 Interface Pin Assignments
-    RPINR18bits.U1RXR = 15; // Make UART1 RX RP15 Test with UART 1
-    RPOR7bits.RP14R = 3; // Make RP14 UART1 TX Test with UART 1
-#else
-    // UART2 Interface Pin Assignments
-    RPINR19bits.U2RXR = 15; // Make UART2 RX RP15 Test with UART 2
-    RPOR7bits.RP14R = 5; // Make RP14 UART2 TX Test with UART 2
-#endif
-
-    AD1PCFG = 0x1fff; // All Digital I/O
-
-#endif // PIC24FJ64_NIC28
-
     // Set direction and initial default valuefor GPIO Ports
-#if defined(INIT_PORTA)
     LATA = INIT_PORTA;
     TRISA = INIT_TRISA;
-#endif
-
-#if defined(INIT_PORTB)
     LATB = INIT_PORTB;
     TRISB = INIT_TRISB;
-#endif
-
-#if defined(INIT_PORTC)
     LATC = INIT_PORTC;
     TRISC = INIT_TRISC;
-#endif
-
-#if defined(INIT_PORTD)
-    LATD = INIT_PORTD;
-    TRISD = INIT_TRISD;
-#endif
-
-#if defined(INIT_PORTE)
-    LATE = INIT_PORTE;
-    TRISE = INIT_TRISE;
-#endif
-
-#if defined(INIT_PORTF)
-    LATF = INIT_PORTF;
-    TRISF = INIT_TRISF;
-#endif
-
-#if defined(INIT_PORTG)
-    LATG = INIT_PORTG;
-    TRISG = INIT_TRISG;
-#endif
-
-#if defined(INIT_PORTH)
-    LATH = INIT_PORTH;
-    TRISH = INIT_TRISH;
-#endif
-
-#if defined(INIT_PORTJ)
-    LATJ = INIT_PORTJ;
-    TRISJ = INIT_TRISJ;
-#endif
-
     // Initialize serial RS232 Interface
-#if defined(__C30__)
-    UART_BRG = SPBRG_VAL; // Set baud rate and enable UART serial
-    UART_MODE = 0x8000; // RS232 interface
-    UART_STA = 0x0400;
-    __C30_UART = UART_NO;
-#else
     UART_TXSTA = 0b00100000; // Set baud rate and enable UART serial
     UART_RCSTA = 0b10010000; // RS232 interface
 
@@ -599,73 +517,14 @@ static void InitializeBoard(void) {
 #endif
 
     UART_SPBRG = SPBRG_VAL;
-#endif      
-
-#if defined(__C30__)
-    /* JA 061807 Analog features commented for this version ...
-        // ADC
-        AD1CON1 = 0x84E4;          // Turn on, auto sample start, auto-convert,
-                                   // 12 bit mode (on parts with a 12bit A/D)
-        AD1CON2 = 0x0404;          // AVdd, AVss, int every 2 conversions,
-                                   // MUXA only, scan
-        AD1CON3 = 0x1003;          // 16 Tad auto-sample, Tad = 3*Tcy
-        AD1CHS = 0;                // Input to AN0 (potentiometer)
-        AD1PCFGbits.PCFG5 = 0;     // Disable digital input on AN5 (pot)
-        AD1PCFGbits.PCFG4 = 0;     // Disable digital input on AN4 (temp sensor)
-        AD1CSSL = 1<<5;            // Scan pot
-
-    //    IFS0bits.AD1IF = 0;      // Enable ADC interrupt
-    //    IEC0bits.AD1IE = 1;
-
-     */
-#else  // PIC18 
-
     ADCON0 = INIT_ADCON0; // Set up analog features of PORTA
     ADCON1 = INIT_ADCON1;
-
-#if defined(ADCON2) && defined(INIT_ADCON2)
-    ADCON2 = INIT_ADCON2;
-#endif
-
-    //    PIR1bits.ADIF = 0;       // Enable ADC interrupt
-    //    PIE1bits.ADIE = 1;
-
     INTCON2bits.RBPU = 0; // Enable internal PORTB pull-ups
-
     RCONbits.IPEN = 1; // Enable Interrupts
     INTCONbits.GIEH = 1;
     INTCONbits.GIEL = 1;
-#endif
-
-    // If the ENC28J60 Ethernet controller is used set the proper
-    // configuration for the SPI serial interface.
-    // The ENC_SPICON1_CFG configuration value must be defined in the
-    // hardware configuration file.
-#if defined(USE_ENC28J60)
     ENC_SPICON1 = ENC_SPICON1_CFG;
-#if defined(ENC_SPICON2)
-    ENC_SPICON2 = ENC_SPICON2_CFG;
-#endif
     ENC_SPISTAT = ENC_SPISTAT_CFG;
-#endif
-
-    // If an external serial EEPROM with SPI interface is used, check if the
-    // interface is shared with the Ethernet controller if not we must set
-    // the proper configuration.
-    // The EEPROM_SPICON1_CFG configuration value must be defined in the
-    // hardware configuration file.
-    // If the ENC27J60 and serial EEPROM share the SPI interface the
-    // configuration must support both devices, if a different clock speed or
-    // configuration is required for the serial EEPROM define the proper
-    // configuration and the EEPROM_SAVE_SPI_CFG macro in the hardwware
-    // configuration file.
-#if defined(USE_SPIEEPROM) && ((EEPROM_SPICON1 != ENC_SPICON1) || !defined(USE_ENC28J60))
-    EEPROM_SPICON1 = EEPROM_SPICON1_CFG;
-#if defined(EEPROM_SPICON2)
-    EEPROM_SPICON2 = EEPROM_SPICON2_CFG;
-#endif
-    EEPROM_SPISTAT = EEPROM_SPISTAT_CFG;
-#endif
 }
 
 //*****************************************************************************
@@ -676,9 +535,6 @@ static void InitializeBoard(void) {
 //
 
 static void InitAppConfig(void) {
-#if defined(MPFS_USE_EEPROM)
-    BYTE c, *p;
-#endif
 
 #if defined(STACK_USE_DHCP) || defined(STACK_USE_IP_GLEANING)
     AppConfig.Flags.bIsDHCPEnabled = TRUE;
@@ -741,7 +597,6 @@ void main(void)
         if (TickGetDiff(TickGet(), t) >= TICK_SECOND / 2) {
             t = TickGet();
             LED0_IO ^= 1; // Blink system LED
-
         }
 
         // This task performs normal stack task including checking for
