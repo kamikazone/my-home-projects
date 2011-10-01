@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Cobra</title>
+<script language="JavaScript">
+var	xmlHttp;
+var ObjArray = new Array;
+function GetXmlHttpObject(handler)
+{
+ var objXmlHttp = null;
+ if(navigator.userAgent.indexOf("MSIE")>=0)
+ {
+  var ClassName = "Msxml2.XMLHTTP";
+  if(navigator.appVersion.indexOf("MSIE 5.5")>=0)
+  {
+   ClassName = "Microsoft.XMLHTTP";
+  }
+  try
+  {
+   objXmlHttp = new ActiveXObject(ClassName);
+   objXmlHttp.onreadystatechange = handler;
+   return objXmlHttp;
+  }
+  catch(e)
+  {
+   alert("Error: ActiveX scripting may be disabled.");
+   return;
+  }
+ }
+ else
+ {
+  try
+  {
+   objXmlHttp = new XMLHttpRequest();
+   objXmlHttp.onload = handler;
+   objXmlHttp.onerror = handler;
+   return objXmlHttp;
+  }
+  catch(e)
+  {
+   alert("Error: Browser may not be supported or browser security restrictions are too high.");
+  }
+ }
+}
+
+function StateChanged()
+{
+ if(xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+ {
+  document.getElementById("txtAutoUpdateStatus").innerHTML=xmlHttp.responseText;
+  xmlHttp = null;
+  UpdateStatus();
+ }
+}
+
+function UpdateStatus()
+{
+ xmlHttp = GetXmlHttpObject(StateChanged);
+ xmlHttp.open("GET", "status.cgi" , true);
+ xmlHttp.send(null);
+}
+
+function GetServerFile(FileName, AssignTo)
+{
+ var NiftyObj = new Object();
+ NiftyObj.XMLDevice = new GetXmlHttpObject(StateChanged2);
+ NiftyObj.XMLDevice.open("GET", FileName, true);
+ NiftyObj.XMLDevice.send(null);
+ NiftyObj.Text = AssignTo;
+ ObjArray.push(NiftyObj);
+}
+
+function StateChanged2()
+{
+ for(i in ObjArray)
+ {
+  if(ObjArray[i].XMLDevice.readyState == 4 || ObjArray[i].XMLDevice.readyState == "complete")
+  {
+   if(ObjArray[i].Text != "")
+   {
+    document.getElementById(ObjArray[i].Text).innerHTML=ObjArray[i].XMLDevice.responseText;
+   }
+   if(ObjArray[i].Text == "txtAutoUpdateStatus")
+   {
+    GetServerFile("status.cgi", "txtAutoUpdateStatus");
+   }
+   delete ObjArray[i].XMLDevice;
+   delete ObjArray[i];
+  }
+ }
+}
+</script>
+</head>
+<body onload="UpdateStatus(); GetServerFile('version.cgi','txtStackVersion'); GetServerFile('bdate.cgi','txtBuildDate');">
+<p>Toggle LEDs &nbsp;&nbsp;<input type="button" value="LED1" onclick="GetServerFile('0?0=LED1','')"></input><input type="button" value="LED2" onclick="GetServerFile('0?1=LED2','')"></input><br><br></font>
+<tr valign=top>
+
+<br><input type=text size=2 maxlength=1 name=P value=0></input>
+<br><input type=submit name=B value=Click></input>
+<br><input type="button" value="Click" onclick="GetServerFile('0?2=Button','')">
+
+<b>Status</b><br><span id="txtAutoUpdateStatus">Loading...</span><br>
+</body>
+</html>
