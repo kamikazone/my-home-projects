@@ -1,0 +1,40 @@
+<html>
+<head><title>Microchip TCP/IP Stack Demo</title></head>
+<body bgcolor=#FFFFFF leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+<font size=2 color=#6C6C6C face=Arial>
+<table bgcolor=#FFFFFF border=0 cellpadding=4 cellspacing=0>
+<tr valign=center>
+<td colspan=2 align=right><a href="http://www.microchip.com/"><img src="mchp.gif" width=230 height=60 alt="" border=0 align=left></a></td>
+<td colspan=2 align=right><font color=#156F4F size=6><b>Microchip TCP/IP Stack&nbsp;</b></font></td>
+</tr>
+<tr bgcolor=#E5EFEC>
+<td width=25% align=center><a href="index.htm">Home</a></td>
+<td width=25% align=center><b>Architecture</b></td>
+<td width=25% align=center><a href="feat.htm">Features</a></td>
+<td width=25% align=center><a href="links.htm">Links</a></td>
+</tr>
+<tr>
+<td colspan=4>
+<table width=100% border=0 cellpadding=0 cellspacing=0>
+<tr valign=top>
+<td width=5%></td>
+<td><font color=#6C6C6C size=2><br><img src="arch.jpg" width="320" height="250" alt="" border="0" align="right">
+The hardware architecture to run the Microchip TCP/IP Stack	is very simple.	Most Ethernet controllers require few support components including the pulse transformer or RJ45 connector with integrated magnetics. When using the ENC28J60 Ethernet controller communications with the MCU are implemented with the standard SPI interface that can be shared with other devices such as the	serial EEPROM and a character LCD display module.<br><br>
+Each MCU provides a variety of clock configurations, including sourcing the	clock signal from the CLKOUT output of the ENC28J60.<br><br>
+Some MCUs from the PIC18F family, such as the popular PIC18F452, may not provide enough program memory or RAM to fit the TCP/IP stack code depending on what modules are selected. A highly recommended option is the PIC18F4620 or	the PIC28F2620 if fewer I/O ports are required.<br><br>
+The TCP/IP Stack firmware is implemented in a modular fashion using cooperative	multitasking and written in C language.<br><br>
+The current version serving these pages is a modified version of the original TCP/IP Stack v3.75 from Microchip.<br><br>
+The latest version of the TCP/IP stack is available for download at <a href="http://www.microchip.com/tcpip/">www.microchip.com/tcpip</a> and this modified version and additional documentation at	<a href="http://www.ljcv.net/projects/mchptcp3.75/">www.ljcv.net/projects/mchptcp3.75</a>.<br><br>   
+</td>
+<td width=5%></td>
+</tr>
+</table>	
+</td>
+</tr>
+<tr height=2px bgcolor=#E5EFEC>
+<td height=8 colspan=4></td>
+</tr>
+</table>
+</font>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>Microchip TCP/IP Stack Demo</title>
+<script language="JavaScript">
+var	xmlHttp;
+var ObjArray = new Array;
+function GetXmlHttpObject(handler)
+{
+ var objXmlHttp = null;
+ if(navigator.userAgent.indexOf("MSIE")>=0)
+ {
+  var ClassName = "Msxml2.XMLHTTP";
+  if(navigator.appVersion.indexOf("MSIE 5.5")>=0)
+  {
+   ClassName = "Microsoft.XMLHTTP";
+  }
+  try
+  {
+   objXmlHttp = new ActiveXObject(ClassName);
+   objXmlHttp.onreadystatechange = handler;
+   return objXmlHttp;
+  }
+  catch(e)
+  {
+   alert("Error: ActiveX scripting may be disabled.");
+   return;
+  }
+ }
+ else
+ {
+  try
+  {
+   objXmlHttp = new XMLHttpRequest();
+   objXmlHttp.onload = handler;
+   objXmlHttp.onerror = handler;
+   return objXmlHttp;
+  }
+  catch(e)
+  {
+   alert("Error: Browser may not be supported or browser security restrictions are too high.");
+  }
+ }
+}
+
+function StateChanged()
+{
+ if(xmlHttp.readyState == 4 || xmlHttp.readyState == "complete")
+ {
+  document.getElementById("txtAutoUpdateStatus").innerHTML=xmlHttp.responseText;
+  xmlHttp = null;
+  UpdateStatus();
+ }
+}
+
+function UpdateStatus()
+{
+ xmlHttp = GetXmlHttpObject(StateChanged);
+ xmlHttp.open("GET", "status.cgi" , true);
+ xmlHttp.send(null);
+}
+
+function GetServerFile(FileName, AssignTo)
+{
+ var NiftyObj = new Object();
+ NiftyObj.XMLDevice = new GetXmlHttpObject(StateChanged2);
+ NiftyObj.XMLDevice.open("GET", FileName, true);
+ NiftyObj.XMLDevice.send(null);
+ NiftyObj.Text = AssignTo;
+ ObjArray.push(NiftyObj);
+}
+
+function StateChanged2()
+{
+ for(i in ObjArray)
+ {
+  if(ObjArray[i].XMLDevice.readyState == 4 || ObjArray[i].XMLDevice.readyState == "complete")
+  {
+   if(ObjArray[i].Text != "")
+   {
+    document.getElementById(ObjArray[i].Text).innerHTML=ObjArray[i].XMLDevice.responseText;
+   }
+   if(ObjArray[i].Text == "txtAutoUpdateStatus")
+   {
+    GetServerFile("status.cgi", "txtAutoUpdateStatus");
+   }
+   delete ObjArray[i].XMLDevice;
+   delete ObjArray[i];
+  }
+ }
+}
+</script>
+</head>
+<body bgcolor=#FFFFFF onload="UpdateStatus(); GetServerFile('version.cgi','txtStackVersion'); GetServerFile('bdate.cgi','txtBuildDate');" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+<font face=Arial>
+<table width=100% bgcolor=#FFFFFF border=0 cellpadding=0 cellspacing=0>
+<tr valign=center>
+<td colspan=2 align=right><a href="http://www.microchip.com/"><img src="mchp.gif" width=230 height=60 alt="" border=0 align=left></a></td>
+<td colspan=2 align=right><font color=#156F4F size=6><b>Microchip TCP/IP Stack&nbsp;</b></font></td>
+</tr>
+<tr bgcolor=#E5EFEC>
+<td width=25% align=center><b>Home</b></td>
+<td width=25% align=center><a href="arch.htm">Architecture</a></td>
+<td width=25% align=center><a href="feat.htm">Features</a></td>
+<td width=25% align=center><a href="links.htm">Links</a></td>
+</tr>
+<tr>
+<td colspan=4>
+<table width=100% border=0 cellpadding=0 cellspacing=0>
+<tr valign=top>
+<td width=8 bgcolor=#E5EFEC rowspan=5></td>
+<td width=70% rowspan=5>
+<table>
+<tr>
+<td>&nbsp;</td>
+<td><font color=#6C6C6C size=2><br>
+This is a demo website that is being served by a simple HTTP server part of the Microchip TCP/IP Stack running on an 8 or 16-bit Microchip microcontroller.<br><br>
+The Microchip TCP/IP Stack supports different configurations and ethernet controllers such as the Microchip ENC28J60, the Realtek RTL8019 and the new PIC18F97J60 family of 8-bit microcontrollers with integrated ethernet interface.<br><br>
+The <a href="links.htm">Links</a> page includes several links to additional information and reference designs using the Microchip TCP/IP Stack.<br><br>
+The right section of this page demonstrates the ability to handle real-time control functions and how to generate pages with dynamic contents. The <b>Status</b> section refreshes with board information periodically using JavaScript showing the current status of several variables, and the <b>Actions</b> section sends commands like changing the status of particular I/O ports.<br><br>
+If available you can push the on-board switch(es) or change the voltage on the analog inputs and see the new data updated on this page. You can	also click on one of the two LED command buttons to toggle the on-board LEDs.<br><br>
+If your browser does not support AJAX, you can check a static version of this page <a href="index.cgi">here</a>.<br><br>
+For more information about how to put together a simple hardware design to run the Microchip TCP/IP Stack and for products and tools available for developing applications like this one, visit the <a href="http://www.ljcv.net/projects/">LJCV Electronics Projects Page</a>.<br><br><br>
+</font>
+</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+</td>
+<td width=8 bgcolor=#E5EFEC rowspan=5></td>
+<td><br><font color=#6C6C6C size=2>Version: <span id="txtStackVersion">Unknown</span><br>Build date: <span id="txtBuildDate">Unknown</span><br><br></font></td>
+<td width=8 bgcolor=#E5EFEC rowspan=5></td>
+</tr>
+<tr bgcolor=#E5EFEC>
+<td height=8></td>
+</tr>
+<tr valign=top>
+<td><font color=#156F4F size=3><b>Actions</b><br><br></font><font color=#6C6C6C size=2>
+Toggle LEDs &nbsp;&nbsp;<input type="button" value="LED1" onclick="GetServerFile('0?0=LED1','')"></input><input type="button" value="LED2" onclick="GetServerFile('0?1=LED2','')"></input><br><br></font>
+</td>
+</tr>
+<tr bgcolor=#E5EFEC>
+<td height=8></td>
+</tr>
+<tr valign=top>
+<td height=100%><font color=#156F4F size=3><b>Status</b><br><br></font><span id="txtAutoUpdateStatus">Loading...</span><br><br></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr bgcolor=#E5EFEC>
+<td height=8 colspan=4></td>
+</tr>
+</table>
+</font>
+</body>
+</html>
