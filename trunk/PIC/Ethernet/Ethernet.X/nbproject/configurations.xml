@@ -22,8 +22,6 @@
       <itemPath>../src/net/include/stacktsk.h</itemPath>
       <itemPath>../src/net/include/tcp.h</itemPath>
       <itemPath>../src/net/include/tick.h</itemPath>
-      <itemPath>../src/time/include/time.h</itemPath>
-      <itemPath>../src/uart/include/uart.h</itemPath>
       <itemPath>../src/net/include/udp.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
@@ -58,7 +56,6 @@
       <itemPath>../src/net/stacktsk.c</itemPath>
       <itemPath>../src/net/tcp.c</itemPath>
       <itemPath>../src/net/tick.c</itemPath>
-      <itemPath>../src/uart/uart.c</itemPath>
       <itemPath>../src/net/udp.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"

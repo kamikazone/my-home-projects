@@ -13,7 +13,6 @@
 #include "net/include/tick.h"
 #include "net/include/mac.h"
 #include "net/include/helpers.h"
-#include "uart/include/uart.h"
 
 
 #if defined(STACK_USE_DHCP)
@@ -155,178 +154,6 @@ void FormatNetBIOSName(char *Name) {
     }
 }
 
-
-//*****************************************************************************
-// ROM strings used by the interactive configuration menu via serial interface
-//
-#if defined(ENABLE_BUTTON0_CONFIG)
-
-#define MAX_USER_RESPONSE_LEN  (20)
-
-ROM char menu[] =
-        "\r\nTCP/IP Config Application ("VERSION", " __DATE__ ")\r\n\r\n"
-        "\t1: Change Board serial number\r\n"
-        "\t2: Change Host Name\r\n"
-        "\t3: Change IP address\r\n"
-        "\t4: Change Gateway address\r\n"
-        "\t5: Change Netmask\r\n"
-        "\t6: Change DNS server address\r\n"
-        "\t7: Enable DHCP\r\n"
-        "\t8: Disable DHCP\r\n"
-        "\t0: Save & Quit\r\n"
-        "\r\n"
-        "Enter a menu choice (1-0):";
-
-typedef enum _MENU_CMD {
-    MENU_CMD_SERIAL_NUMBER = '1',
-    MENU_CMD_HOST_NAME,
-    MENU_CMD_IP_ADDRESS,
-    MENU_CMD_GATEWAY_ADDRESS,
-    MENU_CMD_SUBNET_MASK,
-    MENU_CMD_DNS_ADDRESS,
-    MENU_CMD_ENABLE_AUTO_CONFIG,
-    MENU_CMD_DISABLE_AUTO_CONFIG,
-    MENU_CMD_DOWNLOAD_MPFS,
-    MENU_CMD_QUIT = '0',
-    MENU_CMD_INVALID = MENU_CMD_DOWNLOAD_MPFS + 1
-} MENU_CMD;
-
-ROM char * const menuCommandPrompt[] ={
-    "\r\nNow running application...\r\n",
-    "\r\nSerial Number (",
-    "\r\nHost Name (",
-    "\r\nIP Address (",
-    "\r\nGateway Address (",
-    "\r\nNetmask (",
-    "\r\nDNS Server Address (",
-    "\r\nDHCP\r\n",
-    "\r\nDHCP\r\n",
-    "\r\nReady to download MPFS image - Use Xmodem protocol\r\n",
-};
-
-ROM char InvalidInputMsg[] = "\r\nInvalid input received - Input ignored\r\n"
-        "Press any key to continue\r\n";
-
-MENU_CMD GetMenuChoice(void) {
-    BYTE c;
-
-    while (!DataRdyUART()) {
-
-    }
-
-    c = ReadUART();
-
-    if (c >= '0' && c < MENU_CMD_INVALID)
-        return c;
-    else
-        return MENU_CMD_INVALID;
-}
-
-void ExecuteMenuChoice(MENU_CMD choice) {
-    char response[MAX_USER_RESPONSE_LEN], buffer[20];
-    IP_ADDR tempIPValue, *destIPValue;
-
-    putrsUART(CRLF);
-    putrsUART(menuCommandPrompt[choice - '0']);
-
-    switch (choice) {
-        case MENU_CMD_SERIAL_NUMBER:
-            itoa(AppConfig.SerialNumber.Val, response);
-            putsUART(response);
-            putrsUART("): ");
-
-            if (ReadStringUART((BYTE *) response, sizeof (response))) {
-                AppConfig.SerialNumber.Val = atoi(response);
-                AppConfig.MyMACAddr.v[4] = AppConfig.SerialNumber.v[1];
-                AppConfig.MyMACAddr.v[5] = AppConfig.SerialNumber.v[0];
-            }
-            break;
-
-        case MENU_CMD_HOST_NAME:
-            putsUART(AppConfig.NetBIOSName);
-            putrsUART("): ");
-            ReadStringUART((BYTE *) response, sizeof (response) > sizeof (AppConfig.NetBIOSName) ? sizeof (AppConfig.NetBIOSName) : sizeof (response));
-
-            if (response[0] != '\0') {
-                memcpy(AppConfig.NetBIOSName, (void*) response, sizeof (AppConfig.NetBIOSName));
-                FormatNetBIOSName((char *) &AppConfig.NetBIOSName);
-            }
-            break;
-
-        case MENU_CMD_IP_ADDRESS:
-            destIPValue = &AppConfig.MyIPAddr;
-            goto ReadIPConfig;
-
-        case MENU_CMD_GATEWAY_ADDRESS:
-            destIPValue = &AppConfig.MyGateway;
-            goto ReadIPConfig;
-
-        case MENU_CMD_SUBNET_MASK:
-            destIPValue = &AppConfig.MyMask;
-            goto ReadIPConfig;
-
-        case MENU_CMD_DNS_ADDRESS:
-            destIPValue = &AppConfig.PrimaryDNSServer;
-
-ReadIPConfig:
-            IPAddressToString(destIPValue, buffer);
-            putsUART(buffer);
-            putrsUART("): ");
-            ReadStringUART((BYTE *) response, sizeof (response));
-
-            if (!StringToIPAddress(response, &tempIPValue)) {
-                putrsUART(InvalidInputMsg);
-
-                while (!DataRdyUART());
-
-                ReadUART();
-            } else {
-                destIPValue->Val = tempIPValue.Val;
-            }
-            break;
-
-        case MENU_CMD_ENABLE_AUTO_CONFIG:
-            AppConfig.Flags.bIsDHCPEnabled = TRUE;
-            break;
-
-        case MENU_CMD_DISABLE_AUTO_CONFIG:
-            AppConfig.Flags.bIsDHCPEnabled = FALSE;
-            break;
-
-        case MENU_CMD_DOWNLOAD_MPFS:
-
-#if defined(MPFS_USE_EEPROM)
-            DownloadMPFS();
-#endif
-
-            break;
-
-        case MENU_CMD_QUIT:
-
-#if defined(MPFS_USE_EEPROM)
-            SaveAppConfig();
-#endif
-
-            break;
-    }
-}
-
-static void SetConfig(void) {
-    MENU_CMD choice;
-
-    do {
-        putrsUART(menu);
-        choice = GetMenuChoice();
-
-        if (choice != MENU_CMD_INVALID)
-            ExecuteMenuChoice(choice);
-
-    } while (choice != MENU_CMD_QUIT);
-
-}
-#endif  // ENABLE_BUTTON0_CONFIG
-
-
 /******************************************************************************
  * If enabled the HTTP Server requires the main application to implement two  *
  * callback functions to handle http requests that include dynamic content or *
@@ -436,10 +263,7 @@ void HTTPExecCmd(BYTE** argv, BYTE argc) {
 
     ////////////////////////////////////////////////////////////////////////////
 */
-#if defined(ENABLE_REMOTE_CONFIG)
-    BYTE CurrentArg;
-    WORD_VAL TmpWord;
-#endif
+
 
     // Design your pages such that they contain command code as a one
     // character numerical value.
@@ -456,40 +280,29 @@ void HTTPExecCmd(BYTE** argv, BYTE argc) {
                 switch (var) {
                     case CMD_LED1: // NAME = 0
                         LED1_IO ^= 1; // Toggle LED
-                        putrsUART("\r\nLED1\r\n");
                         break;
 
                     case CMD_LED2: // NAME = 1
                         LED2_IO ^= 1; // Toggle LED
-                        putrsUART("\r\nLED2\r\n");
                         break;
                     case 2:
-                        putrsUART("\r\nTest1\r\n");
                         break;
                     case 3:
-                        putrsUART("\r\nTest2\r\n");
                         break;
                     case 4:
-                        putrsUART("\r\nTest3\r\n");
                         break;
                     case 5:
-                        putrsUART("\r\nTest4\r\n");
                         break;
                     case 6:
-                        putrsUART("\r\nTest5\r\n");
                         break;
                     case 7:
-                        putrsUART("\r\nTest6\r\n");
                         break;
                     case 8:
-                        putrsUART("\r\nTest7\r\n");
                         break;
                     case 9:
-                        putrsUART("\r\nTest8\r\n");
                         break;
                 }
-            } else
-                putrsUART("\r\nNone...\r\n");
+            } else;
 
             memcpypgm2ram(argv[0], COMMANDS_OK_PAGE, COMMANDS_OK_PAGE_LEN);
 
@@ -895,15 +708,6 @@ void main(void)
     FormatNetBIOSName((char *) &AppConfig.NetBIOSName);
 
     InitAppConfig(); // Load configuration vector
-
-#if defined(ENABLE_BUTTON0_CONFIG)
-    if (BUTTON0_IO == 0) {
-        // If BUTTON0 is pressed during startup initiate the
-        // configuration menu via the serial interface
-        SetConfig();
-    }
-#endif
-
     StackInit(); // Initialize TCP/IP stack
 
 #if defined(STACK_USE_HTTP_SERVER)

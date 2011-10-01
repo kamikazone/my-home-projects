@@ -71,7 +71,6 @@
 #include "net/include/helpers.h"
 #include "net/include/mac.h"
 #include "net/include/enc28j60.h"
-#include "uart/include/uart.h"
 
 /******************************************************************************
  * Specific types and structures definitions for this module                  *

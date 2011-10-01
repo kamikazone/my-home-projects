@@ -58,7 +58,6 @@
 #include "net/include/dhcp.h"
 #include "net/include/udp.h"
 #include "net/include/tick.h"
-#include "uart/include/uart.h"
 
 /******************************************************************************
  * Specific types and structures definitions for this module                  *
