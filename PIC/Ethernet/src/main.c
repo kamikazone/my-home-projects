@@ -15,71 +15,9 @@
  * section you must add the proper configuration bits for it using the        *
  * existing ones and the C18, C30 compilers documentation as a reference.     *
  ******************************************************************************/
-#if defined(PIC10T) || defined(MINIPIC10T) || defined(PIC18_NIC28)
-#if defined(__18F452)
-#pragma config OSC=ECIO, PWRT=ON, BOR=OFF, WDT=OFF, LVP=OFF
-#elif defined(__18F4520) || defined(__18F4525) || defined(__18F4620) || defined(__18F2620)
 #pragma config OSC=EC, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=OFF, PBADEN=OFF, LVP=OFF, XINST=OFF
-#elif defined(__18F4580)
-#pragma config OSC=EC, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=OFF, PBADEN=OFF, LVP=OFF, XINST=OFF
-#else
-#error Add CPU configuration bits for PIC10T or MINIPIC10T or PIC18_NIC28
-#endif
 
-#elif defined(PICNET1)
-#if defined(__18F252) || defined(__18F452)
-#pragma config OSC=HSPLL, PWRT=ON, BOR=OFF, WDT=OFF, LVP=OFF
-#elif defined(__18F2520) || defined(__18F4520) || defined(__18F2525) || \
-          defined(__18F4525) || defined(__18F2620) || defined(__18F4620)
-#pragma config OSC=HSPLL, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=ON, PBADEN=OFF, LVP=OFF, XINST=OFF
-#else
-#error Add CPU configuration bits for PICNET1
-#endif
 
-#elif defined(EIP10)
-#pragma config OSC=HSPLL, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=ON, PBADEN=OFF, LVP=OFF, XINST=OFF
-
-#elif defined(PICDEM2)
-#if defined(__18F252) || defined(__18F452)
-#pragma config OSC=HSPLL, PWRT=ON, BOR=OFF, WDT=OFF, LVP=OFF
-#elif defined(__18F2520) || defined(__18F4520) || defined(__18F2525) || \
-          defined(__18F4525) || defined(__18F2620) || defined(__18F4620)
-#pragma config OSC=HSPLL, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=ON, PBADEN=OFF, LVP=OFF, XINST=OFF
-#else
-#error Add CPU configuration bits for PICDEM2
-#endif
-
-#elif defined(PICDEMNET)
-#if defined(__18F452)
-#pragma config OSC=HSPLL, PWRT=ON, BOR=OFF, WDT=OFF, LVP=OFF
-#elif defined(__18F4520) || defined(__18F4525) || defined(__18F4620)
-#pragma config OSC=HS, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=ON, PBADEN=OFF, LVP=OFF, XINST=OFF
-#else
-#error Add CPU configuration bits for PICDEMNET
-#endif
-
-#elif defined(PICDEMNET2) || defined(PICWEB1)
-#pragma config XINST=OFF, WDT=OFF, FOSC2=ON, FOSC=HSPLL, ETHLED=ON
-
-#elif defined(HPC_EXPLORER)
-#pragma config OSC=HSPLL, PWRT=ON, BOREN=OFF, WDT=OFF, MCLRE=ON, LVP=OFF, XINST=OFF
-
-#elif defined(EXP16_DSPIC33) || defined(EXP16_PIC24H)
-_FOSCSEL(FNOSC_PRIPLL) // PLL enabled
-_FOSC(OSCIOFNC_OFF & POSCMD_XT) // XT Osc
-_FWDT(FWDTEN_OFF) // Disable Watchdog timer
-
-#elif defined(EXP16_PIC24F)
-_CONFIG2(FNOSC_PRIPLL & POSCMOD_XT) // Primary XT OSC with 4x PLL
-_CONFIG1(JTAGEN_OFF & FWDTEN_OFF) // JTAG off, watchdog timer off
-
-#elif defined(PIC24FJ64_NIC28)
-_CONFIG2(FNOSC_PRIPLL & POSCMOD_HS) // Primary HS OSC with 4x PLL
-_CONFIG1(JTAGEN_OFF & FWDTEN_OFF) // JTAG off, watchdog timer off
-
-#else
-#error MAIN001: Unknown or unsupported board/hardware profile
-#endif
 
 
 /******************************************************************************
@@ -93,9 +31,6 @@ _CONFIG1(JTAGEN_OFF & FWDTEN_OFF) // JTAG off, watchdog timer off
 #include "net/include/helpers.h"
 #include "uart/include/uart.h"
 
-#if defined(USE_LCD) && defined(USE_CM_LCD)
-#include "lcd/include/cmlcddriver.h"
-#endif
 
 #if defined(STACK_USE_DHCP)
 #include "net/include/dhcp.h"
@@ -105,41 +40,12 @@ _CONFIG1(JTAGEN_OFF & FWDTEN_OFF) // JTAG off, watchdog timer off
 #include "mpfs/include/mpfs.h"
 #endif
 
-#if defined(MPFS_USE_EEPROM)
-#include "eeprom/include/xeeprom.h"
-#endif
+
 
 #if defined(STACK_USE_HTTP_SERVER)
 #include "net/include/http.h"
 #endif
 
-#if defined(STACK_USE_FTP_SERVER)
-#include "net/include/ftp.h"
-#endif
-
-#if defined(STACK_USE_ANNOUNCE)
-#include "net/include/announce.h"
-#endif
-
-#if defined(STACK_USE_DNS)
-#include "net/include/dns.h"
-#endif
-
-#if defined(STACK_USE_TCP_EXAMPLE1)
-#include "net/include/tcp_client_ex1.h"
-#endif
-
-#if defined(STACK_USE_UDPTEST)
-#include "net/include/udptest.h"
-#endif
-
-#if defined(USE_TIME)
-#include "time/include/time.h"
-#endif
-
-#if defined(STACK_USE_SNTP)
-#include "net/include/sntp.h"
-#endif
 
 /******************************************************************************
  * Local & external variables and constants used by the application           *
@@ -242,84 +148,6 @@ void IPAddressToString(IP_ADDR *IPVal, char *str) {
     itoa(IPVal->v[3], str);
 }
 
-#if defined(USE_LCD)
-//*****************************************************************************
-// DisplayCounters will convert the Tx and Rx counters to strings and display
-// them in the LCD module
-//
-
-void DisplayCounters(void) {
-    LCDClearBufferRow(LCD_ROWS - 2);
-    LCDClearBufferRow(LCD_ROWS - 1);
-    strcpypgm2ram((char *) &LCDBuffer[LCD_ROWS - 2][0], (ROM char *) "Tx=");
-    strcpypgm2ram((char *) &LCDBuffer[LCD_ROWS - 1][0], (ROM char *) "Rx=");
-    ultoa(IP_TX_pktcnt, (char *) &LCDBuffer[LCD_ROWS - 2][3]);
-    ultoa(IP_RX_pktcnt, (char *) &LCDBuffer[LCD_ROWS - 1][3]);
-}
-
-//*****************************************************************************
-//
-
-void UpdateLCD(void) {
-    static BYTE lcd_cycle = 0;
-
-#if defined(USE_TIME)
-    time_t time;
-    tm tm_time;
-#endif    
-
-    LCDClearBuffer();
-
-#if LCD_ROWS > 2
-
-    IPAddressToString(&AppConfig.MyIPAddr, (char *) &LCDBuffer[1][0]);
-    DisplayCounters();
-
-#if defined(USE_TIME)
-    time = GetTimeTick();
-    offtime(&tm_time, time, LOCAL_OFFSET_SECS);
-
-#if defined(STACK_USE_SNTP)
-    if (!IsClockValid())
-        strcpypgm2ram((char *) &LCDBuffer[0][0], (ROM char *) "--/--/-- --:--");
-    else
-#endif
-        asctime(&tm_time, &LCDBuffer[0][0], 7);
-
-#else  // No time to show, copy back the software version
-    strcpypgm2ram((char *) &LCDBuffer[0][0], (ROM char *) "TCP/IP " VERSION);
-#endif
-
-#else  // We have only 2 rows, cycle the LCD
-
-    if (lcd_cycle < 10) {
-        IPAddressToString(&AppConfig.MyIPAddr, (char *) &LCDBuffer[1][0]);
-
-#if defined(USE_TIME)
-        time = GetTimeTick();
-        offtime(&tm_time, time, LOCAL_OFFSET_SECS);
-
-#if defined(STACK_USE_SNTP)
-        if (!IsClockValid())
-            strcpypgm2ram((char *) &LCDBuffer[0][0], (ROM char *) "--/--/-- --:--");
-        else
-#endif
-            asctime(&tm_time, &LCDBuffer[0][0], 7);
-
-#else  // No time to show, copy back the software version
-        strcpypgm2ram((char *) &LCDBuffer[0][0], (ROM char *) "TCP/IP " VERSION);
-#endif
-        lcd_cycle++;
-    }
-    else if (lcd_cycle < 30) {
-        DisplayCounters();
-        lcd_cycle++;
-    } else lcd_cycle = 0;
-#endif  // LCD_ROWS > 2
-
-    LCDRefresh();
-}
-#endif  // USE_LCD
 
 //*****************************************************************************
 // FormatNetBIOSName converts the string pointed by Name to the standard
@@ -343,39 +171,6 @@ void FormatNetBIOSName(char *Name) {
     }
 }
 
-
-/******************************************************************************
- * The following group of functions implement an interactive configuration    *
- * menu over the serial interface.                                            *
- * To enable this feature the macro ENABLE_BUTTON0_CONFIG must be defined,    *
- * if an external serial EEPROM is available the application configuration    *
- * vector (AppConfig) is written into it.                                     *
- ******************************************************************************/
-
-#if defined(MPFS_USE_EEPROM)
-//*****************************************************************************
-// If an external serial EEPROM is available SaveAppConfig will write the
-// application configuration vector (AppConfig) into the reserved memory
-// block at the start of the memory address space writing a 0x55 value to
-// indicate the presence of a valid configuration vector
-//
-
-static void SaveAppConfig(void) {
-    BYTE c, *p;
-
-    p = (BYTE*) & AppConfig;
-    XEEBeginWrite(EEPROM_CONTROL, 0x00);
-    XEEWrite(0x55);
-
-    for (c = 0; c < sizeof (AppConfig); c++) {
-        XEEWrite(*p++);
-    }
-
-    XEEEndWrite();
-}
-#else
-#define SaveAppConfig()
-#endif
 
 //*****************************************************************************
 // ROM strings used by the interactive configuration menu via serial interface
@@ -427,146 +222,6 @@ ROM char * const menuCommandPrompt[] ={
 
 ROM char InvalidInputMsg[] = "\r\nInvalid input received - Input ignored\r\n"
         "Press any key to continue\r\n";
-
-#if defined(MPFS_USE_EEPROM)
-/******************************************************************************
- * Function:        BOOL DownloadMPFS(void)
- * PreCondition:    MPFSInit() is already called.
- * Input:           None
- * Output:          TRUE if successful
- *                  FALSE otherwise
- * Side Effects:    This function uses 128 bytes of Bank 4 using indirect
- *                  pointer.  This requires that no part of code is using 
- *                  this block during or before calling this function.
- *                  Once this function is done, that block of memory is
- *                  available for general use.
- * Overview:        This function implements XMODEM protocol to be able to
- *                  receive a binary file from PC applications such as 
- *                  HyperTerminal or TeraTerm.
- * Note:            The current version does not implement user interface to
- *                  set IP address and other information. User should create
- *                  their own interface to allow user to modify IP information
- *                  Also, this version implements simple user action to start
- *                  file transfer. User may evaulate its own requirements and
- *                  implement an appropriate start action.
- ******************************************************************************/
-#define XMODEM_SOH       0x01
-#define XMODEM_EOT       0x04
-#define XMODEM_ACK       0x06
-#define XMODEM_NAK       0x15
-#define XMODEM_CAN       0x18
-#define XMODEM_BLOCK_LEN 128
-
-static BOOL DownloadMPFS(void) {
-
-    enum SM_MPFS {
-        SM_MPFS_SOH,
-        SM_MPFS_BLOCK,
-        SM_MPFS_BLOCK_CMP,
-        SM_MPFS_DATA,
-    } state;
-
-    BYTE c, blockLen, lResult, tempData[XMODEM_BLOCK_LEN];
-    MPFS handle;
-    BOOL lbDone = FALSE;
-    TICK lastTick, currentTick;
-
-    state = SM_MPFS_SOH;
-    handle = MPFSFormat();
-
-    // Notify the host that we are ready to receive...
-    lastTick = TickGet();
-    do {
-        currentTick = TickGet();
-        if (TickGetDiff(currentTick, lastTick) >= (TICK_SECOND / 2)) {
-            lastTick = TickGet();
-
-            while (BusyUART());
-
-            WriteUART(XMODEM_NAK);
-
-            /*
-             * Blink LED to indicate that we are waiting for
-             * host to send the file.
-             */
-            LED6_IO ^= 1;
-        }
-
-    } while (!DataRdyUART());
-
-    while (!lbDone) {
-        if (DataRdyUART()) {
-            // Toggle LED as we receive the data from host.
-            LED6_IO ^= 1;
-            c = ReadUART();
-        } else {
-            // Real application should put some timeout to make sure
-            // that we do not wait forever.
-            continue;
-        }
-
-        switch (state) {
-            default:
-                if (c == XMODEM_SOH) {
-                    state = SM_MPFS_BLOCK;
-                } else if (c == XMODEM_EOT) {
-                    // Turn off LED when we are done.
-                    LED6_IO = 1;
-
-                    MPFSClose();
-
-                    while (BusyUART());
-
-                    WriteUART(XMODEM_ACK);
-                    lbDone = TRUE;
-                } else {
-                    while (BusyUART());
-
-                    WriteUART(XMODEM_NAK);
-                }
-
-                break;
-
-            case SM_MPFS_BLOCK:
-
-                // We do not use block information.
-                lResult = XMODEM_ACK;
-                blockLen = 0;
-                state = SM_MPFS_BLOCK_CMP;
-                break;
-
-            case SM_MPFS_BLOCK_CMP:
-
-                // We do not use 1's comp. block value.
-                state = SM_MPFS_DATA;
-                break;
-
-            case SM_MPFS_DATA:
-
-                // Buffer block data until it is over.
-                tempData[blockLen++] = c;
-
-                if (blockLen > XMODEM_BLOCK_LEN) {
-                    // We have one block data. Write it to EEPROM.
-                    MPFSPutBegin(handle);
-                    lResult = XMODEM_ACK;
-
-                    for (c = 0; c < XMODEM_BLOCK_LEN; c++)
-                        MPFSPut(tempData[c]);
-
-                    handle = MPFSPutEnd();
-
-                    while (BusyUART());
-
-                    WriteUART(lResult);
-                    state = SM_MPFS_SOH;
-                }
-                break;
-        }
-    }
-    return TRUE;
-}
-#endif
 
 MENU_CMD GetMenuChoice(void) {
     BYTE c;
@@ -855,115 +510,6 @@ void HTTPExecCmd(BYTE** argv, BYTE argc) {
             memcpypgm2ram(argv[0], COMMANDS_OK_PAGE, COMMANDS_OK_PAGE_LEN);
 
             break;
-            /*
-            // TODO change code to use new lcd driver
-            #if defined(USE_LCD)
-                case CGI_CMD_LCDOUT:     // ACTION=1
-                    if(argc > 2)         // Text provided in argv[2]
-                    {
-                        // Write 32 received characters or less to LCDText
-                        if(strlen(argv[2]) < 32)
-                        {
-                            memset(LCDText, ' ', 32);
-                            strcpy(LCDText, argv[2]);
-                        }
-                        else
-                        {
-                            memcpy(LCDText, (void*)argv[2], 32);
-                        }
-
-                        // Write LCDText to the LCD
-                        LCDUpdate();
-                    }
-                    else                 // No text provided
-                    {
-                        LCDErase();
-                    }
-                    memcpypgm2ram(argv[0], COMMANDS_OK_PAGE, COMMANDS_OK_PAGE_LEN);
-                    break;
-            #endif
-             */
-
-#if ENABLE_REMOTE_CONFIG
-            // Possibly useful code for remotely reconfiguring the board through HTTP
-        case CGI_CMD_RECONFIG: // ACTION=2
-            // Loop through all variables that we've been given
-            CurrentArg = 1;
-
-            while (argc > CurrentArg) {
-                // Get the variable identifier (HTML "name"), and
-                // increment to the variable's value
-                TmpWord.byte.MSB = argv[CurrentArg][0];
-                TmpWord.byte.LSB = argv[CurrentArg++][1];
-                var = hexatob(TmpWord);
-
-                // Make sure the variable's value exists
-                if (CurrentArg >= argc)
-                    break;
-
-                // Take action with this variable/value
-                switch (var) {
-                    case VAR_SERIAL_NUMBER:
-                        AppConfig.SerialNumber.Val = atoi(argv[CurrentArg]);
-                        AppConfig.MyMACAddr.v[4] = AppConfig.SerialNumber.byte.MSB;
-                        AppConfig.MyMACAddr.v[5] = AppConfig.SerialNumber.byte.LSB;
-                        break;
-
-                    case VAR_IP_ADDRESS:
-                    case VAR_SUBNET_MASK:
-                    case VAR_GATEWAY_ADDRESS:
-                    {
-                        DWORD TmpAddr;
-
-                        // Convert the returned value to the 4 octect
-                        // binary representation
-                        if (!StringToIPAddress(argv[CurrentArg], (IP_ADDR*) & TmpAddr))
-                            break;
-
-                        // Reconfigure the App to use the new values
-                        if (var == VAR_IP_ADDRESS) {
-                            // Cause the IP address to be rebroadcast
-                            // through Announce.c or the RS232 port since
-                            // we now have a new IP address
-                            if (TmpAddr != *(DWORD*) & AppConfig.MyIPAddr)
-                                DHCPBindCount++;
-
-                            // Set the new address
-                            memcpy((void*) &AppConfig.MyIPAddr, (void*) &TmpAddr, sizeof (AppConfig.MyIPAddr));
-                        } else if (var == VAR_SUBNET_MASK)
-                            memcpy((void*) &AppConfig.MyMask, (void*) &TmpAddr, sizeof (AppConfig.MyMask));
-                        else if (var == VAR_SUBNET_MASK)
-                            memcpy((void*) &AppConfig.MyGateway, (void*) &TmpAddr, sizeof (AppConfig.MyGateway));
-                    }
-                        break;
-
-                    case VAR_DHCP:
-                        if (AppConfig.Flags.bIsDHCPEnabled) {
-                            if (!(argv[CurrentArg][0] - '0')) {
-                                AppConfig.Flags.bIsDHCPEnabled = FALSE;
-                            }
-                        } else {
-                            if (argv[CurrentArg][0] - '0') {
-                                AppConfig.MyIPAddr.Val = 0x00000000ul;
-                                AppConfig.Flags.bIsDHCPEnabled = TRUE;
-                                AppConfig.Flags.bInConfigMode = TRUE;
-                                DHCPReset();
-                            }
-                        }
-                        break;
-                }
-
-                // Advance to the next variable (if present)
-                CurrentArg++;
-            }
-
-            // Save any changes to non-volatile memory
-            SaveAppConfig();
-
-            // Return the same CONFIG.CGI file as a result.
-            memcpypgm2ram(argv[0], CONFIG_UPDATE_PAGE, CONFIG_UPDATE_PAGE_LEN);
-            break;
-#endif
 
         default:
             memcpypgm2ram(argv[0], COMMANDS_OK_PAGE, COMMANDS_OK_PAGE_LEN);
@@ -1052,25 +598,6 @@ WORD HTTPGetVar(BYTE var, WORD ref, BYTE* val) {
             *val = LED7_IO ? '1' : '0';
             break;
 
-#if defined(ENABLE_USER_PROCESS)
-        case VAR_ANAIN_AN0:
-            *val = AN0String[(BYTE) ref];
-
-            if (AN0String[(BYTE) ref] == '\0')
-                return HTTP_END_OF_VAR;
-            else if (AN0String[(BYTE)++ref] == '\0')
-                return HTTP_END_OF_VAR;
-            return ref;
-
-            //    case VAR_ANAIN_AN1:
-            //        *val = AN1String[(BYTE)ref];
-            //        if(AN1String[(BYTE)ref] == '\0')
-            //            return HTTP_END_OF_VAR;
-            //        else if(AN1String[(BYTE)++ref] == '\0' )
-            //            return HTTP_END_OF_VAR;
-            //        return ref;
-#endif
-
         case VAR_DIGIN0:
             *val = BUTTON0_IO ? '1' : '0';
             break;
@@ -1143,23 +670,6 @@ WORD HTTPGetVar(BYTE var, WORD ref, BYTE* val) {
         case VAR_DATE:
         case VAR_TIME:
             if (ref == HTTP_START_OF_VAR) {
-#if defined(USE_TIME)
-                if (!IsClockValid()) {
-                    if (var == VAR_DATE)
-                        strcpypgm2ram(VarString, "--/--/--");
-                    else
-                        strcpypgm2ram(VarString, "--:--");
-                } else {
-                    time = GetTimeTick();
-                    offtime(&tm_time, time, LOCAL_OFFSET_SECS);
-                    if (var == VAR_DATE)
-                        asctime(&tm_time, &VarString[0], 3);
-                    else
-                        asctime(&tm_time, &VarString[0], 6);
-                }
-#else
-                strcpypgm2ram(VarString, "n/a");
-#endif
             }
 
             *val = VarString[(BYTE) ref];
@@ -1169,111 +679,6 @@ WORD HTTPGetVar(BYTE var, WORD ref, BYTE* val) {
             else if (VarString[(BYTE)++ref] == '\0')
                 return HTTP_END_OF_VAR;
             return ref;
-
-#if ENABLE_REMOTE_CONFIG
-        case VAR_MAC_ADDRESS:
-            if (ref == HTTP_START_OF_VAR) {
-                VarStringLen = 2 * 6 + 5; // 17 bytes: 2 for each of the 6 address bytes + 5 octet spacers
-
-                // Format the entire string
-                i = 0;
-                VarStringPtr = VarString;
-
-                while (1) {
-                    *VarStringPtr++ = btohexa_high(AppConfig.MyMACAddr.v[i]);
-                    *VarStringPtr++ = btohexa_low(AppConfig.MyMACAddr.v[i]);
-                    if (++i == 6)
-                        break;
-                    *VarStringPtr++ = '-';
-                }
-            }
-
-            // Send one byte back to the calling function (the HTTP Server)
-            *val = VarString[(BYTE) ref];
-
-            if ((BYTE)++ref == VarStringLen)
-                return HTTP_END_OF_VAR;
-
-            return ref;
-
-        case VAR_SERIAL_NUMBER:
-            if (ref == HTTP_START_OF_VAR) {
-                // Obtain the serial number.  For this demo, we will call
-                // the two low bytes of our MAC address (required to be
-                // organization assigned) our board's serial number
-                itoa(AppConfig.SerialNumber.Val, VarString);
-                VarStringLen = strlen(VarString);
-            }
-
-            // Send one byte back to the calling function (the HTTP Server)
-            *val = VarString[(BYTE) ref];
-
-            // If this is the last byte to be returned, return
-            // HTTP_END_OF_VAR so the HTTP server won't keep calling this
-            // application callback function
-            if ((BYTE)++ref == VarStringLen)
-                return HTTP_END_OF_VAR;
-
-            return ref;
-
-        case VAR_IP_ADDRESS:
-        case VAR_SUBNET_MASK:
-        case VAR_GATEWAY_ADDRESS:
-            // Check if ref == 0 meaning that the first character of this
-            // variable needs to be returned
-            if (ref == HTTP_START_OF_VAR) {
-                // Decide which 4 variable bytes to send back
-                if (var == VAR_IP_ADDRESS)
-                    DataSource = (BYTE*) & AppConfig.MyIPAddr;
-                else if (var == VAR_SUBNET_MASK)
-                    DataSource = (BYTE*) & AppConfig.MyMask;
-                else if (var == VAR_GATEWAY_ADDRESS)
-                    DataSource = (BYTE*) & AppConfig.MyGateway;
-
-                // Format the entire string
-                VarStringPtr = VarString;
-                i = 0;
-
-                while (1) {
-                    itoa((WORD) * DataSource++, VarStringPtr);
-                    VarStringPtr += strlen(VarStringPtr);
-                    if (++i == 4)
-                        break;
-                    *VarStringPtr++ = '.';
-                }
-                VarStringLen = strlen(VarString);
-            }
-
-            // Send one byte back to the calling function (the HTTP Server)
-            *val = VarString[(BYTE) ref];
-
-            // If this is the last byte to be returned, return
-            // HTTP_END_OF_VAR so the HTTP server won't keep calling this
-            // application callback function
-            if ((BYTE)++ref == VarStringLen)
-                return HTTP_END_OF_VAR;
-
-            return ref;
-
-        case VAR_DHCP_TRUE:
-        case VAR_DHCP_FALSE:
-            // Check if ref == 0 meaning that the first character of this
-            // variable needs to be returned
-            if (ref == HTTP_START_OF_VAR) {
-                if ((var == VAR_DHCP_TRUE) ^ AppConfig.Flags.bIsDHCPEnabled)
-                    return HTTP_END_OF_VAR;
-
-                VarStringLen = 7;
-                memcpypgm2ram(VarString, "checked", 7);
-            }
-
-            *val = VarString[(BYTE) ref];
-
-            if ((BYTE)++ref == VarStringLen)
-                return HTTP_END_OF_VAR;
-
-            return ref;
-#endif
     }
 
     return HTTP_END_OF_VAR;
@@ -1484,65 +889,7 @@ static void InitAppConfig(void) {
     AppConfig.Flags.bIsDHCPEnabled = FALSE;
 #endif
 
-#if defined(MPFS_USE_EEPROM)
-    p = (BYTE*) & AppConfig;
-
-    XEEBeginRead(EEPROM_CONTROL, 0x00);
-    c = XEERead();
-    XEEEndRead();
-
-    // Check for a valid configuration vector
-    if (c == 0x55) {
-        XEEBeginRead(EEPROM_CONTROL, 0x01);
-
-        for (c = 0; c < sizeof (AppConfig); c++)
-            *p++ = XEERead();
-
-        XEEEndRead();
-    } else
-        SaveAppConfig();
-#endif
 }
-
-
-/******************************************************************************
- * The following function shows how to implement a process that is called     *
- * periodically from the main application to perform a specific task such as  *
- * acquiring the value for an analog input and converting it to a string      *
- ******************************************************************************/
-#if defined(ENABLE_USER_PROCESS)
-
-static void ProcessIO(void) {
-#if defined(__C30__)
-    //  Note: floats and sprintf uses a lot of program memory/CPU cycles, so it's commented out
-    //    float Temperature;
-    //
-    //    // Convert temperature result into ASCII string
-    //    Temperature = ((float)(ADC1BUF0)*(3.3/1024.)-0.500)*100.;
-    //    sprintf(AN1String, "%3.1f�C", Temperature);
-
-    // Convert potentiometer result into ASCII string
-    itoa((unsigned) ADC1BUF0, AN0String);
-#else
-    // AN0 should already be set up as an analog input
-    ADCON0bits.GO = 1;
-
-    // Wait until A/D conversion is done
-    while (ADCON0bits.GO);
-
-    // AD converter errata work around (ex: PIC18F87J10 A2)
-#if !defined(__18F452)
-    PRODL = ADCON2;
-    ADCON2bits.ADCS0 = 1;
-    ADCON2bits.ADCS1 = 1;
-    ADCON2 = PRODL;
-#endif
-
-    // Convert 10-bit value into ASCII string
-    itoa(*((WORD*) (&ADRESL)), AN0String);
-#endif
-}
-#endif // ENABLE_USER_PROCESS
 
 /******************************************************************************
  * Main Application code                                                      *
@@ -1568,29 +915,7 @@ void main(void)
 
     InitializeBoard(); // Initialize hardware
 
-#if defined(USE_LCD)
-    LCDInit(); // Initialize LCD module
-    DelayMs(50);
 
-    // Load in some custom chars on the LCD character generation RAMsadas
-    LCDLoadCGRAM(1, (ROM char *) &CGCHAR01);
-    LCDLoadCGRAM(2, (ROM char *) &CGCHAR02);
-    LCDLoadCGRAM(3, (ROM char *) &CGCHAR03);
-    LCDLoadCGRAM(4, (ROM char *) &CGCHAR04);
-    LCDLoadCGRAM(5, (ROM char *) &CGCHAR05);
-    LCDLoadCGRAM(6, (ROM char *) &CGCHAR06);
-
-    // Display software version and current IP address
-    strcpypgm2ram((char *) &LCDBuffer[0][0], (ROM char *) "\001\002\003Microchip TCP");
-    strcpypgm2ram((char *) &LCDBuffer[1][0], (ROM char *) "\004\005\006 v" VERSION);
-
-    LCDRefresh();
-    DelayMs(250);
-#endif
-
-#if defined(USE_TIME)
-    SetTimeTick(220924800ul); // Jan 1 2007, 00:00:00 UTC
-#endif
 
     TickInit(); // Initialize tick manager
 
@@ -1654,9 +979,6 @@ void main(void)
             t = TickGet();
             LED0_IO ^= 1; // Blink system LED
 
-#if defined(USE_LCD)
-            UpdateLCD();
-#endif
         }
 
         // This task performs normal stack task including checking for
