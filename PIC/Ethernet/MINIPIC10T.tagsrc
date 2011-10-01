@@ -9,7 +9,6 @@ C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\nbns.c
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\stacktsk.c
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tick.c
-C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\icmpd.c
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\delay.c
@@ -31,12 +30,7 @@ C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp.h
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tick.h
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\udp.h
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\helpers.h
-C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\include\uart.h
-C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp_client_ex1.h
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\include\mpfs.h
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\delay.h
-C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\udptest.h
 C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\minipic10t.h
-C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\sntp.h
-C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h
