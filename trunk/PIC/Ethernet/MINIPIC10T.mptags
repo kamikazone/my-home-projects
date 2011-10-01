@@ -19,7 +19,7 @@ AD1PCFGbits::AD1PCFGLbits	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src
 AD1PCFGbits::ADPCFGbits	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	742;"	d	line:742
 ADC1BUF0::ADCBUF0	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	737;"	d	line:737
 ADDRESS_FILL::0b0100	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	2092;"	d	line:2092	file:
-AN0String	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	154;"	v	line:154	file:
+AN0String	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	60;"	v	line:60	file:
 ANDOR	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	296;"	m	line:296	struct:_REG::<anonymous>
 ANNOUNCE_PORT::30303	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c	55;"	d	line:55	file:
 APP_CONFIG	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\stacktsk.h	83;"	t	line:83
@@ -66,6 +66,7 @@ AnnounceIP	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c
 AnnounceIP	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\announce.h	32;"	p	line:32	signature:(void)
 Answers	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dns.c	57;"	m	line:57	struct:_DNS_HEADER	file:
 Answers	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\nbns.c	48;"	m	line:48	struct:_NBNS_HEADER	file:
+AppConfig	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	53;"	v	line:53
 AuthoritativeRecords	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dns.c	58;"	m	line:58	struct:_DNS_HEADER	file:
 AuthoritativeRecords	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\nbns.c	49;"	m	line:49	struct:_NBNS_HEADER	file:
 BAUD_RATE::(19200)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	186;"	d	line:186
@@ -106,29 +107,29 @@ BusyUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	191
 ByteCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	39;"	m	line:39
 ByteCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	65;"	m	line:65
 BytesTransmittedOnWire	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	53;"	m	line:53
-CGI_CMD_DIGOUT::(0)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	698;"	d	line:698	file:
-CGI_CMD_LCDOUT::(1)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	699;"	d	line:699	file:
-CGI_CMD_RECONFIG::(2)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	700;"	d	line:700	file:
+CGI_CMD_DIGOUT::(0)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	353;"	d	line:353	file:
+CGI_CMD_LCDOUT::(1)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	354;"	d	line:354	file:
+CGI_CMD_RECONFIG::(2)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	355;"	d	line:355	file:
 CLKRDY	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	256;"	m	line:256	struct:_REG::<anonymous>
 CLK_CONFIG	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	61;"	t	line:61
-CMD_LED1::(0x0)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	737;"	d	line:737	file:
-CMD_LED2::(0x1)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	738;"	d	line:738	file:
-CMD_UNKNOWN_PAGE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	742;"	v	line:742
-CMD_UNKNOWN_PAGE_LEN::(sizeof(CMD_UNKNOWN_PAGE))	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	747;"	d	line:747	file:
+CMD_LED1::(0x0)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	392;"	d	line:392	file:
+CMD_LED2::(0x1)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	393;"	d	line:393	file:
+CMD_UNKNOWN_PAGE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	397;"	v	line:397
+CMD_UNKNOWN_PAGE_LEN::(sizeof(CMD_UNKNOWN_PAGE))	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	402;"	d	line:402	file:
 COCON	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	381;"	m	line:381	struct:_REG::<anonymous>
 COCON0	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	375;"	m	line:375	struct:_REG::<anonymous>
 COCON1	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	376;"	m	line:376	struct:_REG::<anonymous>
 COCON2	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	377;"	m	line:377	struct:_REG::<anonymous>
 COLSTAT	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	487;"	m	line:487
-COMMANDS_OK_PAGE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	740;"	v	line:740
-COMMANDS_OK_PAGE_LEN::(sizeof(COMMANDS_OK_PAGE))	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	745;"	d	line:745	file:
-CONFIG_UPDATE_PAGE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	741;"	v	line:741
-CONFIG_UPDATE_PAGE_LEN::(sizeof(CONFIG_UPDATE_PAGE))	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	746;"	d	line:746	file:
+COMMANDS_OK_PAGE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	395;"	v	line:395
+COMMANDS_OK_PAGE_LEN::(sizeof(COMMANDS_OK_PAGE))	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	400;"	d	line:400	file:
+CONFIG_UPDATE_PAGE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	396;"	v	line:396
+CONFIG_UPDATE_PAGE_LEN::(sizeof(CONFIG_UPDATE_PAGE))	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	401;"	d	line:401	file:
 CPU_CLOCK::(25000000)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\minipic10t.h	46;"	d	line:46
 CRCEN	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	295;"	m	line:295	struct:_REG::<anonymous>
 CRCError	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	41;"	m	line:41
 CRCError	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	70;"	m	line:70
-CRLF	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	159;"	v	line:159
+CRLF	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	65;"	v	line:65
 CSUMEN	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	282;"	m	line:282	struct:_REG::<anonymous>
 Cache	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\arp.c	87;"	v	line:87	file:
 CalcChecksum	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\icmpd.c	109;"	l	line:109
@@ -155,7 +156,7 @@ CollisionCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\includ
 ConfigIntUART::(a)ConfigIntUSART(a)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	710;"	d	line:710
 ControlFrame	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	54;"	m	line:54
 ControlFrame	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	77;"	m	line:77
-CurrentArg	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	801;"	l	line:801
+CurrentArg	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	456;"	l	line:456
 CurrentPacketLocation	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	143;"	v	line:143
 CurrentTxBuffer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	142;"	v	line:142
 DATA_BUFFER	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	107;"	t	line:107	file:
@@ -176,7 +177,7 @@ DEFAULT_NS1::{10,10,10,6}	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src
 DEFAULT_NS1::{192,168,1,1}	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	123;"	d	line:123
 DEFER	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	335;"	m	line:335	struct:_REG::<anonymous>
 DHCPBindCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	132;"	v	line:132
-DHCPBindCount::(0xFF)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	164;"	d	line:164	file:
+DHCPBindCount::(0xFF)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	70;"	d	line:70	file:
 DHCPDisable::(smDHCPState=SM_DHCP_DISABLED)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\dhcp.h	71;"	d	line:71
 DHCPIsBound::(DHCPState.bits.bIsBound)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\dhcp.h	72;"	d	line:72
 DHCPLeaseTime	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	133;"	v	line:133	file:
@@ -254,7 +255,7 @@ DataRdyUART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	1
 DataRdyUART::DataRdyUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	711;"	d	line:711
 DataRdyUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\include\uart.h	50;"	p	line:50	signature:(void)
 DataRdyUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	203;"	f	line:203	signature:(void)
-DataSource	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1013;"	l	line:1013
+DataSource	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	559;"	l	line:559
 DebugPrint::(a){putrsUART(a);}	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	696;"	d	line:696
 DebugPrint::(a){}	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	698;"	d	line:698
 Delay10us::(us)Delay10TCYx(((TCY_CLOCK/10	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\delay.h	50;"	d	line:50
@@ -273,7 +274,6 @@ Digit	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	279;"
 DiscoverySM	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c	181;"	l	line:181	file:
 DiscoveryTask	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c	174;"	f	line:174	signature:(void)
 DiscoveryTask	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\announce.h	33;"	p	line:33	signature:(void)
-DisplayCounters	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	251;"	f	line:251	signature:(void)
 Divide1	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	56;"	e	line:56	enum:_CLK_CONFIG
 Divide2	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	57;"	e	line:57	enum:_CLK_CONFIG
 Divide3	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	58;"	e	line:58	enum:_CLK_CONFIG
@@ -282,7 +282,6 @@ Divide8	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h
 Divisor	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	250;"	l	line:250
 Divisor	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	279;"	l	line:279
 Done	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	44;"	m	line:44
-DownloadMPFS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	460;"	f	line:460	file:	signature:(void)
 DribbleNibble	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	76;"	m	line:76
 Dummy	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	2037;"	l	line:2037
 Dummy	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	304;"	l	line:304
@@ -441,7 +440,7 @@ EWRPTL::0x02	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\
 EndAddress	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	101;"	m	line:101	struct:_DATA_BUFFER	file:
 ExcessiveDefer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	48;"	m	line:48
 ExecuteFTPCommand	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ftpd.c	406;"	f	line:406	file:	signature:(FTP_COMMAND cmd)
-ExecuteMenuChoice	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	586;"	f	line:586	signature:(MENU_CMD choice)
+ExecuteMenuChoice	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	241;"	f	line:241	signature:(MENU_CMD choice)
 FALSE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	34;"	e	line:34	enum:_BOOL
 FALSE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	252;"	e	line:252	file:
 FALSE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	281;"	e	line:281	file:
@@ -521,7 +520,7 @@ Flags	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp.h	8
 Flags	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\udp.h	52;"	m	line:52	struct:_UDP_SOCKET_INFO
 Flags	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\nbns.c	46;"	m	line:46	struct:_NBNS_HEADER	file:
 Flags	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	118;"	m	line:118	struct:_TCP_HEADER	file:
-FormatNetBIOSName	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	329;"	f	line:329	signature:(char *Name)
+FormatNetBIOSName	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	157;"	f	line:157	signature:(char *Name)
 FragmentInfo	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ip.h	46;"	m	line:46	struct:_IP_HEADER
 Gateway	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	71;"	m	line:71	file:
 GenericTCPClient	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp_client_ex1.h	33;"	p	line:33	signature:(void)
@@ -529,7 +528,7 @@ GenericTCPClient	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_
 GenericTCPExampleState	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_client_ex1.c	74;"	l	line:74	file:
 GetCLKOUT	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	2013;"	f	line:2013	signature:(void)
 GetLEDConfig::ReadPHYReg(PHLCON).Val	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	85;"	d	line:85
-GetMenuChoice	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	571;"	f	line:571	signature:(void)
+GetMenuChoice	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	226;"	f	line:226	signature:(void)
 GetRegs	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1721;"	f	line:1721	file:	signature:(void)
 GetTimeTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	66;"	p	line:66	signature:(void)
 GetTimeTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	98;"	f	line:98	signature:(void)
@@ -545,9 +544,9 @@ HFRMEN	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j
 HIGH::(a)((a>>8)&0xFF)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	152;"	d	line:152	file:
 HOME	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	116;"	d	line:116
 HTEN	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	292;"	m	line:292	struct:_REG::<anonymous>
-HTTPExecCmd	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	773;"	f	line:773	signature:(BYTE** argv, BYTE argc)
+HTTPExecCmd	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	428;"	f	line:428	signature:(BYTE** argv, BYTE argc)
 HTTPExecCmd	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	212;"	p	line:212	file:	signature:(BYTE** argv, BYTE argc)
-HTTPGetVar	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1006;"	f	line:1006	signature:(BYTE var, WORD ref, BYTE* val)
+HTTPGetVar	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	552;"	f	line:552	signature:(BYTE var, WORD ref, BYTE* val)
 HTTPGetVar	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	211;"	p	line:211	file:	signature:(BYTE var, WORD ref, BYTE* val)
 HTTPInit	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	673;"	f	line:673	signature:(void)
 HTTPInit	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\http.h	46;"	p	line:46	signature:(void)
@@ -634,7 +633,7 @@ INVALID_UDP_PORT::(0L)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\ne
 INVALID_UDP_SOCKET::(0xff)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\udp.h	69;"	d	line:69
 IPAddr	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\stacktsk.h	64;"	m	line:64	struct:_NODE_INFO
 IPAddress	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	70;"	m	line:70	file:
-IPAddressToString	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	232;"	f	line:232	signature:(IP_ADDR *IPVal, char *str)
+IPAddressToString	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	138;"	f	line:138	signature:(IP_ADDR *IPVal, char *str)
 IPDiscard::MACDiscard	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ip.h	69;"	d	line:69
 IPFrameType	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\stacktsk.c	167;"	m	line:167	file:
 IPGetArray::(a,b)MACGetArray(a,b)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ip.h	70;"	d	line:70
@@ -677,9 +676,9 @@ Identification	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\includ
 Identifier	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\icmpd.c	60;"	m	line:60	struct:_ICMP_PACKET	file:
 Init32KTimer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	72;"	p	line:72	signature:(void)
 Init32KTimer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	359;"	f	line:359	signature:(void)
-InitAppConfig	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1476;"	f	line:1476	file:	signature:(void)
-InitializeBoard	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1301;"	f	line:1301	file:	signature:(void)
-InvalidInputMsg	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	428;"	v	line:428
+InitAppConfig	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	881;"	f	line:881	file:	signature:(void)
+InitializeBoard	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	706;"	f	line:706	file:	signature:(void)
+InvalidInputMsg	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	223;"	v	line:223
 IsClockValid	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\sntp.h	44;"	p	line:44	signature:(void)
 IsClockValid	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\sntp.c	78;"	f	line:78	signature:(void)
 JABBER	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	472;"	m	line:472
@@ -732,8 +731,8 @@ LengthCheckError	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\incl
 LengthCheckError	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	71;"	m	line:71
 LengthOutOfRange	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	43;"	m	line:43
 LengthOutOfRange	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	72;"	m	line:72
-LowISR	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	178;"	f	line:178	signature:(void)
-LowVector	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	184;"	f	line:184	signature:(void)
+LowISR	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	84;"	f	line:84	signature:(void)
+LowVector	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	90;"	f	line:90	signature:(void)
 MAADR1::0x304	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	195;"	d	line:195
 MAADR2::0x305	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	196;"	d	line:196
 MAADR3::0x302	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	193;"	d	line:193
@@ -845,21 +844,21 @@ MAX_TCP_DATA_LEN::(MAC_TX_BUFFER_SIZE-54)	C:\Users\Rahul\Documents\Projects\SVN\
 MAX_UDP_DATA::(MAC_TX_BUFFER_SIZE-SIZEOF_MAC	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udp.c	86;"	d	line:86	file:
 MAX_UDP_DATA::(MAC_TX_BUFFER_SIZE-SIZEOF_MAC	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udptest.c	58;"	d	line:58	file:
 MAX_UDP_SOCKETS::(4u)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	258;"	d	line:258
-MAX_USER_RESPONSE_LEN::(20)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	385;"	d	line:385	file:
+MAX_USER_RESPONSE_LEN::(20)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	180;"	d	line:180	file:
 MB	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	104;"	m	line:104	struct:_DWORD_VAL::<anonymous>
 MCEN	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	291;"	m	line:291	struct:_REG::<anonymous>
-MENU_CMD	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	413;"	t	line:413	file:
-MENU_CMD_DISABLE_AUTO_CONFIG	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	409;"	e	line:409	enum:_MENU_CMD	file:
-MENU_CMD_DNS_ADDRESS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	407;"	e	line:407	enum:_MENU_CMD	file:
-MENU_CMD_DOWNLOAD_MPFS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	410;"	e	line:410	enum:_MENU_CMD	file:
-MENU_CMD_ENABLE_AUTO_CONFIG	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	408;"	e	line:408	enum:_MENU_CMD	file:
-MENU_CMD_GATEWAY_ADDRESS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	405;"	e	line:405	enum:_MENU_CMD	file:
-MENU_CMD_HOST_NAME	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	403;"	e	line:403	enum:_MENU_CMD	file:
-MENU_CMD_INVALID	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	412;"	e	line:412	enum:_MENU_CMD	file:
-MENU_CMD_IP_ADDRESS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	404;"	e	line:404	enum:_MENU_CMD	file:
-MENU_CMD_QUIT	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	411;"	e	line:411	enum:_MENU_CMD	file:
-MENU_CMD_SERIAL_NUMBER	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	402;"	e	line:402	enum:_MENU_CMD	file:
-MENU_CMD_SUBNET_MASK	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	406;"	e	line:406	enum:_MENU_CMD	file:
+MENU_CMD	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	208;"	t	line:208	file:
+MENU_CMD_DISABLE_AUTO_CONFIG	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	204;"	e	line:204	enum:_MENU_CMD	file:
+MENU_CMD_DNS_ADDRESS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	202;"	e	line:202	enum:_MENU_CMD	file:
+MENU_CMD_DOWNLOAD_MPFS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	205;"	e	line:205	enum:_MENU_CMD	file:
+MENU_CMD_ENABLE_AUTO_CONFIG	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	203;"	e	line:203	enum:_MENU_CMD	file:
+MENU_CMD_GATEWAY_ADDRESS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	200;"	e	line:200	enum:_MENU_CMD	file:
+MENU_CMD_HOST_NAME	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	198;"	e	line:198	enum:_MENU_CMD	file:
+MENU_CMD_INVALID	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	207;"	e	line:207	enum:_MENU_CMD	file:
+MENU_CMD_IP_ADDRESS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	199;"	e	line:199	enum:_MENU_CMD	file:
+MENU_CMD_QUIT	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	206;"	e	line:206	enum:_MENU_CMD	file:
+MENU_CMD_SERIAL_NUMBER	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	197;"	e	line:197	enum:_MENU_CMD	file:
+MENU_CMD_SUBNET_MASK	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	201;"	e	line:201	enum:_MENU_CMD	file:
 MICMD::0x212	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	175;"	d	line:175
 MICMD_MIIRD::(1)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	619;"	d	line:619
 MICMD_MIISCAN::(1<<1)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	618;"	d	line:618
@@ -1112,7 +1111,6 @@ PreviouslyIgnored	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\inc
 PrimaryDNSServer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\stacktsk.h	73;"	m	line:73	struct:_APP_CONFIG
 Printed	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	252;"	l	line:252
 Printed	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	281;"	l	line:281
-ProcessIO	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1515;"	f	line:1515	file:	signature:(void)
 Protocol	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\arp.c	50;"	m	line:50	struct:_ARP_PACKET	file:
 Protocol	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ip.h	48;"	m	line:48	struct:_IP_HEADER
 Protocol	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	138;"	m	line:138	struct:_PSEUDO_HEADER	file:
@@ -1237,11 +1235,6 @@ SM_HTTP_GET_VAR	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd
 SM_HTTP_HEADER	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	86;"	e	line:86	enum:_SM_HTTP	file:
 SM_HTTP_IDLE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	75;"	e	line:75	enum:_SM_HTTP	file:
 SM_HTTP_NOT_FOUND	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	77;"	e	line:77	enum:_SM_HTTP	file:
-SM_MPFS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	462;"	g	line:462	file:
-SM_MPFS_BLOCK	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	464;"	e	line:464	enum:SM_MPFS	file:
-SM_MPFS_BLOCK_CMP	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	465;"	e	line:465	enum:SM_MPFS	file:
-SM_MPFS_DATA	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	466;"	e	line:466	enum:SM_MPFS	file:
-SM_MPFS_SOH	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	463;"	e	line:463	enum:SM_MPFS	file:
 SM_NAME_RESOLVE	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_client_ex1.c	66;"	e	line:66	enum:_GenericTCPExampleState	file:
 SM_PARSE_ARG	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	361;"	e	line:361	file:
 SM_PARSE_ARG_FORMAT	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	362;"	e	line:362	file:
@@ -1320,8 +1313,6 @@ START_YEAR::2000	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\inc
 STRCH	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	516;"	m	line:516
 STRCH	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	531;"	m	line:531
 SYN::(0x02)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	156;"	d	line:156	file:
-SaveAppConfig	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	363;"	f	line:363	file:	signature:(void)
-SaveAppConfig::	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	377;"	d	line:377	file:
 SendFile	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	228;"	f	line:228	file:	signature:(HTTP_INFO* ph)
 SendSystemReset	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	2035;"	f	line:2035	file:	signature:(void)
 SendTCP::(remote,localPort,remotePort,s	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	205;"	d	line:205	file:
@@ -1334,7 +1325,7 @@ Server	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_client_ex1
 ServerName	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_client_ex1.c	42;"	v	line:42
 ServerPort	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_client_ex1.c	43;"	v	line:43
 SetCLKOUT	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1990;"	f	line:1990	signature:(BYTE NewConfig)
-SetConfig	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	675;"	f	line:675	file:	signature:(void)
+SetConfig	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	330;"	f	line:330	file:	signature:(void)
 SetLEDConfig::(NewConfig)WritePHYReg(PHLCON,	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	84;"	d	line:84
 SetRXHashTableEntry	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	115;"	p	line:115	signature:(MAC_ADDR DestMACAddr)
 SetTimeTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	65;"	p	line:65	signature:(time_t t)
@@ -1357,7 +1348,7 @@ StartTime	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dns.c	193;"
 StartTime	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\sntp.c	101;"	l	line:101	file:
 StatusVector	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	92;"	m	line:92	struct:_ENC_PREAMBLE	file:
 StringPtr	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_client_ex1.c	59;"	l	line:59
-StringToIPAddress	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	204;"	f	line:204	signature:(char *str, IP_ADDR *buffer)
+StringToIPAddress	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	110;"	f	line:110	signature:(char *str, IP_ADDR *buffer)
 SwapARPPacket	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\arp.c	103;"	f	line:103	file:	signature:(ARP_PACKET *p)
 SwapICMPPacket	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\icmpd.c	85;"	f	line:85	file:	signature:(ICMP_PACKET* p)
 SwapIPHeader	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ip.c	85;"	f	line:85	file:	signature:(IP_HEADER* h)
@@ -1469,8 +1460,7 @@ TickUpdate	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tick.c	133
 TimeOut	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp.h	73;"	m	line:73	struct:_SOCKET_INFO
 TimeToLive	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ip.h	47;"	m	line:47	struct:_IP_HEADER
 Timer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp_client_ex1.c	60;"	l	line:60	file:
-TmpAddr	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	916;"	l	line:916
-TmpWord	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	802;"	l	line:802
+TmpWord	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	457;"	l	line:457
 TotalLength	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ip.h	44;"	m	line:44	struct:_IP_HEADER
 TransactionID	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dns.c	54;"	m	line:54	struct:_DNS_HEADER	file:
 TransactionID	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\nbns.c	45;"	m	line:45	struct:_NBNS_HEADER	file:
@@ -1569,38 +1559,37 @@ USE_SPIEEPROM	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\con
 Underrun	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	52;"	m	line:52
 UnmaskedPatternLen	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1568;"	l	line:1568
 UnsupportedOpcode	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	79;"	m	line:79
-UpdateLCD	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	263;"	f	line:263	signature:(void)
 UrgentPointer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	122;"	m	line:122	struct:_TCP_HEADER	file:
 VAL	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	416;"	m	line:416
-VAR_ANAIN_AN0::(0x02)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	713;"	d	line:713	file:
-VAR_ANAIN_AN1::(0x03)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	714;"	d	line:714	file:
-VAR_DATE::(0x22)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	732;"	d	line:732	file:
-VAR_DHCP::(0x0B)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	727;"	d	line:727	file:
-VAR_DHCP_FALSE::(0x0C)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	729;"	d	line:729	file:
-VAR_DHCP_TRUE::(0x0B)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	728;"	d	line:728	file:
-VAR_DIGIN0::(0x04)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	715;"	d	line:715	file:
-VAR_DIGIN1::(0x0D)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	716;"	d	line:716	file:
-VAR_DIGIN2::(0x0E)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	717;"	d	line:717	file:
-VAR_DIGIN3::(0x0F)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	718;"	d	line:718	file:
-VAR_GATEWAY_ADDRESS::(0x0A)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	726;"	d	line:726	file:
-VAR_IPCNTR_RX::(0x21)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	731;"	d	line:731	file:
-VAR_IPCNTR_TX::(0x20)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	730;"	d	line:730	file:
-VAR_IP_ADDRESS::(0x08)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	724;"	d	line:724	file:
-VAR_LED0::(0x00)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	705;"	d	line:705	file:
-VAR_LED1::(0x01)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	706;"	d	line:706	file:
-VAR_LED2::(0x10)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	707;"	d	line:707	file:
-VAR_LED3::(0x11)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	708;"	d	line:708	file:
-VAR_LED4::(0x12)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	709;"	d	line:709	file:
-VAR_LED5::(0x13)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	710;"	d	line:710	file:
-VAR_LED6::(0x14)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	711;"	d	line:711	file:
-VAR_LED7::(0x15)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	712;"	d	line:712	file:
-VAR_MAC_ADDRESS::(0x06)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	722;"	d	line:722	file:
-VAR_SERIAL_NUMBER::(0x07)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	723;"	d	line:723	file:
-VAR_STACK_DATE::(0x17)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	720;"	d	line:720	file:
-VAR_STACK_VERSION::(0x16)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	719;"	d	line:719	file:
-VAR_STROUT_LCD::(0x05)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	721;"	d	line:721	file:
-VAR_SUBNET_MASK::(0x09)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	725;"	d	line:725	file:
-VAR_TIME::(0x23)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	733;"	d	line:733	file:
+VAR_ANAIN_AN0::(0x02)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	368;"	d	line:368	file:
+VAR_ANAIN_AN1::(0x03)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	369;"	d	line:369	file:
+VAR_DATE::(0x22)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	387;"	d	line:387	file:
+VAR_DHCP::(0x0B)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	382;"	d	line:382	file:
+VAR_DHCP_FALSE::(0x0C)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	384;"	d	line:384	file:
+VAR_DHCP_TRUE::(0x0B)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	383;"	d	line:383	file:
+VAR_DIGIN0::(0x04)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	370;"	d	line:370	file:
+VAR_DIGIN1::(0x0D)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	371;"	d	line:371	file:
+VAR_DIGIN2::(0x0E)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	372;"	d	line:372	file:
+VAR_DIGIN3::(0x0F)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	373;"	d	line:373	file:
+VAR_GATEWAY_ADDRESS::(0x0A)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	381;"	d	line:381	file:
+VAR_IPCNTR_RX::(0x21)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	386;"	d	line:386	file:
+VAR_IPCNTR_TX::(0x20)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	385;"	d	line:385	file:
+VAR_IP_ADDRESS::(0x08)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	379;"	d	line:379	file:
+VAR_LED0::(0x00)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	360;"	d	line:360	file:
+VAR_LED1::(0x01)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	361;"	d	line:361	file:
+VAR_LED2::(0x10)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	362;"	d	line:362	file:
+VAR_LED3::(0x11)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	363;"	d	line:363	file:
+VAR_LED4::(0x12)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	364;"	d	line:364	file:
+VAR_LED5::(0x13)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	365;"	d	line:365	file:
+VAR_LED6::(0x14)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	366;"	d	line:366	file:
+VAR_LED7::(0x15)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	367;"	d	line:367	file:
+VAR_MAC_ADDRESS::(0x06)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	377;"	d	line:377	file:
+VAR_SERIAL_NUMBER::(0x07)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	378;"	d	line:378	file:
+VAR_STACK_DATE::(0x17)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	375;"	d	line:375	file:
+VAR_STACK_VERSION::(0x16)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	374;"	d	line:374	file:
+VAR_STROUT_LCD::(0x05)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	376;"	d	line:376	file:
+VAR_SUBNET_MASK::(0x09)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	380;"	d	line:380	file:
+VAR_TIME::(0x23)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	388;"	d	line:388	file:
 VERSION::"3.75.6"	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	57;"	d	line:57
 VLANTaggedFrame	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	57;"	m	line:57
 VLANType	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	80;"	m	line:80
@@ -1621,9 +1610,9 @@ Val	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	102;"	m	lin
 ValidValues	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	77;"	v	line:77	file:
 Valid_Clock	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\sntp.c	68;"	v	line:68	file:
 VarRef	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	106;"	m	line:106	struct:_HTTP_INFO	file:
-VarString	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1009;"	l	line:1009	file:
-VarStringLen	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1012;"	l	line:1012	file:
-VarStringPtr	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1013;"	l	line:1013
+VarString	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	555;"	l	line:555	file:
+VarStringLen	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	558;"	l	line:558	file:
+VarStringPtr	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	559;"	l	line:559
 Variable	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	108;"	m	line:108	struct:_HTTP_INFO	file:
 VersionIHL	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ip.h	42;"	m	line:42	struct:_IP_HEADER
 WBM::((0b011<<5)|0x1A)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	126;"	d	line:126	file:
@@ -1641,12 +1630,6 @@ WriteUART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	180
 WriteUART::(a)WriteUSART(a)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	714;"	d	line:714
 WriteUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\include\uart.h	52;"	p	line:52	signature:(char data)
 WriteUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	218;"	f	line:218	signature:(char data)
-XMODEM_ACK::0x06	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	455;"	d	line:455	file:
-XMODEM_BLOCK_LEN::128	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	458;"	d	line:458	file:
-XMODEM_CAN::0x18	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	457;"	d	line:457	file:
-XMODEM_EOT::0x04	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	454;"	d	line:454	file:
-XMODEM_NAK::0x15	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	456;"	d	line:456	file:
-XMODEM_SOH::0x01	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	453;"	d	line:453	file:
 Zero	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	81;"	m	line:81
 Zero	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	137;"	m	line:137	struct:_PSEUDO_HEADER	file:
 Zero	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udp.c	76;"	m	line:76	struct:_PSEUDO_HEADER	file:
@@ -1698,7 +1681,7 @@ _LWORD_VAL	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generi
 _MAC_ADDR	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\stacktsk.h	50;"	s	line:50
 _MAC_H	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\mac.h	35;"	d	line:35
 _MAIN_C	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	2;"	d	line:2	file:
-_MENU_CMD	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	401;"	g	line:401	file:
+_MENU_CMD	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	196;"	g	line:196	file:
 _MINIPIC10T_H	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\minipic10t.h	38;"	d	line:38
 _MPFS_C	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	50;"	d	line:50	file:
 _MPFS_ENTRY	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	81;"	s	line:81	file:
@@ -1859,7 +1842,6 @@ bits	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\dhcp.h	5
 bits	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	59;"	m	line:59
 bits	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	82;"	m	line:82
 bits	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	116;"	m	line:116	union:_TCP_HEADER::<anonymous>	file:
-blockLen	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	469;"	l	line:469
 btohexa_high	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c	129;"	p	line:129	file:	signature:(AppConfig.MyMACAddr.v[i])
 btohexa_high	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c	242;"	p	line:242	file:	signature:(AppConfig.MyMACAddr.v[i])
 btohexa_high	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	91;"	f	line:91	signature:(BYTE b)
@@ -1868,16 +1850,14 @@ btohexa_low	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.
 btohexa_low	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c	243;"	p	line:243	file:	signature:(AppConfig.MyMACAddr.v[i])
 btohexa_low	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	109;"	f	line:109	signature:(BYTE b)
 btohexa_low	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\helpers.h	40;"	p	line:40	signature:(BYTE b)
-buffer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1566;"	l	line:1566
-buffer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	587;"	l	line:587
+buffer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	242;"	l	line:242
+buffer	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	913;"	l	line:913
 byte	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	105;"	m	line:105	union:_DWORD_VAL
 byte	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	67;"	m	line:67	union:_WORD_VAL
 byte	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	117;"	m	line:117	union:_TCP_HEADER::<anonymous>	file:
-byteIndex	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	205;"	l	line:205
-c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1478;"	l	line:1478
-c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	364;"	l	line:364
-c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	469;"	l	line:469
-c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	572;"	l	line:572
+byteIndex	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	111;"	l	line:111
+c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	227;"	l	line:227
+c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	883;"	l	line:883
 c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	320;"	l	line:320
 c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	231;"	l	line:231
 c	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	354;"	l	line:354
@@ -1889,19 +1869,18 @@ checksum1	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	1442;
 checksum2	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	1442;"	l	line:1442
 checksums	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\icmpd.c	112;"	l	line:112
 checksums	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ip.c	116;"	l	line:116
-choice	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	676;"	l	line:676
+choice	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	331;"	l	line:331
 cmd	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	355;"	l	line:355
-command	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	774;"	l	line:774
+command	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	429;"	l	line:429
 conn	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	656;"	l	line:656
 count	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	44;"	l	line:44
-currentTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	472;"	l	line:472
 currentTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ftpd.c	487;"	l	line:487
 data	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\stacktsk.c	160;"	l	line:160	file:
 data	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	226;"	l	line:226
 dataCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\stacktsk.c	155;"	l	line:155	file:
 days	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	157;"	l	line:157
 days_month	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	67;"	v	line:67
-destIPValue	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	588;"	l	line:588
+destIPValue	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	243;"	l	line:243
 diffTicks	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	863;"	l	line:863
 entry	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	167;"	l	line:167
 ext	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	354;"	l	line:354
@@ -1926,7 +1905,6 @@ getsUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\include\ua
 getsUSART	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	223;"	f	line:223	signature:(char *buffer, unsigned char len)
 h	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udp.c	250;"	l	line:250
 h	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udp.c	428;"	l	line:428
-handle	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	470;"	l	line:470
 header	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1074;"	l	line:1074
 header	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ip.c	112;"	l	line:112
 header	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ip.c	215;"	l	line:215
@@ -1939,8 +1917,8 @@ httpData	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	484;
 httpFiles	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	150;"	v	line:150	file:
 httpLength	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	486;"	l	line:486
 i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\delay.c	36;"	l	line:36
-i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1013;"	l	line:1013
-i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	330;"	l	line:330
+i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	158;"	l	line:158
+i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	559;"	l	line:559
 i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	169;"	l	line:169
 i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	384;"	l	line:384
 i	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\announce.c	184;"	l	line:184
@@ -1989,35 +1967,31 @@ j	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	157;"	l	lin
 j	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	223;"	l	line:223
 k	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\nbns.c	80;"	l	line:80
 k	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	158;"	l	line:158
-lResult	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	469;"	l	line:469
 lastActivity	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ftpd.c	179;"	v	line:179	file:
-lastTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	472;"	l	line:472
 lastTryTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	593;"	l	line:593	file:
 lbContinue	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	487;"	l	line:487
 lbContinue	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\stacktsk.c	157;"	l	line:157
-lbDone	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	471;"	l	line:471
 lbDone	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	293;"	l	line:293
 lbFound	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	469;"	l	line:469
 lbMSB	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	199;"	l	line:199
 lbTransmit	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	230;"	l	line:230
-lcd_cycle	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1558;"	l	line:1558
-lcd_cycle	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	264;"	l	line:264	file:
+lcd_cycle	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	905;"	l	line:905
 localPort	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp.h	63;"	m	line:63	struct:_SOCKET_INFO
 localPort	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\udp.h	43;"	m	line:43	struct:_UDP_SOCKET_INFO
-main	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1551;"	f	line:1551	signature:(void)
+main	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	898;"	f	line:898	signature:(void)
 match	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	170;"	l	line:170
 memcmppgm2ram::(a,b,c)memcmp(a,b,c)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	728;"	d	line:728
 memcmppgm2ram::(a,b,c)memcmppgm2ram((void*)a,	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	706;"	d	line:706
 memcpypgm2ram::(a,b,c)memcpy(a,b,c)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	729;"	d	line:729
 memcpypgm2ram::(a,b,c)memcpypgm2ram((void*)a,	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	705;"	d	line:705
-menu	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	387;"	v	line:387
-menuCommandPrompt	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	415;"	v	line:415
+menu	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	182;"	v	line:182
+menuCommandPrompt	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	210;"	v	line:210
 mktime	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	67;"	p	line:67	signature:(tm *p)
 mktime	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	122;"	f	line:122	signature:(tm *p)
 month_str	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	58;"	v	line:58
 mpfsFlags	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	95;"	v	line:95	file:
 mpfsOpenCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	117;"	v	line:117
-myDHCPBindCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	153;"	v	line:153
+myDHCPBindCount	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	59;"	v	line:59
 myP	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	132;"	l	line:132
 myV	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	131;"	l	line:131
 offtime	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	68;"	p	line:68	signature:(tm *ts, time_t t, long offset)
@@ -2027,8 +2001,7 @@ options	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ip.c	120;"	l	
 options	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	354;"	l	line:354
 optionsLen	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ip.c	117;"	l	line:117
 optionsSize	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	1443;"	l	line:1443
-p	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1478;"	l	line:1478
-p	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	364;"	l	line:364
+p	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	883;"	l	line:883
 p	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ftpd.c	231;"	l	line:231
 p	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udp.c	127;"	l	line:127
 p	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udp.c	198;"	l	line:198
@@ -2085,7 +2058,7 @@ remoteNode	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\ud
 remoteNode	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\stacktsk.c	100;"	v	line:100
 remotePort	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp.h	64;"	m	line:64	struct:_SOCKET_INFO
 remotePort	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\udp.h	42;"	m	line:42	struct:_UDP_SOCKET_INFO
-response	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	587;"	l	line:587
+response	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	242;"	l	line:242
 rmap	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1801;"	l	line:1801
 romString	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	489;"	l	line:489
 s	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\sntp.c	99;"	l	line:99	file:
@@ -2117,7 +2090,6 @@ smState	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp.h
 socket	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\httpd.c	102;"	m	line:102	struct:_HTTP_INFO	file:
 socket	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	1441;"	l	line:1441
 startTick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\tcp.h	72;"	m	line:72	struct:_SOCKET_INFO
-state	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	467;"	l	line:467
 strcpypgm2ram::(a,b)strcpy((char*)a,b)	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	730;"	d	line:730
 strcpypgm2ram::(a,b)strcpypgm2ram(a,(romfarch	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\config.h	704;"	d	line:704
 strupr	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	318;"	f	line:318	signature:(char *s)
@@ -2127,22 +2099,21 @@ swapl	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	128;"
 swapl	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\helpers.h	42;"	p	line:42	signature:(DWORD v)
 swaps	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	115;"	f	line:115	signature:(WORD v)
 swaps	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\helpers.h	41;"	p	line:41	signature:(WORD v)
-t	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1567;"	l	line:1567	file:
+t	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	914;"	l	line:914	file:
 t	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\mpfs\mpfs.c	267;"	l	line:267
 t	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	117;"	l	line:117
 t	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	320;"	l	line:320
 t	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	100;"	l	line:100
 tcpHeaderLength	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	716;"	l	line:716
-temp	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	206;"	l	line:206
+temp	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	112;"	l	line:112
 temp	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1324;"	l	line:1324
 temp	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1378;"	l	line:1378
 temp	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1431;"	l	line:1431
 temp	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\udp.c	199;"	l	line:199
 tempDNS	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	137;"	v	line:137	file:
-tempData	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	469;"	l	line:469
 tempGateway	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	134;"	v	line:134	file:
 tempIPAddress	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	134;"	v	line:134	file:
-tempIPValue	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	588;"	l	line:588
+tempIPValue	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	243;"	l	line:243
 tempLocalIP	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\stacktsk.c	156;"	l	line:156
 tempMask	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	134;"	v	line:134	file:
 tempServerID	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	292;"	l	line:292
@@ -2152,9 +2123,8 @@ temp_ptr	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	74;"
 tformat	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\time.c	75;"	v	line:75
 tick	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\tcp.c	863;"	l	line:863
 tickDiff	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	595;"	l	line:595
-time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1017;"	l	line:1017
-time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1562;"	l	line:1562
-time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	267;"	l	line:267
+time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	563;"	l	line:563
+time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	909;"	l	line:909
 time_t	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	48;"	t	line:48
 tm	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	46;"	t	line:46
 tm_hour	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	40;"	m	line:40	struct:_tm
@@ -2162,9 +2132,8 @@ tm_mday	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time
 tm_min	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	39;"	m	line:39	struct:_tm
 tm_mon	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	42;"	m	line:42	struct:_tm
 tm_sec	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	38;"	m	line:38	struct:_tm
-tm_time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1018;"	l	line:1018
-tm_time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	1563;"	l	line:1563
-tm_time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	268;"	l	line:268
+tm_time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	564;"	l	line:564
+tm_time	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	910;"	l	line:910
 tm_wday	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	44;"	m	line:44	struct:_tm
 tm_yday	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	45;"	m	line:45	struct:_tm
 tm_year	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\time\include\time.h	43;"	m	line:43	struct:_tm
@@ -2176,7 +2145,7 @@ ultoa	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\helpers
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	147;"	m	line:147	union:_LWORD_VAL
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	62;"	m	line:62	union:_WORD_VAL
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	93;"	m	line:93	union:_DWORD_VAL
-v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	205;"	l	line:205
+v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	111;"	l	line:111
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dhcp.c	291;"	l	line:291
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\enc28j60.c	1800;"	l	line:1800
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\ftpd.c	231;"	l	line:231
@@ -2187,7 +2156,7 @@ v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\enc28j60.h	
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\stacktsk.h	52;"	m	line:52	struct:_MAC_ADDR
 v	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\include\stacktsk.h	57;"	m	line:57	union:_IP_ADDR
 val	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\helpers.c	150;"	l	line:150
-var	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	774;"	l	line:774
+var	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\main.c	429;"	l	line:429
 w	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\include\generic_typedefs.h	92;"	m	line:92	union:_DWORD_VAL
 w	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\net\dns.c	195;"	l	line:195
 wait	C:\Users\Rahul\Documents\Projects\SVN\PIC\Ethernet\src\uart\uart.c	111;"	l	line:111
