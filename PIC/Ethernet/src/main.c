@@ -23,7 +23,9 @@
 #include "mpfs/include/mpfs.h"
 #endif
 
-
+#if defined(STACK_USE_ANNOUNCE)
+#include "net/include/announce.h"
+#endif
 
 #if defined(STACK_USE_HTTP_SERVER)
 #include "net/include/http.h"
@@ -564,11 +566,18 @@ void main(void)
         }
         StackTask();
         HTTPServer(); // Execute HTTP server FSM
-        /*// For DHCP information, display how many times we have renewed the IP
+#if defined(STACK_USE_ANNOUNCE)
+        DiscoveryTask(); // Execute announce function
+#endif
+        // For DHCP information, display how many times we have renewed the IP
         // configuration since last reset.
         if (DHCPBindCount != myDHCPBindCount) {
             myDHCPBindCount = DHCPBindCount;
             IPAddressToString(&AppConfig.MyIPAddr, buffer);
-        }*/
+        
+#if defined(STACK_USE_ANNOUNCE)
+            AnnounceIP();
+#endif
+		}
     }
 }
