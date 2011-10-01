@@ -61,21 +61,17 @@ extern BYTE DHCPBindCount;
  * FAST/MOVFF bug. The interruptlow keyword is used to work around the bug    *
  * when using the C18 compiler                                                *
  ******************************************************************************/
-#if defined(__18CXX)
-#pragma interruptlow LowISR
 
+#pragma interruptlow LowISR
 void LowISR(void) {
     TickUpdate();
 }
 
 #pragma code lowVector=0x18
-
 void LowVector(void) {
     _asm goto LowISR _endasm
 }
-
 #pragma code // Return to default code section
-#endif
 
 
 /******************************************************************************
@@ -350,17 +346,6 @@ WORD HTTPGetVar(BYTE var, WORD ref, BYTE* val) {
     // Temporary variables designated for storage of a whole return result
     // to simplify logic needed since one byte must be returned at a time.
     static BYTE VarString[32];
-
-#if ENABLE_REMOTE_CONFIG
-    static BYTE VarStringLen;
-    BYTE *VarStringPtr, i, *DataSource;
-#endif
-
-#if defined(USE_TIME)
-    time_t time;
-    tm tm_time;
-#endif    
-
     // Identify variable
     switch (var) {
         case VAR_LED0:
@@ -551,68 +536,39 @@ void main(void)
 {
     char buffer[30];
     static TICK t = 0;
-
     InitializeBoard(); // Initialize hardware
     TickInit(); // Initialize tick manager
-
-#if defined(MPFS_USE_EEPROM) || defined(MPFS_USE_PGRM)
     MPFSInit(); // Initialize file system
-#endif
-
     // Load the default NetBIOS Host Name
     memcpypgm2ram(AppConfig.NetBIOSName, DEFAULT_NETBIOS_NAME, 16);
     FormatNetBIOSName((char *) &AppConfig.NetBIOSName);
-
     InitAppConfig(); // Load configuration vector
     StackInit(); // Initialize TCP/IP stack
-
-#if defined(STACK_USE_HTTP_SERVER)
     HTTPInit(); // Start HTTP server
-#endif
-
 #if defined(STACK_USE_DHCP) || defined(STACK_USE_IP_GLEANING)
     if (!AppConfig.Flags.bIsDHCPEnabled) {
         // Force IP address display update.
         myDHCPBindCount = 1;
-
-#if defined(STACK_USE_DHCP)
+    #if defined(STACK_USE_DHCP)
         DHCPDisable();
-#endif
+    #endif
     }
-
 #endif
 
-    // Once all items are initialized, go into infinite loop and let stack
-    // items execute their tasks.
-    // If application needs to perform its own task, it should be done at
-    // the end of while loop.
-    //
-    // Note that this is a "co-operative mult-tasking" mechanism where every
-    // task performs its job (whether all in one shot or part of it) and
-    // returns so that other tasks can do their job.
-    // If a task needs very long time to do its job, it must broken
-    // down into smaller pieces so that other tasks can have CPU time.
-
-    while (1) {
-        if (TickGetDiff(TickGet(), t) >= TICK_SECOND / 2) {
+    while (1)
+    {
+        if (TickGetDiff(TickGet(), t) >= TICK_SECOND / 2)
+        {
             t = TickGet();
             LED0_IO ^= 1; // Blink system LED
         }
-
-        // This task performs normal stack task including checking for
-        // incoming packet, type of packet and calls appropriate stack
-        // function to process it
         StackTask();
-
-#if defined(STACK_USE_HTTP_SERVER)
         HTTPServer(); // Execute HTTP server FSM
-#endif
-
-        // For DHCP information, display how many times we have renewed the IP
+        /*// For DHCP information, display how many times we have renewed the IP
         // configuration since last reset.
         if (DHCPBindCount != myDHCPBindCount) {
             myDHCPBindCount = DHCPBindCount;
             IPAddressToString(&AppConfig.MyIPAddr, buffer);
-        }
+        }*/
     }
 }

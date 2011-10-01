@@ -1,48 +1,4 @@
-/******************************************************************************
- * Global configuration file for the Microchip TCP/IP Stack                   *
- *============================================================================*
- *                                                                            *
- * See README.TXT in the doc directory.                                       *
- *                                                                            *
- * SOFTWARE LICENSE AGREEMENT                                                 *
- *                                                                            *
- * This software is owned by Microchip Technology Inc. ("Microchip") and is   *
- * supplied to you for use exclusively as described in the associated         *
- * software agreement.  This software is protected by software and other      *
- * intellectual property laws.  Any use in violation of the software license  *
- * may subject the user to criminal sanctions as well as civil liability.     *
- * Copyright 2006 Microchip Technology Inc.  All rights reserved.             *
- *                                                                            *
- * This software is provided "AS IS."  MICROCHIP DISCLAIMS ALL WARRANTIES,    *
- * EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, NOT LIMITED TO MERCHANTABILITY,  *
- * FITNESS FOR A PARTICULAR PURPOSE, AND INFRINGEMENT. Microchip shall in no  *
- * event be liable for special, incidental, or consequential damages.         *
- *                                                                            *
- *                                                                            *
- *- Version Log --------------------------------------------------------------*
- *   Date       Author        Comments                                        *
- *----------------------------------------------------------------------------*
- * 02/11/07 Jorge Amodio      Initial Version                                 *
- * 04/25/07 Jorge Amodio      Moved definitions from compiler.h and stacktsk.h*
- * 05/01/07 Jorge Amodio      Added macros for different serial EEPROMS part  *
- *                            numbers. Added MPFS_USE_24BIT_ADDR macro        *
- * 05/10/07 Jorge Amodio      Added STACK_USE_UDPTEST                         *
- * 05/12/07 Jorge Amodio      Added ENABLE_USER_PROCESS                       *
- * 06/01/01 Jorge Amodio      Rev 3.75.5 Beta Release                         *
- * 06/17/07 Jorge Amodio      Added support for PIC24FJ64GA002 based projects *
- * 06/21/07 Jorge Amodio      Added UART register mappings to enable UART     *
- *                            module selection in hardware config file if     *
- *                            needed.                                         *
- * 06/26/07 Jorge Amodio      Removed casts from mem manipulation functions   *
- *                            and compatibility with latest (3.12) C18 fix    *
- *                            Correct casts are introduced in config.h        *
- * 06/27/07 Jorge Amodio      Removed TICK_PRESCALE, added time and SNTP      *
- *                            definitions                                     *
- * 07/03/07 Jorge Amodio      Added support and configuration for PICDEM.net2 *
- * 07/04/07 Jorge Amodio      Added correct castings for printf C18 & C30     *
- * 07/09/07 Jorge Amodio      Added support for HPC Explorer (PIC18F8722)     *  
- * 07/10/07 Jorge Amodio      Added support for Cerelitous PICWEB1 module     *
- ******************************************************************************/
+
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
@@ -50,60 +6,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#if defined(__C30__)
-#include <libpic30.h>
-#endif
-
 #define VERSION   "3.75.6"        // Firmware version
 
+#include "include/minipic10t.h"
 
-//*****************************************************************************
-// Define or include your hardware configuration
-//
-// In this section you have to include the header file that defines the 
-// particular hardware configuration for your board or design.
-//
-// A macro is defined in the project options to name each board or design and
-// select the appropiate header file for inclusion. You must define this
-// macro in the MPLAB IDE Project->Build Options->Project compiler options.
-// All header files are located in the main include directory, refer to the
-// existing files as an example about how to create a new one.
-//
-#if defined(PIC10T)
-    #include "include/pic10t.h"
-#elif defined(MINIPIC10T)
-    #include "include/minipic10t.h"
-#elif defined(PICNET1)
-//    #include "include/picnet1.h"
-    #include "include/picnet1_spilcd.h"
-#elif defined(EIP10)
-      #include "include/eip10.h"
-//    #include "include/eip10_lcd.h"
-//    #include "include/eip10_spilcd.h"
-#elif defined(PICDEM2)
-    #include "include/picdem2.h"
-#elif defined(PIC18_NIC28)
-    #include "include/pic18_nic28.h"
-#elif defined(PICDEMNET)
-    #include "include/picdemnet.h"
-#elif defined(PICDEMNET2)
-    #include "include/picdemnet2.h"
-#elif defined(HPC_EXPLORER)
-    #include "include/hpc_explorer.h"
-#elif defined(PICWEB1)
-    #include "include/picweb1.h"
-#elif defined(EXP16_DSPIC33)
-    #include "include/exp16_dspic33.h"
-#elif defined(EXP16_PIC24H)
-    #include "include/exp16_pic24h.h"
-#elif defined(EXP16_PIC24F)
-    #include "include/exp16_pic24F.h"
-#elif defined(PIC24FJ64_NIC28)
-//    #include "include/pic24fj64.h"
-    #include "include/pic24fj64_lcd.h"
-#else
-    #error: CFG001: No hardware configuration defined
-#endif
 
 
 //*****************************************************************************
@@ -130,18 +36,8 @@
     #define DEFAULT_NS1         { 10, 10, 10, 6  }
     #define SNTP_SERVER_IP      { 192, 43, 244, 18 }   // time.nist.gov
 #endif
-#if defined(PICDEM2)
-    #define DEFAULT_NETBIOS_NAME  "COBRA"
-#elif defined(PIC10T) || defined(MINIPIC10T)
-    #define DEFAULT_NETBIOS_NAME  "COBRA"
-#elif defined(EIP10)
-    #define DEFAULT_NETBIOS_NAME  "COBRA"
-#elif defined(PICNET1)
-    #define DEFAULT_NETBIOS_NAME  "COBRA"
-#else
-    #define DEFAULT_NETBIOS_NAME  "COBRA"
-#endif
 
+    #define DEFAULT_NETBIOS_NAME  "COBRA"
 
 //*****************************************************************************
 // Stack Modules
@@ -156,7 +52,7 @@
 #define STACK_USE_DHCP             // DHCP client
 //#define STACK_USE_FTP_SERVER         // FTP server
 //#define STACK_USE_TCP_EXAMPLE1     // HTTP client example in tcp_client_ex1.c
-//#define STACK_USE_ANNOUNCE           // Ethernet Device Discoverer server/client
+#define STACK_USE_ANNOUNCE           // Ethernet Device Discoverer server/client
 //#define STACK_USE_SNTP               // SNTP client
 //#define STACK_USE_DNS              // DNS client
 #define STACK_USE_NBNS               // NetBIOS Name Service Server
@@ -189,15 +85,6 @@
 //
 #define ENABLE_BUTTON0_CONFIG
 
-// Include User process code in main.c
-//
-//#define ENABLE_USER_PROCESS
-
-// Define Username and Password for the FTP Server
-//
-//#define FTP_USERNAME "ftp"
-//#define FTP_PASSWORD "microchip"
-//#define FTP_USER_NAME_LEN (10)
 
 // Define default TCP port for HTTP server
 //

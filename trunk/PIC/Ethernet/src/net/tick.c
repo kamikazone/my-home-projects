@@ -47,7 +47,6 @@ void TickInit(void)
     INTCON2bits.TMR0IP = 0;		// Low priority
     INTCONbits.TMR0IF = 0;
     INTCONbits.TMR0IE = 1;		// Enable interrupt
-
     // Timer0 on, 16-bit, internal timer, 4:1 prescale
     T0CON = 0x81;
 }
