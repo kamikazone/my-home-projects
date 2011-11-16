@@ -24,8 +24,12 @@
 <option id="de.innot.avreclipse.toolchain.options.toolchain.avrdude.991029759" name="AVRDude" superClass="de.innot.avreclipse.toolchain.options.toolchain.avrdude"/>
 <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="de.innot.avreclipse.targetplatform.avr.29699963" name="AVR Cross-Target" osList="all" superClass="de.innot.avreclipse.targetplatform.avr"/>
 <builder id="de.innot.avreclipse.target.builder.winavr.base.1175113199" managedBuildOn="false" name="AVR GNU Make Builder.AVR-GCC Toolchain" superClass="de.innot.avreclipse.target.builder.winavr.base"/>
-<tool id="de.innot.avreclipse.tool.assembler.winavr.base.1491241949" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.base"/>
-<tool id="de.innot.avreclipse.tool.compiler.winavr.base.1319388629" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.base"/>
+<tool id="de.innot.avreclipse.tool.assembler.winavr.base.1491241949" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.base">
+<inputType id="de.innot.avreclipse.tool.assembler.input.1845377246" superClass="de.innot.avreclipse.tool.assembler.input"/>
+</tool>
+<tool id="de.innot.avreclipse.tool.compiler.winavr.base.1319388629" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.base">
+<inputType id="de.innot.avreclipse.compiler.winavr.input.1281684811" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
+</tool>
 <tool id="de.innot.avreclipse.tool.cppcompiler.base.1877421457" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.base"/>
 <tool id="de.innot.avreclipse.tool.linker.winavr.base.1303854726" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.base"/>
 <tool id="de.innot.avreclipse.tool.cpplinker.base.1578999408" name="AVR C++ Linker" superClass="de.innot.avreclipse.tool.cpplinker.base"/>
