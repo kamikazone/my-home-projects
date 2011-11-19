@@ -1023,7 +1023,7 @@ MISTAT</panel_attributes>
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>530</x>
+      <x>520</x>
       <y>430</y>
       <w>120</w>
       <h>40</h>
