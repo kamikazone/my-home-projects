@@ -39,7 +39,7 @@ uint16_t print_webpage(uint8_t *buf,uint8_t rev)
         uint16_t plen;
         plen=fill_tcp_data_p(buf,0,PSTR("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"));
         plen=fill_tcp_data_p(buf,plen,PSTR("<center><p>ENC28J60 silicon rev is: B"));
-        itoa((enc28j60getrev()),vstr,10);
+        itoa((ENC28J60GetRev()),vstr,10);
         plen=fill_tcp_data(buf,plen,vstr);
         plen=fill_tcp_data_p(buf,plen,PSTR("</center><hr><br>tuxgraphics.org\n"));
         return(plen);
@@ -63,8 +63,8 @@ int main(void){
         _delay_loop_1(50); // 12ms
         
         /*initialize enc28j60*/
-        enc28j60Init(mymac);
-        enc28j60clkout(2); // change clkout from 6.25MHz to 12.5MHz
+        ENC28J60Init(mymac);
+        ENC28J60ClkOut(2); // change clkout from 6.25MHz to 12.5MHz
         _delay_loop_1(50); // 12ms
         
         // LED
@@ -79,7 +79,7 @@ int main(void){
         //
         // 0x476 is PHLCON LEDA=links status, LEDB=receive/transmit
         // enc28j60PhyWrite(PHLCON,0b0000 0100 0111 01 10);
-        enc28j60PhyWrite(PHLCON,0x476);
+        ENC28J60PhyWrite(PHLCON,0x476);
         _delay_loop_1(50); // 12ms
         
         /* set output to GND, red LED on */
@@ -91,7 +91,7 @@ int main(void){
 
         while(1){
                 // get the next new packet:
-                plen = enc28j60PacketReceive(BUFFER_SIZE, buf);
+                plen = ENC28J60PacketReceive(BUFFER_SIZE, buf);
 
                 /*plen will ne unequal to zero if there is a valid 
                  * packet (without crc error) */
@@ -154,7 +154,7 @@ int main(void){
                                         goto SENDTCP;
                                 }
                                 // any GET, any url:
-                                plen=print_webpage(buf,enc28j60getrev());
+                                plen=print_webpage(buf,ENC28J60GetRev());
 SENDTCP:
                                 make_tcp_ack_from_any(buf); // send ack for http get
                                 make_tcp_ack_with_data(buf,plen); // send data
@@ -174,7 +174,7 @@ SENDTCP:
                                 str[2]='r';
                                 str[3]='=';
                                 str[4]='B';
-                                itoa((enc28j60getrev()),&(str[5]),10);
+                                itoa((ENC28J60GetRev()),&(str[5]),10);
                                 make_udp_reply_from_request(buf,str,strnlen(str,10),MYUDPPORT);
                         }
                 }

@@ -279,7 +279,7 @@ void make_arp_answer_from_request(uint8_t *buf)
                 i++;
         }
         // eth+arp is 42 bytes:
-        enc28j60PacketSend(42,buf); 
+        ENC28J60PacketSend(42,buf); 
 }
 
 void make_echo_reply_from_request(uint8_t *buf,uint16_t len)
@@ -294,7 +294,7 @@ void make_echo_reply_from_request(uint8_t *buf,uint16_t len)
         }
         buf[ICMP_CHECKSUM_P]+=0x08;
         //
-        enc28j60PacketSend(len,buf);
+        ENC28J60PacketSend(len,buf);
 }
 
 // you can send a max of 220 bytes of data
@@ -332,7 +332,7 @@ void make_udp_reply_from_request(uint8_t *buf,char *data,uint8_t datalen,uint16_
         ck=checksum(&buf[IP_SRC_P], 16 + datalen,1);
         buf[UDP_CHECKSUM_H_P]=ck>>8;
         buf[UDP_CHECKSUM_L_P]=ck& 0xff;
-        enc28j60PacketSend(UDP_HEADER_LEN+IP_HEADER_LEN+ETH_HEADER_LEN+datalen,buf);
+        ENC28J60PacketSend(UDP_HEADER_LEN+IP_HEADER_LEN+ETH_HEADER_LEN+datalen,buf);
 }
 
 void make_tcp_synack_from_syn(uint8_t *buf)
@@ -351,7 +351,7 @@ void make_tcp_synack_from_syn(uint8_t *buf)
         buf[TCP_CHECKSUM_H_P]=ck>>8;
         buf[TCP_CHECKSUM_L_P]=ck& 0xff;
         // add 4 for option mss:
-        enc28j60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+4+ETH_HEADER_LEN,buf);
+        ENC28J60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+4+ETH_HEADER_LEN,buf);
 }
 
 // get a pointer to the start of tcp data in buf
@@ -435,7 +435,7 @@ void make_tcp_ack_from_any(uint8_t *buf)
         j=checksum(&buf[IP_SRC_P], 8+TCP_HEADER_LEN_PLAIN,2);
         buf[TCP_CHECKSUM_H_P]=j>>8;
         buf[TCP_CHECKSUM_L_P]=j& 0xff;
-        enc28j60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+ETH_HEADER_LEN,buf);
+        ENC28J60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+ETH_HEADER_LEN,buf);
 }
 
 // you must have called init_len_info at some time before calling this function
@@ -465,7 +465,7 @@ void make_tcp_ack_with_data(uint8_t *buf,uint16_t dlen)
         j=checksum(&buf[IP_SRC_P], 8+TCP_HEADER_LEN_PLAIN+dlen,2);
         buf[TCP_CHECKSUM_H_P]=j>>8;
         buf[TCP_CHECKSUM_L_P]=j& 0xff;
-        enc28j60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+dlen+ETH_HEADER_LEN,buf);
+        ENC28J60PacketSend(IP_HEADER_LEN+TCP_HEADER_LEN_PLAIN+dlen+ETH_HEADER_LEN,buf);
 }
 
 /* end of ip_arp_udp.c */

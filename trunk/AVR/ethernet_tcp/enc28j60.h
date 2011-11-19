@@ -259,21 +259,21 @@
 
 
 // functions
-extern uint8_t enc28j60ReadOp(uint8_t op, uint8_t address);
-extern void enc28j60WriteOp(uint8_t op, uint8_t address, uint8_t data);
-extern void enc28j60ReadBuffer(uint16_t len, uint8_t* data);
-extern void enc28j60WriteBuffer(uint16_t len, uint8_t* data);
-extern void enc28j60SetBank(uint8_t address);
-extern uint8_t enc28j60Read(uint8_t address);
-extern void enc28j60Write(uint8_t address, uint8_t data);
-extern void enc28j60PhyWrite(uint8_t address, uint16_t data);
-extern void enc28j60clkout(uint8_t clk);
-extern void enc28j60Init(uint8_t* macaddr);
-extern void enc28j60PacketSend(uint16_t len, uint8_t* packet);
-extern uint8_t enc28j60hasRxPkt(void);
-extern uint16_t enc28j60PacketReceive(uint16_t maxlen, uint8_t* packet);
-extern uint8_t enc28j60getrev(void);
-extern uint8_t enc28j60linkup(void);
+extern uint8_t ENC28J60ReadOp(uint8_t op, uint8_t address);
+extern void ENC28J60WriteOp(uint8_t op, uint8_t address, uint8_t data);
+extern void ENC28J60ReadBuffer(uint16_t len, uint8_t* data);
+extern void ENC28J60WriteBuffer(uint16_t len, uint8_t* data);
+extern void ENC28J60SetBank(uint8_t address);
+extern uint8_t ENC28J60Read(uint8_t address);
+extern void ENC28J60Write(uint8_t address, uint8_t data);
+extern void ENC28J60PhyWrite(uint8_t address, uint16_t data);
+extern void ENC28J60ClkOut(uint8_t clk);
+extern void ENC28J60Init(uint8_t* macaddr);
+extern void ENC28J60PacketSend(uint16_t len, uint8_t* packet);
+extern uint8_t ENC28J60HasRxPkt(void);
+extern uint16_t ENC28J60PacketReceive(uint16_t maxlen, uint8_t* packet);
+extern uint8_t ENC28J60GetRev(void);
+extern uint8_t ENC28J60LinkUp(void);
 
 #endif
 //@}

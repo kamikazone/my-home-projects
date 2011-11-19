@@ -48,8 +48,8 @@ int main(void){
         PORTB|= (1<<PORTB1);
 
         /*initialize enc28j60*/
-        enc28j60Init(mymac);
-        enc28j60clkout(2); // change clkout from 6.25MHz to 12.5MHz
+        ENC28J60Init(mymac);
+        ENC28J60ClkOut(2); // change clkout from 6.25MHz to 12.5MHz
         _delay_ms(10);
         
 	/* Magjack leds configuration, see enc28j60 datasheet, page 11 */
@@ -57,27 +57,27 @@ int main(void){
 	//
 	// 0x880 is PHLCON LEDB=on, LEDA=on
 	// enc28j60PhyWrite(PHLCON,0b0000 1000 1000 00 00);
-	enc28j60PhyWrite(PHLCON,0x880);
+	ENC28J60PhyWrite(PHLCON,0x880);
 	_delay_ms(250); _delay_ms(250);
 	//
 	// 0x990 is PHLCON LEDB=off, LEDA=off
 	// enc28j60PhyWrite(PHLCON,0b0000 1001 1001 00 00);
-	enc28j60PhyWrite(PHLCON,0x990);
+	ENC28J60PhyWrite(PHLCON,0x990);
 	_delay_ms(250); _delay_ms(250);
 	//
 	// 0x880 is PHLCON LEDB=on, LEDA=on
 	// enc28j60PhyWrite(PHLCON,0b0000 1000 1000 00 00);
-	enc28j60PhyWrite(PHLCON,0x880);
+	ENC28J60PhyWrite(PHLCON,0x880);
 	_delay_ms(250); _delay_ms(250);
 	//
 	// 0x990 is PHLCON LEDB=off, LEDA=off
 	// enc28j60PhyWrite(PHLCON,0b0000 1001 1001 00 00);
-	enc28j60PhyWrite(PHLCON,0x990);
+	ENC28J60PhyWrite(PHLCON,0x990);
 	_delay_ms(250); _delay_ms(250);
 	//
         // 0x476 is PHLCON LEDA=links status, LEDB=receive/transmit
         // enc28j60PhyWrite(PHLCON,0b0000 0100 0111 01 10);
-        enc28j60PhyWrite(PHLCON,0x476);
+        ENC28J60PhyWrite(PHLCON,0x476);
 	_delay_ms(100);
         
         //init the ethernet/ip layer:
@@ -85,7 +85,7 @@ int main(void){
 
         while(1){
                 // get the next new packet:
-                plen = enc28j60PacketReceive(BUFFER_SIZE, buf);
+                plen = ENC28J60PacketReceive(BUFFER_SIZE, buf);
 
                 /*plen will ne unequal to zero if there is a valid 
                  * packet (without crc error) */

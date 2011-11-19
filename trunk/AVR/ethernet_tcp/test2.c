@@ -53,8 +53,8 @@ int main(void){
         PORTB|= (1<<PORTB1);
 
         /*initialize enc28j60*/
-        enc28j60Init(mymac);
-        enc28j60clkout(2); // change clkout from 6.25MHz to 12.5MHz
+        ENC28J60Init(mymac);
+        ENC28J60ClkOut(2); // change clkout from 6.25MHz to 12.5MHz
         _delay_loop_1(50); // 12ms
         
         /* Magjack leds configuration, see enc28j60 datasheet, page 11 */
@@ -62,7 +62,7 @@ int main(void){
         //
         // 0x476 is PHLCON LEDA=links status, LEDB=receive/transmit
         // enc28j60PhyWrite(PHLCON,0b0000 0100 0111 01 10);
-        enc28j60PhyWrite(PHLCON,0x476);
+        ENC28J60PhyWrite(PHLCON,0x476);
         _delay_loop_1(50); // 12ms
         
         /* set output to GND, red LED on */
@@ -74,7 +74,7 @@ int main(void){
 
         while(1){
                 // get the next new packet:
-                plen = enc28j60PacketReceive(BUFFER_SIZE, buf);
+                plen = ENC28J60PacketReceive(BUFFER_SIZE, buf);
 
                 /*plen will ne unequal to zero if there is a valid 
                  * packet (without crc error) */
