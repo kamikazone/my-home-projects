@@ -14,31 +14,34 @@
  ******************************************************************************/
 // A generic structure representing the Ethernet header starting all
 //  Ethernet frames
+
 typedef struct _ETHER_HEADER
 {
-    MAC_ADDR  DestMACAddr;
-    MAC_ADDR  SourceMACAddr;
-    WORD_VAL  Type;
+    MAC_ADDR DestMACAddr;
+    MAC_ADDR SourceMACAddr;
+    WORD_VAL Type;
 } ETHER_HEADER;
 
 // A header appended at the start of all RX frames by the hardware
+
 typedef struct _ENC_PREAMBLE
 {
-    WORD      NextPacketPointer;
-    RXSTATUS  StatusVector;
-    MAC_ADDR  DestMACAddr;
-    MAC_ADDR  SourceMACAddr;
-    WORD_VAL  Type;
+    WORD NextPacketPointer;
+    RXSTATUS StatusVector;
+    MAC_ADDR DestMACAddr;
+    MAC_ADDR SourceMACAddr;
+    WORD_VAL Type;
 } ENC_PREAMBLE;
 
 typedef struct _DATA_BUFFER
 {
-    WORD_VAL  StartAddress;
-    WORD_VAL  EndAddress;
-    struct 
+    WORD_VAL StartAddress;
+    WORD_VAL EndAddress;
+
+    struct
     {
-        unsigned char bFree: 1;
-        unsigned char bTransmitted: 1;
+        unsigned char bFree : 1;
+        unsigned char bTransmitted : 1;
     } Flags;
 } DATA_BUFFER;
 
@@ -92,20 +95,22 @@ BYTE ENCRevID;
  * Functions implemented by this module                                       *
  ******************************************************************************/
 #define Delay10us(us) Delay10TCYx(((TCY_CLOCK/1000000)*us))
+
 void DelayMs(unsigned int ms)
 {
     unsigned char i;
 
-    while(ms--)
+    while (ms--)
     {
-        i=4;
+        i = 4;
 
-        while(i--)
+        while (i--)
         {
             Delay10us(25);
         }
     }
 }
+
 /******************************************************************************
  * Function:        REG ReadMACReg(BYTE Address)
  * PreCondition:    SPI bus must be initialized (done in MACInit()).
@@ -127,11 +132,11 @@ static REG ReadMACReg(BYTE Address)
     REG r;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -141,22 +146,22 @@ static REG ReadMACReg(BYTE Address)
 
     ENC_CS_IO = 0;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = RCR | Address;// Send the Read Control Register opcode and
-                               // address.
+    ENC_SSPBUF = RCR | Address; // Send the Read Control Register opcode and
+    // address.
 
-    while(!ENC_SPI_IF);
-
-    r.Val = ENC_SSPBUF;
-    ENC_SPI_IF = 0;
-    ENC_SSPBUF = 0;            // Send a dummy byte
-
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     r.Val = ENC_SSPBUF;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = 0;            // Send another dummy byte to receive the register
-                               // contents.
-    while(!ENC_SPI_IF);
+    ENC_SSPBUF = 0; // Send a dummy byte
+
+    while (!ENC_SPI_IF);
+
+    r.Val = ENC_SSPBUF;
+    ENC_SPI_IF = 0;
+    ENC_SSPBUF = 0; // Send another dummy byte to receive the register
+    // contents.
+    while (!ENC_SPI_IF);
 
     r.Val = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -192,11 +197,11 @@ static REG ReadETHReg(BYTE Address)
     REG r;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -209,13 +214,13 @@ static REG ReadETHReg(BYTE Address)
     ENC_SPI_IF = 0;
     ENC_SSPBUF = RCR | Address;
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     r.Val = ENC_SSPBUF;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = 0;            // Send a dummy byte to receive the register
-                               // contents
-    while(!ENC_SPI_IF);
+    ENC_SSPBUF = 0; // Send a dummy byte to receive the register
+    // contents
+    while (!ENC_SPI_IF);
 
     r.Val = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -250,15 +255,15 @@ static REG ReadETHReg(BYTE Address)
  *                  registers must be accomplished with WritePHYReg().
  *****************************************************************************/
 static void WriteReg(BYTE Address, BYTE Data)
-{        
+{
     BYTE Dummy;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -268,15 +273,15 @@ static void WriteReg(BYTE Address, BYTE Data)
 
     ENC_CS_IO = 0;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = WCR | Address;// Send the opcode and address
+    ENC_SSPBUF = WCR | Address; // Send the opcode and address
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = Data;         // Send the byte to be writen
+    ENC_SSPBUF = Data; // Send the byte to be writen
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -310,11 +315,11 @@ static void BFSReg(BYTE Address, BYTE Data)
     BYTE Dummy;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -324,15 +329,15 @@ static void BFSReg(BYTE Address, BYTE Data)
 
     ENC_CS_IO = 0;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = BFS | Address;// Send the opcode and address
+    ENC_SSPBUF = BFS | Address; // Send the opcode and address
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = Data;         // Send the byte to be writen
+    ENC_SSPBUF = Data; // Send the byte to be writen
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -366,11 +371,11 @@ static void BFCReg(BYTE Address, BYTE Data)
     BYTE Dummy;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -380,15 +385,15 @@ static void BFCReg(BYTE Address, BYTE Data)
 
     ENC_CS_IO = 0;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = BFC | Address;// Send the opcode and address
+    ENC_SSPBUF = BFC | Address; // Send the opcode and address
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = Data;         // Send the byte to be writen
+    ENC_SSPBUF = Data; // Send the byte to be writen
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -412,10 +417,10 @@ static void BFCReg(BYTE Address, BYTE Data)
  *                  changes the bank select bits in ETHCON1 to match.
  * Note:            None
  *****************************************************************************/
-static void BankSel(WORD Register) 
+static void BankSel(WORD Register)
 {
     BFCReg(ECON1, ECON1_BSEL1 | ECON1_BSEL0);
-    BFSReg(ECON1, ((WORD_VAL*)&Register)->v[1]);
+    BFSReg(ECON1, ((WORD_VAL*) & Register)->v[1]);
 }
 
 /******************************************************************************
@@ -435,22 +440,22 @@ PHYREG ReadPHYReg(BYTE Register)
 
     // Set the right address and start the register read operation
     BankSel(MIREGADR);
-    WriteReg((BYTE)MIREGADR, Register);
-    WriteReg((BYTE)MICMD, MICMD_MIIRD);
+    WriteReg((BYTE) MIREGADR, Register);
+    WriteReg((BYTE) MICMD, MICMD_MIIRD);
 
     // Loop to wait until the PHY register has been read through the MII
     // This requires 10.24us
     BankSel(MISTAT);
 
-    while(ReadMACReg((BYTE)MISTAT).MISTATbits.BUSY);
+    while (ReadMACReg((BYTE) MISTAT).MISTATbits.BUSY);
 
     // Stop reading
     BankSel(MIREGADR);
-    WriteReg((BYTE)MICMD, 0x00);
+    WriteReg((BYTE) MICMD, 0x00);
 
     // Obtain results and return
-    Result.VAL.v[0] = ReadMACReg((BYTE)MIRDL).Val;
-    Result.VAL.v[1] = ReadMACReg((BYTE)MIRDH).Val;
+    Result.VAL.v[0] = ReadMACReg((BYTE) MIRDL).Val;
+    Result.VAL.v[1] = ReadMACReg((BYTE) MIRDH).Val;
 
     return Result;
 }
@@ -470,17 +475,17 @@ void WritePHYReg(BYTE Register, WORD Data)
 {
     // Write the register address
     BankSel(MIREGADR);
-    WriteReg((BYTE)MIREGADR, Register);
+    WriteReg((BYTE) MIREGADR, Register);
 
     // Write the data
     // Order is important: write low byte first, high byte last
-    WriteReg((BYTE)MIWRL, ((WORD_VAL*)&Data)->v[0]);
-    WriteReg((BYTE)MIWRH, ((WORD_VAL*)&Data)->v[1]);
+    WriteReg((BYTE) MIWRL, ((WORD_VAL*) & Data)->v[0]);
+    WriteReg((BYTE) MIWRH, ((WORD_VAL*) & Data)->v[1]);
 
     // Wait until the PHY register has been written
     BankSel(MISTAT);
 
-    while(ReadMACReg((BYTE)MISTAT).MISTATbits.BUSY);
+    while (ReadMACReg((BYTE) MISTAT).MISTATbits.BUSY);
 }
 
 /******************************************************************************
@@ -500,11 +505,11 @@ BYTE MACGet()
     BYTE Result;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -516,13 +521,13 @@ BYTE MACGet()
     ENC_SPI_IF = 0;
     ENC_SSPBUF = RBM;
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Result = ENC_SSPBUF;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = 0;            // Send a dummy byte to receive the register 
-                               // contents.
-    while(!ENC_SPI_IF);
+    ENC_SSPBUF = 0; // Send a dummy byte to receive the register
+    // contents.
+    while (!ENC_SPI_IF);
 
     Result = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -558,11 +563,11 @@ WORD MACGetArray(BYTE *val, WORD len)
     BYTE Dummy;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -573,23 +578,23 @@ WORD MACGetArray(BYTE *val, WORD len)
     // Start the burst operation
     ENC_CS_IO = 0;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = RBM;          // Send the Read Buffer Memory opcode.
+    ENC_SSPBUF = RBM; // Send the Read Buffer Memory opcode.
     i = 0;
     val--;
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
 
     // Read the data
-    while(i<len)
+    while (i < len)
     {
-        ENC_SSPBUF = 0;        // Send a dummy byte to receive a byte
+        ENC_SSPBUF = 0; // Send a dummy byte to receive a byte
         i++;
         val++;
 
-        while(!ENC_SPI_IF);
+        while (!ENC_SPI_IF);
 
         *val = ENC_SSPBUF;
         ENC_SPI_IF = 0;
@@ -624,11 +629,11 @@ void MACPut(BYTE val)
     BYTE Dummy;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -638,15 +643,15 @@ void MACPut(BYTE val)
 
     ENC_CS_IO = 0;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = WBM;          // Send the opcode and constant
+    ENC_SSPBUF = WBM; // Send the opcode and constant
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
     ENC_SSPBUF = val;
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -677,11 +682,11 @@ void MACPutArray(BYTE *val, WORD len)
     BYTE Dummy;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -692,21 +697,21 @@ void MACPutArray(BYTE *val, WORD len)
     // Select the chip and send the proper opcode
     ENC_CS_IO = 0;
     ENC_SPI_IF = 0;
-    ENC_SSPBUF = WBM;          // Send the Write Buffer Memory opcode
+    ENC_SSPBUF = WBM; // Send the Write Buffer Memory opcode
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
 
     // Send the data
-    while(len)
+    while (len)
     {
-        ENC_SSPBUF = *val;     // Start sending the byte
-        val++;                 // Increment after writing to ENC_SSPBUF to increase speed
-        len--;                 // Decrement after writing to ENC_SSPBUF to increase speed
+        ENC_SSPBUF = *val; // Start sending the byte
+        val++; // Increment after writing to ENC_SSPBUF to increase speed
+        len--; // Decrement after writing to ENC_SSPBUF to increase speed
 
-        while(!ENC_SPI_IF);
+        while (!ENC_SPI_IF);
 
         Dummy = ENC_SSPBUF;
         ENC_SPI_IF = 0;
@@ -764,9 +769,8 @@ BOOL MACIsTxReady(BOOL HighPriority)
 #if MAC_TX_BUFFER_COUNT > 1
     BUFFER i;
 
-    if(HighPriority)
+    if (HighPriority)
 #endif
-
     {
         return !ReadETHReg(ECON1).ECON1bits.TXRTS;
     }
@@ -774,15 +778,15 @@ BOOL MACIsTxReady(BOOL HighPriority)
 #if MAC_TX_BUFFER_COUNT > 1
     // Check if the current buffer can be modified.  It cannot be modified if
     // the TX hardware is currently transmitting it.
-    if(CurrentTxBuffer == LastTXedBuffer)
+    if (CurrentTxBuffer == LastTXedBuffer)
     {
         return !ReadETHReg(ECON1).ECON1bits.TXRTS;
     }
 
     // Check if a buffer is available for a new packet
-    for(i = 1; i < MAC_TX_BUFFER_COUNT; i++)
+    for (i = 1; i < MAC_TX_BUFFER_COUNT; i++)
     {
-        if(TxBuffers[i].Flags.bFree)
+        if (TxBuffers[i].Flags.bFree)
         {
             return TRUE;
         }
@@ -796,21 +800,21 @@ BUFFER MACGetTxBuffer(BOOL HighPriority)
 #if MAC_TX_BUFFER_COUNT > 1
     BUFFER i;
 
-    if(HighPriority)
+    if (HighPriority)
 #endif
     {
         return !ReadETHReg(ECON1).ECON1bits.TXRTS ? 0 : INVALID_BUFFER;
     }
-    
+
 #if MAC_TX_BUFFER_COUNT > 1
     // Find a free buffer.  Do not use buffer 0, it is reserved for
     // high priority messages that don't need to be acknowledged
     // before being discarded (TCP control packets, all ICMP 
     // packets, all UDP packets, etc.)
-    for(i = 1; i < MAC_TX_BUFFER_COUNT; i++)
+    for (i = 1; i < MAC_TX_BUFFER_COUNT; i++)
     {
         // If this buffer is free, then mark it as used and return with it
-        if(TxBuffers[i].Flags.bFree)
+        if (TxBuffers[i].Flags.bFree)
         {
             TxBuffers[i].Flags.bFree = FALSE;
             TxBuffers[i].Flags.bTransmitted = FALSE;
@@ -846,23 +850,23 @@ void MACSetTxBuffer(BUFFER buffer, WORD offset)
     // the per packet control byte which preceeds the packet in the TX memory
     // area.
 #if MAC_TX_BUFFER_COUNT > 1
-    offset += TxBuffers[buffer].StartAddress.Val + 1 + sizeof(ETHER_HEADER);
+    offset += TxBuffers[buffer].StartAddress.Val + 1 + sizeof (ETHER_HEADER);
 #else
-    offset += TXSTART + 1 + sizeof(ETHER_HEADER);
+    offset += TXSTART + 1 + sizeof (ETHER_HEADER);
 #endif
 
     // Set the SPI read and write pointers to the new calculated value
     BankSel(EWRPTL);
-    WriteReg(ERDPTL, ((WORD_VAL*)&offset)->v[0]);
-    WriteReg(ERDPTH, ((WORD_VAL*)&offset)->v[1]);
-    WriteReg(EWRPTL, ((WORD_VAL*)&offset)->v[0]);
-    WriteReg(EWRPTH, ((WORD_VAL*)&offset)->v[1]);
+    WriteReg(ERDPTL, ((WORD_VAL*) & offset)->v[0]);
+    WriteReg(ERDPTH, ((WORD_VAL*) & offset)->v[1]);
+    WriteReg(EWRPTL, ((WORD_VAL*) & offset)->v[0]);
+    WriteReg(EWRPTH, ((WORD_VAL*) & offset)->v[1]);
 }
 
 void MACDiscardTx(BUFFER buffer)
 {
 #if MAC_TX_BUFFER_COUNT > 1
-    if(buffer < sizeof(TxBuffers)/sizeof(TxBuffers[0]))
+    if (buffer < sizeof (TxBuffers) / sizeof (TxBuffers[0]))
     {
         TxBuffers[buffer].Flags.bFree = TRUE;
         CurrentTxBuffer = buffer;
@@ -893,10 +897,10 @@ void MACSetRxBuffer(WORD offset)
 
     // Determine the address of the beginning of the entire packet
     // and adjust the address to the desired location
-    ReadPT.Val = CurrentPacketLocation.Val + sizeof(ENC_PREAMBLE) + offset;
+    ReadPT.Val = CurrentPacketLocation.Val + sizeof (ENC_PREAMBLE) + offset;
 
     // Since the receive buffer is circular, adjust if a wraparound is needed
-    if ( ReadPT.Val > RXSTOP ) ReadPT.Val -= RXSIZE;
+    if (ReadPT.Val > RXSTOP) ReadPT.Val -= RXSIZE;
 
     // Set the SPI read and write pointers to the new calculated value
     BankSel(ERDPTL);
@@ -925,14 +929,16 @@ WORD MACGetFreeRxSize(void)
     // bytes.  A loop is necessary to make certain a proper low/high byte pair
     // is read.
     BankSel(EPKTCNT);
-    do {
+    do
+    {
         // Save EPKTCNT in a temporary location
-        ReadPT.v[0] = ReadETHReg((BYTE)EPKTCNT).Val;
+        ReadPT.v[0] = ReadETHReg((BYTE) EPKTCNT).Val;
         BankSel(ERXWRPTL);
         WritePT.v[0] = ReadETHReg(ERXWRPTL).Val;
         WritePT.v[1] = ReadETHReg(ERXWRPTH).Val;
         BankSel(EPKTCNT);
-    } while(ReadETHReg((BYTE)EPKTCNT).Val != ReadPT.v[0]);
+    }
+    while (ReadETHReg((BYTE) EPKTCNT).Val != ReadPT.v[0]);
 
     // Determine where the write protection pointer is
     BankSel(ERXRDPTL);
@@ -941,11 +947,11 @@ WORD MACGetFreeRxSize(void)
 
     // Calculate the difference between the pointers, taking care to account
     // for buffer wrapping conditions
-    if ( WritePT.Val > ReadPT.Val )
+    if (WritePT.Val > ReadPT.Val)
     {
         return (RXSTOP - RXSTART) - (WritePT.Val - ReadPT.Val);
     }
-    else if ( WritePT.Val == ReadPT.Val )
+    else if (WritePT.Val == ReadPT.Val)
     {
         return RXSIZE - 1;
     }
@@ -971,11 +977,11 @@ void MACDiscardRx(void)
     WORD_VAL NewRXRDLocation;
 
     // Make sure the current packet was not already discarded
-    if( WasDiscarded )
+    if (WasDiscarded)
         return;
 
     WasDiscarded = TRUE;
-    
+
     // Decrement the next packet pointer before writing it into
     // the ERXRDPT registers.  This is a silicon errata workaround.
     // RX buffer wrapping must be taken into account if the
@@ -983,9 +989,9 @@ void MACDiscardRx(void)
     NewRXRDLocation.Val = NextPacketLocation.Val - 1;
 
 #if RXSTART == 0
-    if(NewRXRDLocation.Val > RXSTOP)
+    if (NewRXRDLocation.Val > RXSTOP)
 #else
-    if(NewRXRDLocation.Val < RXSTART || NewRXRDLocation.Val > RXSTOP)
+    if (NewRXRDLocation.Val < RXSTART || NewRXRDLocation.Val > RXSTOP)
 #endif
     {
         NewRXRDLocation.Val = RXSTOP;
@@ -1026,11 +1032,11 @@ BOOL MACGetHeader(MAC_ADDR *remote, BYTE* type)
     // Test if at least one packet has been received and is waiting
     BankSel(EPKTCNT);
 
-    if(ReadETHReg((BYTE)EPKTCNT).Val == 0)
-        return FALSE;    
+    if (ReadETHReg((BYTE) EPKTCNT).Val == 0)
+        return FALSE;
 
     // Make absolutely certain that any previous packet was discarded
-    if(WasDiscarded == FALSE)
+    if (WasDiscarded == FALSE)
     {
         MACDiscardRx();
         return FALSE;
@@ -1045,7 +1051,7 @@ BOOL MACGetHeader(MAC_ADDR *remote, BYTE* type)
     WriteReg(ERDPTH, NextPacketLocation.v[1]);
 
     // Obtain the MAC header from the Ethernet buffer
-    MACGetArray((BYTE*)&header, sizeof(header));
+    MACGetArray((BYTE*) & header, sizeof (header));
 
     // The EtherType field, like most items transmitted on the Ethernet medium
     // are in big endian.
@@ -1054,11 +1060,11 @@ BOOL MACGetHeader(MAC_ADDR *remote, BYTE* type)
     // Validate the data returned from the ENC28J60.  Random data corruption, 
     // such as if a single SPI bit error occurs while communicating or a 
     // momentary power glitch could cause this to occur in rare circumstances.
-    if(header.NextPacketPointer > RXSTOP || ((BYTE_VAL*)(&header.NextPacketPointer))->bits.b0 ||
-       header.StatusVector.bits.Zero ||
-       header.StatusVector.bits.CRCError ||
-       header.StatusVector.bits.ByteCount > 1518 ||
-       !header.StatusVector.bits.ReceiveOk)
+    if (header.NextPacketPointer > RXSTOP || ((BYTE_VAL*) (&header.NextPacketPointer))->bits.b0 ||
+            header.StatusVector.bits.Zero ||
+            header.StatusVector.bits.CRCError ||
+            header.StatusVector.bits.ByteCount > 1518 ||
+            !header.StatusVector.bits.ReceiveOk)
     {
         Reset();
     }
@@ -1069,13 +1075,13 @@ BOOL MACGetHeader(MAC_ADDR *remote, BYTE* type)
     // Return the Ethernet frame's Source MAC address field to the caller
     // This parameter is useful for replying to requests without requiring an
     // ARP cycle.
-    memcpy((void*)remote->v, (void*)header.SourceMACAddr.v, sizeof(*remote));
+    memcpy((void*) remote->v, (void*) header.SourceMACAddr.v, sizeof (*remote));
 
     // Return a simplified version of the EtherType field to the caller
     *type = MAC_UNKNOWN;
 
-    if( (header.Type.v[1] == 0x08u) &&
-        ((header.Type.v[0] == ETHER_IP) || (header.Type.v[0] == ETHER_ARP)) )
+    if ((header.Type.v[1] == 0x08u) &&
+            ((header.Type.v[0] == ETHER_IP) || (header.Type.v[0] == ETHER_ARP)))
     {
         *type = header.Type.v[0];
     }
@@ -1114,7 +1120,7 @@ void MACPutHeader(MAC_ADDR *remote, BYTE type, WORD dataLen)
     WriteReg(EWRPTH, TxBuffers[CurrentTxBuffer].StartAddress.v[1]);
 
     // Calculate where to put the TXND pointer
-    dataLen += (WORD)sizeof(ETHER_HEADER) + TxBuffers[CurrentTxBuffer].StartAddress.Val;
+    dataLen += (WORD)sizeof (ETHER_HEADER) + TxBuffers[CurrentTxBuffer].StartAddress.Val;
     TxBuffers[CurrentTxBuffer].EndAddress.Val = dataLen;
 #else
     // Set the SPI write pointer to the beginning of the transmit buffer
@@ -1122,20 +1128,20 @@ void MACPutHeader(MAC_ADDR *remote, BYTE type, WORD dataLen)
     WriteReg(EWRPTH, HIGH(TXSTART));
 
     // Calculate where to put the TXND pointer
-    dataLen += (WORD)sizeof(ETHER_HEADER) + TXSTART;
+    dataLen += (WORD)sizeof (ETHER_HEADER) + TXSTART;
 
     // Write the TXND pointer into the registers, given the dataLen given
-    WriteReg(ETXNDL, ((WORD_VAL*)&dataLen)->v[0]);
-    WriteReg(ETXNDH, ((WORD_VAL*)&dataLen)->v[1]);
+    WriteReg(ETXNDL, ((WORD_VAL*) & dataLen)->v[0]);
+    WriteReg(ETXNDH, ((WORD_VAL*) & dataLen)->v[1]);
 #endif
 
     // Set the per-packet control byte and write the Ethernet destination
     // address
-    MACPut(0x00);    // Use default control configuration
-    MACPutArray((BYTE*)remote, sizeof(*remote));
+    MACPut(0x00); // Use default control configuration
+    MACPutArray((BYTE*) remote, sizeof (*remote));
 
     // Write our MAC address in the Ethernet source field
-    MACPutArray((BYTE*)&AppConfig.MyMACAddr, sizeof(AppConfig.MyMACAddr));
+    MACPutArray((BYTE*) & AppConfig.MyMACAddr, sizeof (AppConfig.MyMACAddr));
 
     // Write the appropriate Ethernet Type WORD for the protocol being used
     MACPut(0x08);
@@ -1174,7 +1180,7 @@ void MACFlush(void)
 
     // Reset transmit logic if a TX Error has previously occured
     // This is a silicon errata workaround
-    if(ReadETHReg(EIR).EIRbits.TXERIF)
+    if (ReadETHReg(EIR).EIRbits.TXERIF)
     {
         BFSReg(ECON1, ECON1_TXRST);
         BFCReg(ECON1, ECON1_TXRST);
@@ -1189,16 +1195,16 @@ void MACFlush(void)
     BFSReg(ECON1, ECON1_TXRTS);
 
     // Revision B5 silicon errata workaround
-    if(ENCRevID == 0x05)
+    if (ENCRevID == 0x05)
     {
-        while(!(ReadETHReg(EIR).Val & (EIR_TXERIF | EIR_TXIF)));
+        while (!(ReadETHReg(EIR).Val & (EIR_TXERIF | EIR_TXIF)));
 
-        if(ReadETHReg(EIR).EIRbits.TXERIF)
+        if (ReadETHReg(EIR).EIRbits.TXERIF)
         {
             WORD_VAL ReadPtrSave, TXEnd;
             TXSTATUS TXStatus;
             BYTE i;
-            
+
             // Cancel the previous transmission if it has become stuck set
             BFCReg(ECON1, ECON1_TXRTS);
 
@@ -1215,14 +1221,14 @@ void MACFlush(void)
             // Read the transmit status vector
             WriteReg(ERDPTL, TXEnd.v[0]);
             WriteReg(ERDPTH, TXEnd.v[1]);
-            MACGetArray((BYTE*)&TXStatus, sizeof(TXStatus));
+            MACGetArray((BYTE*) & TXStatus, sizeof (TXStatus));
 
             // Implement retransmission if a late collision occured (this can
             // happen on B5 when certain link pulses arrive at the same time
             // as the transmission)
-            for(i = 0; i < 16; i++)
+            for (i = 0; i < 16; i++)
             {
-                if(ReadETHReg(EIR).EIRbits.TXERIF && TXStatus.bits.LateCollision)
+                if (ReadETHReg(EIR).EIRbits.TXERIF && TXStatus.bits.LateCollision)
                 {
                     // Reset the TX logic
                     BFSReg(ECON1, ECON1_TXRST);
@@ -1232,7 +1238,7 @@ void MACFlush(void)
                     // Transmit the packet again
                     BFSReg(ECON1, ECON1_TXRTS);
 
-                    while(!(ReadETHReg(EIR).Val & (EIR_TXERIF | EIR_TXIF)));
+                    while (!(ReadETHReg(EIR).Val & (EIR_TXERIF | EIR_TXIF)));
 
                     // Cancel the previous transmission if it has become stuck set
                     BFCReg(ECON1, ECON1_TXRTS);
@@ -1240,7 +1246,7 @@ void MACFlush(void)
                     // Read transmit status vector
                     WriteReg(ERDPTL, TXEnd.v[0]);
                     WriteReg(ERDPTH, TXEnd.v[1]);
-                    MACGetArray((BYTE*)&TXStatus, sizeof(TXStatus));
+                    MACGetArray((BYTE*) & TXStatus, sizeof (TXStatus));
                 }
                 else
                 {
@@ -1256,6 +1262,7 @@ void MACFlush(void)
 }
 
 #if defined(STACK_USE_HW_CKSUM)
+
 /******************************************************************************
  * Function:        WORD MACCalcRxChecksum(WORD offset, WORD len)
  * PreCondition:    None
@@ -1274,9 +1281,9 @@ WORD MACCalcRxChecksum(WORD offset, WORD len)
     WORD_VAL temp;
 
     // Add the offset requested by firmware plus the Ethernet header
-    temp.Val = CurrentPacketLocation.Val + sizeof(ENC_PREAMBLE) + offset;
+    temp.Val = CurrentPacketLocation.Val + sizeof (ENC_PREAMBLE) + offset;
 
-    if ( temp.Val > RXSTOP )        // Adjust value if a wrap is needed
+    if (temp.Val > RXSTOP) // Adjust value if a wrap is needed
     {
         temp.Val -= RXSIZE;
     }
@@ -1287,9 +1294,9 @@ WORD MACCalcRxChecksum(WORD offset, WORD len)
     WriteReg(EDMASTH, temp.v[1]);
 
     // Calculate the end address, given the start address and len
-    temp.Val += len-1;
+    temp.Val += len - 1;
 
-    if ( temp.Val > RXSTOP )        // Adjust value if a wrap is needed
+    if (temp.Val > RXSTOP) // Adjust value if a wrap is needed
     {
         temp.Val -= RXSIZE;
     }
@@ -1297,11 +1304,11 @@ WORD MACCalcRxChecksum(WORD offset, WORD len)
     // Program the end address of the DMA
     WriteReg(EDMANDL, temp.v[0]);
     WriteReg(EDMANDH, temp.v[1]);
-    
+
     // Calculate the checksum using the DMA device
     BFSReg(ECON1, ECON1_DMAST | ECON1_CSUMEN);
 
-    while(ReadETHReg(ECON1).ECON1bits.DMAST);
+    while (ReadETHReg(ECON1).ECON1bits.DMAST);
 
     // Swap endianness and return
     temp.v[1] = ReadETHReg(EDMACSL).Val;
@@ -1330,11 +1337,11 @@ WORD MACCalcTxChecksum(WORD offset, WORD len)
     // Program the start address of the DMA, after adjusting for the Ethernet
     // header
 #if MAC_TX_BUFFER_COUNT > 1
-    temp.Val = TxBuffers[CurrentTxBuffer].StartAddress.Val + sizeof(ETHER_HEADER)
-                + offset + 1;    // +1 needed to account for per packet control byte
+    temp.Val = TxBuffers[CurrentTxBuffer].StartAddress.Val + sizeof (ETHER_HEADER)
+            + offset + 1; // +1 needed to account for per packet control byte
 #else
-    temp.Val = TXSTART + sizeof(ETHER_HEADER)
-                + offset + 1;    // +1 needed to account for per packet control byte
+    temp.Val = TXSTART + sizeof (ETHER_HEADER)
+            + offset + 1; // +1 needed to account for per packet control byte
 #endif
 
     BankSel(EDMASTL);
@@ -1342,14 +1349,14 @@ WORD MACCalcTxChecksum(WORD offset, WORD len)
     WriteReg(EDMASTH, temp.v[1]);
 
     // Program the end address of the DMA.
-    temp.Val += len-1;
+    temp.Val += len - 1;
     WriteReg(EDMANDL, temp.v[0]);
     WriteReg(EDMANDH, temp.v[1]);
 
     // Calcualte the checksum using the DMA device
     BFSReg(ECON1, ECON1_DMAST | ECON1_CSUMEN);
 
-    while(ReadETHReg(ECON1).ECON1bits.DMAST);
+    while (ReadETHReg(ECON1).ECON1bits.DMAST);
 
     // Swap endianness and return
     temp.v[1] = ReadETHReg(EDMACSL).Val;
@@ -1381,15 +1388,15 @@ WORD CalcIPBufferChecksum(WORD len)
     WORD_VAL temp;
 
     // Take care of special cases which the DMA cannot be used for
-    if(len == 0u)
+    if (len == 0u)
     {
         return 0xFFFF;
     }
-    else if(len == 1u)
+    else if (len == 1u)
     {
-        return ~(((WORD)MACGet())<<8);
+        return ~(((WORD) MACGet()) << 8);
     }
- 
+
     // Set the DMA starting address to the SPI read pointer value
     BankSel(ERDPTL);
     temp.v[0] = ReadETHReg(ERDPTL).Val;
@@ -1401,33 +1408,33 @@ WORD CalcIPBufferChecksum(WORD len)
     // wrapping rules apply) or TX/unused area (where wrapping rules are
     // not applied)
 #if RXSTART == 0
-    if(temp.Val <= RXSTOP)
+    if (temp.Val <= RXSTOP)
 #else
-    if(temp.Val >= RXSTART && temp.Val <= RXSTOP)
+    if (temp.Val >= RXSTART && temp.Val <= RXSTOP)
 #endif
     {
         // Calculate the DMA ending address given the starting address and len
         // parameter.  The DMA will follow the receive buffer wrapping boundary.
-        temp.Val += len-1;
+        temp.Val += len - 1;
 
-        if(temp.Val > RXSTOP)
+        if (temp.Val > RXSTOP)
         {
             temp.Val -= RXSIZE;
         }
     }
     else
     {
-        temp.Val += len-1;
-    }    
+        temp.Val += len - 1;
+    }
 
     // Write the DMA end address
     WriteReg(EDMANDL, temp.v[0]);
     WriteReg(EDMANDH, temp.v[1]);
-    
+
     // Begin the DMA checksum calculation and wait until it is finished
     BFSReg(ECON1, ECON1_DMAST | ECON1_CSUMEN);
 
-    while(ReadETHReg(ECON1).ECON1bits.DMAST);
+    while (ReadETHReg(ECON1).ECON1bits.DMAST);
 
     // Return the resulting good stuff
     temp.v[0] = ReadETHReg(EDMACSL).Val;
@@ -1440,6 +1447,7 @@ WORD CalcIPBufferChecksum(WORD len)
 // Remove this line if your application needs to use this
 // function.  This code has NOT been tested.
 #if 0 
+
 /******************************************************************************
  * Function:        void MACCopyRxToTx(WORD RxOffset, WORD TxOffset, WORD len)
  * PreCondition:    None
@@ -1460,39 +1468,40 @@ void MACCopyRxToTx(WORD RxOffset, WORD TxOffset, WORD len)
 {
     WORD_VAL temp;
 
-    temp.Val = CurrentPacketLocation.Val + RxOffset + sizeof(ENC_PREAMBLE);
+    temp.Val = CurrentPacketLocation.Val + RxOffset + sizeof (ENC_PREAMBLE);
 
     // Adjust value if a wrap is needed
-    if ( temp.Val > RXSTOP ) temp.Val -= RXSIZE;
+    if (temp.Val > RXSTOP) temp.Val -= RXSIZE;
 
     BankSel(EDMASTL);
     WriteReg(EDMASTL, temp.v[0]);
     WriteReg(EDMASTH, temp.v[1]);
 
-    temp.Val += len-1;
+    temp.Val += len - 1;
 
     // Adjust value if a wrap is needed
-    if ( temp.Val > RXSTOP ) temp.Val -= RXSIZE;
+    if (temp.Val > RXSTOP) temp.Val -= RXSIZE;
 
     WriteReg(EDMANDL, temp.v[0]);
     WriteReg(EDMANDH, temp.v[1]);
 
-    TxOffset += TXSTART+1;
-    WriteReg(EDMADSTL, ((WORD_VAL*)&TxOffset)->v[0]);
-    WriteReg(EDMADSTH, ((WORD_VAL*)&TxOffset)->v[1]);
+    TxOffset += TXSTART + 1;
+    WriteReg(EDMADSTL, ((WORD_VAL*) & TxOffset)->v[0]);
+    WriteReg(EDMADSTH, ((WORD_VAL*) & TxOffset)->v[1]);
 
     // Do the DMA Copy.  The DMA module will wait for TXRTS to become clear
     // before starting the copy.
     BFCReg(ECON1, ECON1_CSUMEN);
     BFSReg(ECON1, ECON1_DMAST);
 
-    while(ReadETHReg(ECON1).ECON1bits.DMAST);
+    while (ReadETHReg(ECON1).ECON1bits.DMAST);
 }
 #endif
 
 // NOTE: This code has NOT been tested.  See config.h's explanation
 // of MAC_FILTER_BROADCASTS.
 #if defined(MAC_FILTER_BROADCASTS)
+
 /******************************************************************************
  * Function:        void MACSetPMFilter(BYTE *Pattern, BYTE *PatternMask,WORD PatternOffset)
  * PreCondition:    SPI bus must be initialized (done in MACInit()).
@@ -1530,18 +1539,18 @@ void MACSetPMFilter(BYTE *Pattern, BYTE *PatternMask, WORD PatternOffset)
     // subsequently be used for checksum computation.
     MaskPtr = PatternMask;
 
-    for(i.Val = 0x0100; i.v[0] < 64; i.v[0]++)
+    for (i.Val = 0x0100; i.v[0] < 64; i.v[0]++)
     {
-        if( *MaskPtr & i.v[1] )
+        if (*MaskPtr & i.v[1])
         {
             MACPut(*Pattern);
             UnmaskedPatternLen++;
         }
         Pattern++;
-        
+
         i.v[1] <<= 1;
 
-        if( i.v[1] == 0u )
+        if (i.v[1] == 0u)
         {
             i.v[1] = 0x01;
             MaskPtr++;
@@ -1549,14 +1558,14 @@ void MACSetPMFilter(BYTE *Pattern, BYTE *PatternMask, WORD PatternOffset)
     }
 
     // Calculate and set the DMA end address
-    i.Val = TXSTART + (WORD)UnmaskedPatternLen - 1;
+    i.Val = TXSTART + (WORD) UnmaskedPatternLen - 1;
     WriteReg(EDMANDL, i.v[0]);
     WriteReg(EDMANDH, i.v[1]);
 
     // Calculate the checksum on the given pattern using the DMA module
     BFSReg(ECON1, ECON1_DMAST | ECON1_CSUMEN);
 
-    while(ReadETHReg(ECON1).ECON1bits.DMAST);
+    while (ReadETHReg(ECON1).ECON1bits.DMAST);
 
     // Make certain that the PM filter isn't enabled while it is
     // being reconfigured.
@@ -1571,10 +1580,10 @@ void MACSetPMFilter(BYTE *Pattern, BYTE *PatternMask, WORD PatternOffset)
     WriteReg(EPMCSH, i.v[0]);
 
     // Set the Pattern Match offset and 8 byte mask
-    WriteReg(EPMOL, ((WORD_VAL*)&PatternOffset)->v[0]);
-    WriteReg(EPMOH, ((WORD_VAL*)&PatternOffset)->v[1]);
+    WriteReg(EPMOL, ((WORD_VAL*) & PatternOffset)->v[0]);
+    WriteReg(EPMOH, ((WORD_VAL*) & PatternOffset)->v[1]);
 
-    for(i.Val = EPMM0; i.Val <= EPMM7 ; i.Val++)
+    for (i.Val = EPMM0; i.Val <= EPMM7; i.Val++)
     {
         WriteReg(i.Val, *PatternMask++);
     }
@@ -1605,6 +1614,7 @@ void MACDisablePMFilter(void)
 #endif  // MAC_FILTER_BROADCASTS
 
 #if 0
+
 /******************************************************************************
  * Function:        void SetRXHashTableEntry(MAC_ADDR DestMACAddr)
  * PreCondition:    SPI bus must be initialized (done in MACInit()).
@@ -1628,20 +1638,20 @@ void SetRXHashTableEntry(MAC_ADDR DestMACAddr)
 
     // Calculate a CRC-32 over the 6 byte MAC address
     // using polynomial 0x4C11DB7
-    for(i = 0; i < sizeof(MAC_ADDR); i++)
+    for (i = 0; i < sizeof (MAC_ADDR); i++)
     {
-        BYTE  crcnext;
+        BYTE crcnext;
 
         // shift in 8 bits
-        for(j = 0; j < 8; j++)
+        for (j = 0; j < 8; j++)
         {
             crcnext = 0;
-            if(((BYTE_VAL*)&(CRC.v[3]))->bits.b7) crcnext = 1;
+            if (((BYTE_VAL*)&(CRC.v[3]))->bits.b7) crcnext = 1;
 
-            crcnext ^= (((BYTE_VAL*)&DestMACAddr.v[i])->bits.b0);
+            crcnext ^= (((BYTE_VAL*) & DestMACAddr.v[i])->bits.b0);
 
             CRC.Val <<= 1;
-            if(crcnext) CRC.Val ^= 0x4C11DB7;
+            if (crcnext) CRC.Val ^= 0x4C11DB7;
 
             // next bit
             DestMACAddr.v[i] >>= 1;
@@ -1652,13 +1662,13 @@ void SetRXHashTableEntry(MAC_ADDR DestMACAddr)
     // Bits 25:23 define where within the Hash Table byte the bit needs to be set
     // Bits 28:26 define which of the 8 Hash Table bytes that bits 25:23 apply to
     i = CRC.v[3] & 0x1F;
-    HTRegister = (i >> 2) + (BYTE)EHT0;
+    HTRegister = (i >> 2) + (BYTE) EHT0;
     i = (i << 1) & 0x06;
-    ((BYTE_VAL*)&i)->bits.b0 = ((BYTE_VAL*)&CRC.v[2])->bits.b7;
+    ((BYTE_VAL*) & i)->bits.b0 = ((BYTE_VAL*) & CRC.v[2])->bits.b7;
 
     // Set the proper bit in the Hash Table
     BankSel(EHT0);
-    BFSReg(HTRegister, 1<<i);
+    BFSReg(HTRegister, 1 << i);
 }
 #endif
 
@@ -1671,59 +1681,59 @@ static REG Regs[4][32];
 static void GetRegs(void)
 {
     BYTE i;
-    
+
     BankSel(0x000);
 
-    for(i=0; i<0x1A; i++)
+    for (i = 0; i < 0x1A; i++)
         Regs[0][i] = ReadETHReg(i);
 
-    for(i=0x1B; i<32; i++)
+    for (i = 0x1B; i < 32; i++)
         Regs[0][i] = ReadETHReg(i);
 
     BankSel(0x100);
 
-    for(i=0; i<0x1A; i++)
+    for (i = 0; i < 0x1A; i++)
         Regs[1][i] = ReadETHReg(i);
 
-    for(i=0x1B; i<32; i++)
+    for (i = 0x1B; i < 32; i++)
         Regs[1][i] = ReadETHReg(i);
 
     BankSel(0x200);
 
-    for(i=0; i<5; i++)
+    for (i = 0; i < 5; i++)
         Regs[2][i] = ReadMACReg(i);
     Regs[2][5] = ReadETHReg(i);
 
-    for(i=6; i<0x0F; i++)
+    for (i = 6; i < 0x0F; i++)
         Regs[2][i] = ReadMACReg(i);
 
     Regs[2][0x0F] = ReadETHReg(i);
 
-    for(i=0x10; i<0x13; i++)
+    for (i = 0x10; i < 0x13; i++)
         Regs[2][i] = ReadMACReg(i);
 
     Regs[2][0x13] = ReadETHReg(i);
 
-    for(i=0x14; i<0x1A; i++)
+    for (i = 0x14; i < 0x1A; i++)
         Regs[2][i] = ReadMACReg(i);
 
-    for(i=0x1B; i<32; i++)
+    for (i = 0x1B; i < 32; i++)
         Regs[2][i] = ReadETHReg(i);
 
     BankSel(0x300);
 
-    for(i=0; i<0x06; i++)
+    for (i = 0; i < 0x06; i++)
         Regs[3][i] = ReadMACReg(i);
 
-    for(i=6; i<0x0A; i++)
+    for (i = 6; i < 0x0A; i++)
         Regs[3][i] = ReadETHReg(i);
 
     Regs[3][0x0A] = ReadMACReg(i);
 
-    for(i=0x0B; i<0x1A; i++)
+    for (i = 0x0B; i < 0x1A; i++)
         Regs[3][i] = ReadETHReg(i);
 
-    for(i=0x1B; i<32; i++)
+    for (i = 0x1B; i < 32; i++)
         Regs[3][i] = ReadETHReg(i);
 
     Regs[0][0x1A].Val = 0;
@@ -1740,73 +1750,73 @@ static void GetRegs(void)
 // interface of all ENC28J60 registers contents
 //
 
-ROM char const RegMap[] = {0x55,0x55,0x55,0x55,0x55,0x55,0x70,0x55,\
-                           0x55,0x55,0x55,0x55,0x05,0x55,0x75,0x55,\
-                           0xaa,0xa2,0xaa,0x3b,0x2b,0xae,0x7a,0x55,\
-                           0xaa,0x5a,0x25,0x00,0x10,0x74,0x75,0x55};
+ROM char const RegMap[] = {0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x70, 0x55,  \
+                           0x55, 0x55, 0x55, 0x55, 0x05, 0x55, 0x75, 0x55,  \
+                           0xaa, 0xa2, 0xaa, 0x3b, 0x2b, 0xae, 0x7a, 0x55,  \
+                           0xaa, 0x5a, 0x25, 0x00, 0x10, 0x74, 0x75, 0x55};
 
 void ENCCtrlRegDump(void)
 {
-   BYTE bank, g, r,reg, v;
-   char rmap;
-   
-   printf((ROMPC *)"\r\nENC28J60 Control Register Dump\r\n");
-   for ( bank = 0; bank < 4; bank++ )
-   {
-       printf((ROMPC *)"Bank %d\r\n",bank);
-       BankSel((WORD) bank << 8);
-       for ( g=0; g < 8 ; g++)
-       {
-          rmap = RegMap[bank*8+g];
-          for ( r = 0 ; r < 4 ; r++ )
-          {
-             reg = g*4 + r;
-             switch (rmap & 0x03)
-             {
-                case 0 : printf((ROMPC *)"-- ");
-                         break;
-                case 1 : v = ReadETHReg(reg).Val;
-                         printf((ROMPC *)"%02x ",v);
-                         break;
-                case 2 : v = ReadMACReg(reg).Val;
-                         printf((ROMPC *)"%02x ",v);
-                         break;
-                case 3 : printf((ROMPC *)"RR ");
-             }
-             rmap = rmap>>2;
+    BYTE bank, g, r, reg, v;
+    char rmap;
 
-             if ( reg == 7 || reg == 23) putcUART(' ');
+    printf((ROMPC *) "\r\nENC28J60 Control Register Dump\r\n");
+    for (bank = 0; bank < 4; bank++)
+    {
+        printf((ROMPC *) "Bank %d\r\n", bank);
+        BankSel((WORD) bank << 8);
+        for (g = 0; g < 8; g++)
+        {
+            rmap = RegMap[bank * 8 + g];
+            for (r = 0; r < 4; r++)
+            {
+                reg = g * 4 + r;
+                switch (rmap & 0x03)
+                {
+                case 0: printf((ROMPC *) "-- ");
+                    break;
+                case 1: v = ReadETHReg(reg).Val;
+                    printf((ROMPC *) "%02x ", v);
+                    break;
+                case 2: v = ReadMACReg(reg).Val;
+                    printf((ROMPC *) "%02x ", v);
+                    break;
+                case 3: printf((ROMPC *) "RR ");
+                }
+                rmap = rmap >> 2;
 
-             if ( reg == 15 ) printf((ROMPC *)"\r\n");
-          }
-       }
-       printf((ROMPC *)"\r\n");
-   }
+                if (reg == 7 || reg == 23) putcUART(' ');
+
+                if (reg == 15) printf((ROMPC *) "\r\n");
+            }
+        }
+        printf((ROMPC *) "\r\n");
+    }
 }
 
 void ENCPHYRegDump(void)
 {
-   PHYREG Result;
+    PHYREG Result;
 
-   printf((ROMPC *)"\r\nENC28J60 PHY Register Dump\r\n");
-   Result = ReadPHYReg(PHCON1);
-   printf((ROMPC *)"PHCON1 = %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHSTAT1);
-   printf((ROMPC *)"PHSTAT1= %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHID1);
-   printf((ROMPC *)"PHID1  = %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHID2);
-   printf((ROMPC *)"PHID2  = %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHCON2);
-   printf((ROMPC *)"PHCON2 = %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHSTAT2);
-   printf((ROMPC *)"PHSTAT2= %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHIE);
-   printf((ROMPC *)"PHIE   = %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHIR);
-   printf((ROMPC *)"PHIR   = %04x\r\n",Result.Val);
-   Result = ReadPHYReg(PHLCON);
-   printf((ROMPC *)"PHLCON = %04x\r\n",Result.Val);
+    printf((ROMPC *) "\r\nENC28J60 PHY Register Dump\r\n");
+    Result = ReadPHYReg(PHCON1);
+    printf((ROMPC *) "PHCON1 = %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHSTAT1);
+    printf((ROMPC *) "PHSTAT1= %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHID1);
+    printf((ROMPC *) "PHID1  = %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHID2);
+    printf((ROMPC *) "PHID2  = %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHCON2);
+    printf((ROMPC *) "PHCON2 = %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHSTAT2);
+    printf((ROMPC *) "PHSTAT2= %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHIE);
+    printf((ROMPC *) "PHIE   = %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHIR);
+    printf((ROMPC *) "PHIR   = %04x\r\n", Result.Val);
+    Result = ReadPHYReg(PHLCON);
+    printf((ROMPC *) "PHLCON = %04x\r\n", Result.Val);
 }
 #endif
 
@@ -1832,7 +1842,7 @@ void MACPowerUp(void)
 
     // Wait for the 300us Oscillator Startup Timer (OST) to time out.  This
     // delay is required for the PHY module to return to an operational state.
-    while(!ReadETHReg(ESTAT).ESTATbits.CLKRDY);
+    while (!ReadETHReg(ESTAT).ESTATbits.CLKRDY);
 
     // Enable packet reception
     BFSReg(ECON1, ECON1_RXEN);
@@ -1858,10 +1868,10 @@ void MACPowerDown(void)
 
     // Make sure any last packet which was in-progress when RXEN was cleared
     // is completed
-    while(ReadETHReg(ESTAT).ESTATbits.RXBUSY);
+    while (ReadETHReg(ESTAT).ESTATbits.RXBUSY);
 
     // If a packet is being transmitted, wait for it to finish
-    while(ReadETHReg(ECON1).ECON1bits.TXRTS);
+    while (ReadETHReg(ECON1).ECON1bits.TXRTS);
 
     // Enter sleep mode
     BFSReg(ECON2, ECON2_PWRSV);
@@ -1895,7 +1905,7 @@ void MACSetDuplex(DUPLEX DuplexState)
     // Set the PHY to the proper duplex mode
     PhyReg = ReadPHYReg(PHCON1);
 
-    if(DuplexState == USE_PHY)
+    if (DuplexState == USE_PHY)
     {
         DuplexState = PhyReg.PHCON1bits.PDPXMD;
     }
@@ -1907,15 +1917,15 @@ void MACSetDuplex(DUPLEX DuplexState)
 
     // Set the MAC to the proper duplex mode
     BankSel(MACON3);
-    Register = ReadMACReg((BYTE)MACON3);
+    Register = ReadMACReg((BYTE) MACON3);
     Register.MACON3bits.FULDPX = DuplexState;
-    WriteReg((BYTE)MACON3, Register.Val);
+    WriteReg((BYTE) MACON3, Register.Val);
 
     // Set the back-to-back inter-packet gap time to IEEE specified 
     // requirements.  The meaning of the MABBIPG value changes with the duplex
     // state, so it must be updated in this function.
     // In full duplex, 0x15 represents 9.6us; 0x12 is 9.6us in half duplex
-    WriteReg((BYTE)MABBIPG, DuplexState ? 0x15 : 0x12);
+    WriteReg((BYTE) MABBIPG, DuplexState ? 0x15 : 0x12);
 
     // Reenable receive logic
     BFSReg(ECON1, ECON1_RXEN);
@@ -1940,7 +1950,7 @@ void MACSetDuplex(DUPLEX DuplexState)
 void SetCLKOUT(BYTE NewConfig)
 {
     BankSel(ECOCON);
-    WriteReg((BYTE)ECOCON, NewConfig);
+    WriteReg((BYTE) ECOCON, NewConfig);
     BankSel(ERDPTL);
 }
 
@@ -1965,7 +1975,7 @@ BYTE GetCLKOUT(void)
     BYTE i;
 
     BankSel(ECOCON);
-    i = ReadETHReg((BYTE)ECOCON).Val;
+    i = ReadETHReg((BYTE) ECOCON).Val;
     BankSel(ERDPTL);
     return i;
 }
@@ -1987,11 +1997,11 @@ static void SendSystemReset(void)
     BYTE Dummy;
 
 #if defined(ENC_SAVE_SPI_CFG)    // If SPI is shared save config
-    #if defined(__18CXX)
+#if defined(__18CXX)
     BYTE SPICONSave;
-    #else
+#else
     WORD SPICONSave;
-    #endif
+#endif
 
     SPICONSave = ENC_SPICON1;
     ENC_SPIEN = 0;
@@ -2003,7 +2013,7 @@ static void SendSystemReset(void)
     ENC_SPI_IF = 0;
     ENC_SSPBUF = SR;
 
-    while(!ENC_SPI_IF);
+    while (!ENC_SPI_IF);
 
     Dummy = ENC_SSPBUF;
     ENC_SPI_IF = 0;
@@ -2018,6 +2028,7 @@ static void SendSystemReset(void)
 } //end SendSystemReset
 
 #if defined(MAC_POWER_ON_TEST)
+
 /******************************************************************************
  * Function:        static BOOL TestMemory(void)
  * PreCondition:    SPI bus must be initialized (done in MACInit()).
@@ -2038,9 +2049,9 @@ static void SendSystemReset(void)
  *****************************************************************************/
 static BOOL TestEncMemory(void)
 {
-    #define RANDOM_FILL    0b0000
-    #define ADDRESS_FILL   0b0100
-    #define PATTERN_SHIFT  0b1000
+#define RANDOM_FILL    0b0000
+#define ADDRESS_FILL   0b0100
+#define PATTERN_SHIFT  0b1000
 
     WORD_VAL DMAChecksum, BISTChecksum;
 
@@ -2051,70 +2062,70 @@ static BOOL TestEncMemory(void)
     // memory
     WriteReg(EDMASTL, 0x00);
     WriteReg(EDMASTH, 0x00);
-    WriteReg(EDMANDL, LOW(RAMSIZE-1u));
-    WriteReg(EDMANDH, HIGH(RAMSIZE-1u));
-    WriteReg(ERXNDL, LOW(RAMSIZE-1u));
-    WriteReg(ERXNDH, HIGH(RAMSIZE-1u));
+    WriteReg(EDMANDL, LOW(RAMSIZE - 1u));
+    WriteReg(EDMANDH, HIGH(RAMSIZE - 1u));
+    WriteReg(ERXNDL, LOW(RAMSIZE - 1u));
+    WriteReg(ERXNDH, HIGH(RAMSIZE - 1u));
 
     // Enable Test Mode and do an Address Fill
     BankSel(EBSTCON);
-    WriteReg((BYTE)EBSTCON, EBSTCON_TME | EBSTCON_BISTST | ADDRESS_FILL);
+    WriteReg((BYTE) EBSTCON, EBSTCON_TME | EBSTCON_BISTST | ADDRESS_FILL);
 
     // Wait for the BIST to complete and disable test mode before
     // starting any DMA operations.
-    while(ReadETHReg((BYTE)EBSTCON).EBSTCONbits.BISTST);
+    while (ReadETHReg((BYTE) EBSTCON).EBSTCONbits.BISTST);
 
-    BFCReg((BYTE)EBSTCON, EBSTCON_TME);
+    BFCReg((BYTE) EBSTCON, EBSTCON_TME);
 
     // Begin reading the memory and calculating a checksum over it
     // Block until the checksum is generated
     BFSReg(ECON1, ECON1_DMAST | ECON1_CSUMEN);
     BankSel(EDMACSL);
 
-    while(ReadETHReg(ECON1).ECON1bits.DMAST);
+    while (ReadETHReg(ECON1).ECON1bits.DMAST);
 
     // Obtain the resulting DMA checksum and the expected BIST checksum
     DMAChecksum.v[0] = ReadETHReg(EDMACSL).Val;
     DMAChecksum.v[1] = ReadETHReg(EDMACSH).Val;
     BankSel(EBSTCSL);
-    BISTChecksum.v[0] = ReadETHReg((BYTE)EBSTCSL).Val;
-    BISTChecksum.v[1] = ReadETHReg((BYTE)EBSTCSH).Val;
-    BFCReg((BYTE)EBSTCON, EBSTCON_TME);
+    BISTChecksum.v[0] = ReadETHReg((BYTE) EBSTCSL).Val;
+    BISTChecksum.v[1] = ReadETHReg((BYTE) EBSTCSH).Val;
+    BFCReg((BYTE) EBSTCON, EBSTCON_TME);
 
     // Compare the results
     // 0xF807 should always be generated in Address fill mode
-    if( (DMAChecksum.Val != BISTChecksum.Val) || (DMAChecksum.Val != 0xF807) )
+    if ((DMAChecksum.Val != BISTChecksum.Val) || (DMAChecksum.Val != 0xF807))
         return FALSE;
 
     // Seed the random number generator and begin another Random Fill test
     // with the DMA and BIST memory access ports swapped.
 #if defined(__C30__)
-    WriteReg((BYTE)EBSTSD, TMR1);
+    WriteReg((BYTE) EBSTSD, TMR1);
 #else
-    WriteReg((BYTE)EBSTSD, TMR0L);
+    WriteReg((BYTE) EBSTSD, TMR0L);
 #endif
 
-    WriteReg((BYTE)EBSTCON, EBSTCON_TME | EBSTCON_PSEL | EBSTCON_BISTST | RANDOM_FILL);
+    WriteReg((BYTE) EBSTCON, EBSTCON_TME | EBSTCON_PSEL | EBSTCON_BISTST | RANDOM_FILL);
 
     // Wait for the BIST to complete and disable test mode since
     // we won't be needing it anymore
-    while(ReadETHReg((BYTE)EBSTCON).EBSTCONbits.BISTST);
+    while (ReadETHReg((BYTE) EBSTCON).EBSTCONbits.BISTST);
 
-    BFCReg((BYTE)EBSTCON, EBSTCON_TME);
+    BFCReg((BYTE) EBSTCON, EBSTCON_TME);
 
     // Begin reading the memory and calculating a checksum over it
     // Block until the checksum is generated
     BFSReg(ECON1, ECON1_DMAST | ECON1_CSUMEN);
     BankSel(EDMACSL);
 
-    while(ReadETHReg(ECON1).ECON1bits.DMAST);
+    while (ReadETHReg(ECON1).ECON1bits.DMAST);
 
     // Obtain the resulting DMA checksum and the expected BIST checksum
     DMAChecksum.v[0] = ReadETHReg(EDMACSL).Val;
     DMAChecksum.v[1] = ReadETHReg(EDMACSH).Val;
     BankSel(EBSTCSL);
-    BISTChecksum.v[0] = ReadETHReg((BYTE)EBSTCSL).Val;
-    BISTChecksum.v[1] = ReadETHReg((BYTE)EBSTCSH).Val;
+    BISTChecksum.v[0] = ReadETHReg((BYTE) EBSTCSL).Val;
+    BISTChecksum.v[1] = ReadETHReg((BYTE) EBSTCSH).Val;
 
     return (DMAChecksum.Val == BISTChecksum.Val);
 }
@@ -2134,7 +2145,7 @@ static BOOL TestEncMemory(void)
 void MACInit(void)
 {
     BYTE i;
- 
+
     ENC_SPI_IF = 0;
 
     // Wait for CLKRDY to become set.
@@ -2145,7 +2156,8 @@ void MACInit(void)
     do
     {
         i = ReadETHReg(ESTAT).Val;
-    } while((i & 0x08) || (~i & ESTAT_CLKRDY));
+    }
+    while ((i & 0x08) || (~i & ESTAT_CLKRDY));
 
 
 #if defined(MAC_POWER_ON_TEST)
@@ -2153,11 +2165,11 @@ void MACInit(void)
     // occured.  The LEDA and LEDB pins will be configured to blink
     // periodically in an abnormal manner to indicate to the user that the
     // error occured.
-    if( !TestEncMemory() )
+    if (!TestEncMemory())
     {
-        SetLEDConfig(0x0AA2);    // Set LEDs to blink periodically
+        SetLEDConfig(0x0AA2); // Set LEDs to blink periodically
 
-        while(1);
+        while (1);
     }
 #endif
 
@@ -2167,9 +2179,9 @@ void MACInit(void)
 
 #if MAC_TX_BUFFER_COUNT > 1
     // On Init, all transmit buffers are free.
-    for (i = 0; i < MAC_TX_BUFFER_COUNT; i++ )
+    for (i = 0; i < MAC_TX_BUFFER_COUNT; i++)
     {
-        TxBuffers[i].StartAddress.Val = TXSTART + ((WORD)i * (MAC_TX_BUFFER_SIZE+8));
+        TxBuffers[i].StartAddress.Val = TXSTART + ((WORD) i * (MAC_TX_BUFFER_SIZE + 8));
         TxBuffers[i].Flags.bFree = TRUE;
     }
 #endif
@@ -2182,8 +2194,8 @@ void MACInit(void)
     NextPacketLocation.Val = RXSTART;
     WriteReg(ERXSTL, LOW(RXSTART));
     WriteReg(ERXSTH, HIGH(RXSTART));
-    WriteReg(ERXRDPTL, LOW(RXSTOP));     // Write low byte first
-    WriteReg(ERXRDPTH, HIGH(RXSTOP));    // Write high byte last
+    WriteReg(ERXRDPTL, LOW(RXSTOP)); // Write low byte first
+    WriteReg(ERXRDPTH, HIGH(RXSTOP)); // Write high byte last
 
 #if RXSTOP != 0x1FFF                     // The RESET default ERXND is 0x1FFF
     WriteReg(ERXNDL, LOW(RXSTOP));
@@ -2206,42 +2218,42 @@ void MACInit(void)
     BankSel(MACON1);
 
     // Enable the receive portion of the MAC
-    WriteReg((BYTE)MACON1, MACON1_TXPAUS | MACON1_RXPAUS | MACON1_MARXEN);
+    WriteReg((BYTE) MACON1, MACON1_TXPAUS | MACON1_RXPAUS | MACON1_MARXEN);
 
     // Pad packets to 60 bytes, add CRC, and check Type/Length field.
-    WriteReg((BYTE)MACON3, MACON3_PADCFG0 | MACON3_TXCRCEN | MACON3_FRMLNEN);
+    WriteReg((BYTE) MACON3, MACON3_PADCFG0 | MACON3_TXCRCEN | MACON3_FRMLNEN);
 
     // Allow infinite deferals if the medium is continuously busy
     // (do not time out a transmission if the half duplex medium is
     // completely saturated with other people's data)
-    WriteReg((BYTE)MACON4, MACON4_DEFER);
+    WriteReg((BYTE) MACON4, MACON4_DEFER);
 
     // Late collisions occur beyond 63+8 bytes (8 bytes for preamble/start of frame delimiter)
     // 55 is all that is needed for IEEE 802.3, but ENC28J60 B5 errata for improper link pulse
     // collisions will occur less often with a larger number.
-    WriteReg((BYTE)MACLCON2, 63);
+    WriteReg((BYTE) MACLCON2, 63);
 
     // Set non-back-to-back inter-packet gap to 9.6us.  The back-to-back
     // inter-packet gap (MABBIPG) is set by MACSetDuplex() which is called
     // later.
-    WriteReg((BYTE)MAIPGL, 0x12);
-    WriteReg((BYTE)MAIPGH, 0x0C);
+    WriteReg((BYTE) MAIPGL, 0x12);
+    WriteReg((BYTE) MAIPGH, 0x0C);
 
     // Set the maximum packet size which the controller will accept
-    WriteReg((BYTE)MAMXFLL, LOW(MAXFRAMEC));
-    WriteReg((BYTE)MAMXFLH, HIGH(MAXFRAMEC));
+    WriteReg((BYTE) MAMXFLL, LOW(MAXFRAMEC));
+    WriteReg((BYTE) MAMXFLH, HIGH(MAXFRAMEC));
 
     // Enter Bank 3 and initialize physical MAC address registers
     BankSel(MAADR1);
-    WriteReg((BYTE)MAADR1, AppConfig.MyMACAddr.v[0]);
-    WriteReg((BYTE)MAADR2, AppConfig.MyMACAddr.v[1]);
-    WriteReg((BYTE)MAADR3, AppConfig.MyMACAddr.v[2]);
-    WriteReg((BYTE)MAADR4, AppConfig.MyMACAddr.v[3]);
-    WriteReg((BYTE)MAADR5, AppConfig.MyMACAddr.v[4]);
-    WriteReg((BYTE)MAADR6, AppConfig.MyMACAddr.v[5]);
+    WriteReg((BYTE) MAADR1, AppConfig.MyMACAddr.v[0]);
+    WriteReg((BYTE) MAADR2, AppConfig.MyMACAddr.v[1]);
+    WriteReg((BYTE) MAADR3, AppConfig.MyMACAddr.v[2]);
+    WriteReg((BYTE) MAADR4, AppConfig.MyMACAddr.v[3]);
+    WriteReg((BYTE) MAADR5, AppConfig.MyMACAddr.v[4]);
+    WriteReg((BYTE) MAADR6, AppConfig.MyMACAddr.v[5]);
 
     // Get the Rev ID so that we can implement the correct errata workarounds
-    ENCRevID = ReadETHReg((BYTE)EREVID).Val;
+    ENCRevID = ReadETHReg((BYTE) EREVID).Val;
 
     // Disable half duplex loopback in PHY.  Bank bits changed to Bank 2 as a
     // side effect.
