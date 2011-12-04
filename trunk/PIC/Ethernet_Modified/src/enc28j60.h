@@ -1,33 +1,4 @@
-/******************************************************************************
- * Microchip ENC28J60 Standalone Ethernet Controller Register Definitions     *
- *============================================================================*
- *                                                                            *
- * SOFTWARE LICENSE AGREEMENT                                                 *
- *                                                                            *
- * This software is owned by Microchip Technology Inc. ("Microchip") and is   *
- * supplied to you for use exclusively as described in the associated         *
- * software agreement.  This software is protected by software and other      *
- * intellectual property laws.  Any use in violation of the software license  *
- * may subject the user to criminal sanctions as well as civil liability.     *
- * Copyright 2006 Microchip Technology Inc.  All rights reserved.             *
- *                                                                            *
- * This software is provided "AS IS."  MICROCHIP DISCLAIMS ALL WARRANTIES,    *
- * EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, NOT LIMITED TO MERCHANTABILITY,  *
- * FITNESS FOR A PARTICULAR PURPOSE, AND INFRINGEMENT. Microchip shall in no  *
- * event be liable for special, incidental, or consequential damages.         *
- *                                                                            *
- *- Version Log --------------------------------------------------------------*
- *   Date       Author        Comments                                        *
- *----------------------------------------------------------------------------*
- * 06/01/04 Howard Schlunder  Original                                        *
- * 06/29/04 Howard Schlunder  Fixed byte boundary problems on a couple of     *
- *                            PHY register structs.                           *
- * 09/29/04 Howard Schlunder  Matched with data sheet                         *
- * 01/04/06 Howard Schlunder  Matched with new data sheet                     *
- * 06/29/06 Howard Schlunder  Changed MACON3.PHDRLEN to PHDREN                *
- * 07/21/06 Howard Schlunder  Several bits removed to match now reserved bits *
- *                            in rev. B data sheet (DS39662B)                 *
- ******************************************************************************/
+
 #ifndef _ENC28J60_H
 #define _ENC28J60_H
 
