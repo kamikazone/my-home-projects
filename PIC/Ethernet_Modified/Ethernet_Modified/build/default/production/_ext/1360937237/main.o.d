@@ -1,0 +1,2 @@
+build/default/production/_ext/1360937237/main.o: ../src/main.c ../src/minipic10t.h ../src/mac.h \
+ ../src/enc28j60.h ../src/generic_typedefs.h ../src/eth_driver.h

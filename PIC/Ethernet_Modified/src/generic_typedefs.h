@@ -1,33 +1,4 @@
-/******************************************************************************
- * Generic Type Definitions                                                   *
- *============================================================================*
- *                                                                            *
- * SOFTWARE LICENSE AGREEMENT                                                 *
- *                                                                            *
- * This software is owned by Microchip Technology Inc. ("Microchip") and is   *
- * supplied to you for use exclusively as described in the associated         *
- * software agreement.  This software is protected by software and other      *
- * intellectual property laws.  Any use in violation of the software license  *
- * may subject the user to criminal sanctions as well as civil liability.     *
- * Copyright 2006 Microchip Technology Inc.  All rights reserved.             *
- *                                                                            *
- * This software is provided "AS IS."  MICROCHIP DISCLAIMS ALL WARRANTIES,    *
- * EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, NOT LIMITED TO MERCHANTABILITY,  *
- * FITNESS FOR A PARTICULAR PURPOSE, AND INFRINGEMENT. Microchip shall in no  *
- * event be liable for special, incidental, or consequential damages.         *
- *                                                                            *
- *- Version Log --------------------------------------------------------------*
- *   Date       Author        Comments                                        *
- *----------------------------------------------------------------------------*
- * 07/12/04 Nilesh Rajbharti  Rel 0.9                                         *
- * 11/24/04 Nilesh Rajbharti  Rel 0.9.1                                       *
- * 09/17/05 Rawin Rojvanit    Rel 0.9.2                                       *
- * 08/10/06 D Flowers &       Much better now (1.0)                           *
- *          H Schlunder                                                       *
- * 04/25/07 Jorge Amodio      File name change to generic_typdefs.h and       *
- *                            moved to main include directory.                *
- *                            Added LWORD (24-bits) for PIC18 parts           *
- ******************************************************************************/
+
 #ifndef _GENERIC_TYPEDEFS_H
 #define _GENERIC_TYPEDEFS_H
 
