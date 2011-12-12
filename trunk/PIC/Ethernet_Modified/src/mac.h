@@ -112,6 +112,7 @@ REG ReadETHReg(BYTE Address);
 void SendSystemReset(void);
 void DelayMs(unsigned int ms);
 void BFSReg(BYTE Address, BYTE Data);
+void BFCReg(BYTE Address, BYTE Data);
 
 //RAHUL
 

@@ -1,2 +1,2 @@
-enc28j60.o: ../src/enc28j60.c ..\src\minipic10t.h ..\src\mac.h \
- ..\src\enc28j60.h ..\src\generic_typedefs.h
+enc28j60.o: ../src/enc28j60.c ..\src\minipic10t.h ..\src\eth_driver.h \
+ ..\src\generic_typedefs.h ..\src\enc28j60.h ..\src\mac.h

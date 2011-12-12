@@ -27,49 +27,14 @@ static void InitializeBoard(void)
     ENC_SPISTAT = ENC_SPISTAT_CFG;
 }
 
-typedef struct _ETHER_FRAME
-{
-    ETHER_HEADER ethHeader;
-    IP_HEADER ipHeader;
-    UDP_HEADER udpHeader;
-} ETHER_FRAME;
-
-void SendData(void)
-{
-    ETHER_FRAME frame;
-    BYTE destMAC[] = {0xff,0xff,0xff,0xff,0xff,0xff};
-    BYTE myMAC[] = {0x00,0x04,0xa3,0x00,0x02,0x00};
-
-    memcpy(frame.ethHeader.DestMACAddr.v, (void *)destMAC, sizeof(destMAC) );
-    memcpy(frame.ethHeader.SourceMACAddr.v, (void *)myMAC, sizeof(destMAC) );
-}
-
-IP_HEADER SendIP(BYTE* data)
-{
-
-}
-
-void SendUDP(BYTE* data)
-{
-    BYTE* udpData;
-    UDP_HEADER header;
-    header.SourcePort = 2680;
-    header.DestinationPort = 30303;
-    header.Length = 14;
-    header.Checksum = 0;
-    memcpy(udpData, (void*)&header, sizeof(header));
-    memcpy(udpData, data, sizeof(data));
-    SendIP(udpData);
-}
-
 void main(void)
 {
     InitializeBoard();
     MACInit();
     while (1)
     {
-        //SendUDPPacket();
-        SendUDP("Kozhikode");
+        SendUDPPacket();
+        //SendUDP("Kozhikode");
     }
 }
 

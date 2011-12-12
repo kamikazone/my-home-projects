@@ -2,7 +2,7 @@
 #define THIS_IS_MAC_LAYER
 #include "minipic10t.h"
 #include <string.h>
-
+#include "eth_driver.h"
 #include <delays.h>
 #include "mac.h"
 #include "enc28j60.h"
@@ -368,7 +368,7 @@ void BFSReg(BYTE Address, BYTE Data)
  *                  BFSReg() functions.  It is separate to maximize speed.
  *                  BFCReg() must only be used on ETH registers.
  *****************************************************************************/
-static void BFCReg(BYTE Address, BYTE Data)
+void BFCReg(BYTE Address, BYTE Data)
 {
     BYTE Dummy;
 
