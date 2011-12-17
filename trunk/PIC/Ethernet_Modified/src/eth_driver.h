@@ -13,14 +13,15 @@
 
 typedef struct _ETHER_HEADER
 {
-    MAC_ADDR DestMACAddr;
-    MAC_ADDR SourceMACAddr;
+    MAC_ADDR DestMACAddress;
+    MAC_ADDR SourceMACAddress;
     WORD_VAL Type;
 } ETHER_HEADER;
 
 typedef struct _IP_HEADER
 {
-    BYTE    VersionIHL;
+    //BYTE    VersionIHL;
+    BYTE    HeaderLength;
     BYTE    TypeOfService;
     WORD    TotalLength;
     WORD    Identification;
@@ -90,7 +91,7 @@ static WORD _Identifier = 0;
 
 //////////////////////////////////////////////////
 void MACInit(void);
-void SendUDPPacket(void);
+void SendUDPPacket(BYTE* UDPData, WORD len);
 WORD swaps(WORD v);
 
 #endif
